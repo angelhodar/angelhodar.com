@@ -1,0 +1,39 @@
+{
+  "name": "angelhodar.dev",
+  "version": "1.0.0",
+  "description": "My personal website using NextJS, ChakraUI, MDX and Vercel",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angelhodar/angelhodar.dev.git"
+  },
+  "keywords": [
+    "personal",
+    "website",
+    "nextjs",
+    "chakraui",
+    "vercel",
+    "mdx",
+    "angelhodar"
+  ],
+  "author": "Angel Hodar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/angelhodar/angelhodar.dev/issues"
+  },
+  "homepage": "https://github.com/angelhodar/angelhodar.dev#readme",
+  "dependencies": {
+    "@chakra-ui/react": "^1.1.6",
+    "@emotion/react": "^11.1.4",
+    "@emotion/styled": "^11.0.0",
+    "framer-motion": "^3.2.2-rc.1",
+    "next": "^10.0.5",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}
