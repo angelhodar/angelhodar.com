@@ -1,9 +1,9 @@
 import PageContainer from "../components/PageContainer";
 
-export default function Resume() {
+export default function Projects() {
   return (
     <PageContainer>
-      <h1>Resume</h1>
+      <h1>Projects</h1>
     </PageContainer>
   );
 }

@@ -1,16 +1,9 @@
-import Head from "next/head";
+import PageContainer from "../components/PageContainer";
 
 export default function Blog() {
   return (
-    <div>
-      <Head>
-        <title>angelhodar</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
-        <h1>Blog</h1>
-      </main>
-    </div>
+    <PageContainer>
+      <h1>Blog</h1>
+    </PageContainer>
   );
 }

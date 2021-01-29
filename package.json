@@ -28,12 +28,14 @@
   },
   "homepage": "https://github.com/angelhodar/angelhodar.dev#readme",
   "dependencies": {
+    "@chakra-ui/icons": "^1.0.3",
     "@chakra-ui/react": "^1.1.6",
     "@emotion/react": "^11.1.4",
     "@emotion/styled": "^11.0.0",
     "framer-motion": "^3.2.2-rc.1",
     "next": "^10.0.5",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-icons": "^4.1.0"
   }
 }
