@@ -10,7 +10,7 @@ const Header = () => {
       justifyContent="center"
       alignItems="center"
       as="nav"
-      py={5}
+      pt={5}
     >
       <Box py={5}>
         <Link href="/">
@@ -23,6 +23,7 @@ const Header = () => {
         </Link>
       </Box>
       <HStack px={10} spacing="5px">
+        <NavigationSection to={"/"} name={"Home"} />
         <NavigationSection to={"/stats"} name={"Stats"} />
         <NavigationSection to={"/blog"} name={"Blog"} />
         <NavigationSection to={"/resume"} name={"Resume"} />

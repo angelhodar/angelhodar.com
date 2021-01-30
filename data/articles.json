@@ -1,0 +1,84 @@
+{
+  "articles": [
+    {
+      "slug": "my-personal-first-article",
+      "title": "My personal first article",
+      "categories": [
+        {
+          "category": "NodeJS",
+          "color": "teal"
+        },
+        {
+          "category": "Python",
+          "color": "blue"
+        },
+        {
+          "category": "C#",
+          "color": "yellow"
+        }
+      ],
+      "description": "Donec elementum accumsan ultrices. In scelerisque pretium faucibus. Phasellus justo urna, condimentum a ipsum at, laoreet elementum libero. Ut pharetra lacus in ex vulputate vehicula",
+      "date": "30/1/2021"
+    },
+    {
+      "slug": "my-personal-first-article",
+      "title": "My personal first article",
+      "categories": [
+        {
+          "category": "NodeJS",
+          "color": "teal"
+        },
+        {
+          "category": "Python",
+          "color": "blue"
+        },
+        {
+          "category": "C#",
+          "color": "yellow"
+        }
+      ],
+      "description": "Donec elementum accumsan ultrices. In scelerisque pretium faucibus. Phasellus justo urna, condimentum a ipsum at, laoreet elementum libero. Ut pharetra lacus in ex vulputate vehicula",
+      "date": "30/1/2021"
+    },
+    {
+      "slug": "my-personal-first-article",
+      "title": "My personal first article",
+      "categories": [
+        {
+          "category": "NodeJS",
+          "color": "teal"
+        },
+        {
+          "category": "Python",
+          "color": "blue"
+        },
+        {
+          "category": "C#",
+          "color": "yellow"
+        }
+      ],
+      "description": "This is a sample of my personal first article",
+      "date": "30/1/2021"
+    },
+    {
+      "slug": "my-personal-first-article",
+      "title": "My personal first article",
+      "categories": [
+        {
+          "category": "NodeJS",
+          "color": "teal"
+        },
+        {
+          "category": "Python",
+          "color": "blue"
+        },
+        {
+          "category": "C#",
+          "color": "yellow"
+        }
+      ],
+      "description": "This is a sample of my personal first article",
+      "date": "30/1/2021"
+    }
+  ]
+}
