@@ -1,8 +1,12 @@
 {
   "articles": [
     {
-      "slug": "my-personal-first-article",
-      "title": "My personal first article",
+      "slug": "everything-i-know",
+      "author": {
+        "name": "Angel Hodar",
+        "avatar": "https://avatars1.githubusercontent.com/u/26228709?v=4"
+      },
+      "title": "Everything I Know About Style Guides, Design Systems, and Component Libraries",
       "categories": [
         {
           "category": "NodeJS",
@@ -21,8 +25,12 @@
       "date": "30/1/2021"
     },
     {
-      "slug": "my-personal-first-article",
-      "title": "My personal first article",
+      "slug": "my-personal-second-article",
+      "title": "My personal second article",
+      "author": {
+        "name": "Angel Hodar",
+        "avatar": "https://avatars1.githubusercontent.com/u/26228709?v=4"
+      },
       "categories": [
         {
           "category": "NodeJS",
@@ -41,8 +49,12 @@
       "date": "30/1/2021"
     },
     {
-      "slug": "my-personal-first-article",
-      "title": "My personal first article",
+      "slug": "my-personal-third-article",
+      "title": "My personal third article",
+      "author": {
+        "name": "Angel Hodar",
+        "avatar": "https://avatars1.githubusercontent.com/u/26228709?v=4"
+      },
       "categories": [
         {
           "category": "NodeJS",
@@ -61,8 +73,12 @@
       "date": "30/1/2021"
     },
     {
-      "slug": "my-personal-first-article",
-      "title": "My personal first article",
+      "slug": "my-personal-fourth-article",
+      "title": "My personal fourth article",
+      "author": {
+        "name": "Angel Hodar",
+        "avatar": "https://avatars1.githubusercontent.com/u/26228709?v=4"
+      },
       "categories": [
         {
           "category": "NodeJS",

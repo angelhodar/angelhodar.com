@@ -1,5 +1,4 @@
 import {
-  HStack,
   VStack,
   Wrap,
   Tag,
@@ -24,17 +23,14 @@ export default function Home() {
   return (
     <PageContainer>
       <VStack spacing={8}>
-        <HStack>
-          <Text
-            bgGradient={gradients[colorMode]}
-            bgClip="text"
-            fontSize="6xl"
-            fontWeight="extrabold"
-          >
-            Hi, I'm Angel Hodar
-          </Text>
-          <Text fontSize="6xl">👋</Text>
-        </HStack>
+        <Text
+          bgGradient={gradients[colorMode]}
+          bgClip="text"
+          fontSize="6xl"
+          fontWeight="extrabold"
+        >
+          Hi, I'm Angel Hodar
+        </Text>
         <VStack align="start">
           <Heading as="h1">About</Heading>
           <Text>
