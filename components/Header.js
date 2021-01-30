@@ -1,28 +1,28 @@
 import Link from "next/link";
-import { Flex, HStack, Image } from "@chakra-ui/react";
+import { Box, Flex, HStack, Image } from "@chakra-ui/react";
 import NavigationSection from "./NavigationSection";
 import DarkModeSwitch from "./DarkModeSwitch";
 
-const Navigation = () => {
+const Header = () => {
   return (
     <Flex
       flexDirection="row"
-      justifyContent="space-between"
+      justifyContent="center"
       alignItems="center"
-      maxWidth="800px"
-      minWidth="300px"
-      width="100%"
       as="nav"
-      mx="auto"
+      py={5}
     >
-      <Link href="/">
-        <Image
-          src="/logo.svg"
-          w="10%"
-          h="10%"
-        ></Image>
-      </Link>
-      <HStack spacing="5px">
+      <Box py={5}>
+        <Link href="/">
+          <Image
+            boxSize="75px"
+            borderRadius="full"
+            src="/logo.svg"
+            alt="Logo"
+          ></Image>
+        </Link>
+      </Box>
+      <HStack px={10} spacing="5px">
         <NavigationSection to={"/stats"} name={"Stats"} />
         <NavigationSection to={"/blog"} name={"Blog"} />
         <NavigationSection to={"/resume"} name={"Resume"} />
@@ -34,4 +34,4 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+export default Header;

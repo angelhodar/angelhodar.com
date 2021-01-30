@@ -5,8 +5,8 @@ const FooterIcon = ({ to, title }) => {
   const { colorMode } = useColorMode();
 
   const getIconByTitle = () => {
-    if (title === "GitHub") return <SiGithub />;
-    else return <SiLinkedin />;
+    if (title === "GitHub") return <SiGithub size={32}/>;
+    else return <SiLinkedin size={32} />;
   };
 
   return (
