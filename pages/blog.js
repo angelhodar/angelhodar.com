@@ -1,9 +1,9 @@
 import PageContainer from "@/components/PageContainer";
 import ArticleCard from "@/components/ArticleCard";
 import { VStack, Text, Heading } from "@chakra-ui/react";
-import data from "@/data/articles.json";
+import { getArticlesFrontMatter } from "@/lib/mdx";
 
-export default function Blog() {
+export default function Blog({ articles }) {
   return (
     <PageContainer>
       <VStack w="100%" spacing={8}>
@@ -14,13 +14,18 @@ export default function Blog() {
             related to technology
           </Text>
         </VStack>
-        {!data.articles.length && "No posts found."}
+        {!articles.length && "No posts found."}
         <VStack w="100%" align="center" spacing={4}>
-          {data.articles.map((article, i) => {
+          {articles.map((article, i) => {
             return <ArticleCard key={i} {...article} />;
           })}
         </VStack>
       </VStack>
     </PageContainer>
   );
+}
+
+export async function getStaticProps() {
+  const articles = await getArticlesFrontMatter();
+  return { props: { articles } };
 }

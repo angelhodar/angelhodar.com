@@ -1,32 +1,22 @@
-import PageContainer from "@/components/PageContainer";
-import ArticleAuthor from "@/components/ArticleAuthor";
-import { Heading, Text, Tag, Image, HStack, VStack } from "@chakra-ui/react";
-import data from "@/data/articles.json";
+import hydrate from "next-mdx-remote/hydrate";
+import BlogLayout from "@/components/BlogLayout";
+import MDXComponents from "@/components/MDXComponents";
+import { getBlogPaths, getArticleBySlug } from "@/lib/mdx";
 
-export default function Blog({ article }) {
-  return (
-    <PageContainer>
-      <VStack w="100%" spacing={5}>
-        <Heading>{article.title}</Heading>
-        <ArticleAuthor {...article} />
-        <HStack align="center" spacing={3}>
-          {article.categories.map(({ category, color }, i) => (
-            <Tag key={i} colorScheme={color}>
-              {category}
-            </Tag>
-          ))}
-        </HStack>
-        <Image src="https://picsum.photos/800/400" />
-        <Text>{article.description}</Text>
-      </VStack>
-    </PageContainer>
-  );
+export default function Blog({ mdxSource, frontMatter }) {
+  const content = hydrate(mdxSource, {
+    components: MDXComponents,
+  });
+
+  return <BlogLayout frontMatter={frontMatter}>{content}</BlogLayout>;
 }
 
 export async function getStaticPaths() {
-  const paths = data.articles.map(({ slug }) => {
+  const posts = await getBlogPaths();
+
+  const paths = posts.map((p) => {
     return {
-      params: { slug },
+      params: { slug: p.replace(/\.mdx/, "") },
     };
   });
 
@@ -37,6 +27,6 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const article = data.articles.find((a) => a.slug === params.slug);
-  return { props: { article } };
+  const article = await getArticleBySlug(params.slug);
+  return { props: article };
 }
