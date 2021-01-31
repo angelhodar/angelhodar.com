@@ -13,7 +13,7 @@ export default function Home() {
   const { colorMode } = useColorMode();
 
   const gradients = {
-    light: "linear(to-l, #7928CA, #FF0080)",
+    light: "linear(to-l, #f7b733, #fc4a1a)",
     dark: "linear(to-l, #00F260,#0575E6)",
   };
 
@@ -41,8 +41,8 @@ export default function Home() {
             auctor mi ipsum ac lacus.
           </Text>
         </VStack>
-        <VStack align="stretch" spacing={4}>
-          <Heading as="h3" size="lg">
+        <VStack align="start" spacing={4}>
+          <Heading as="h1">
             Work
           </Heading>
           <Text>
