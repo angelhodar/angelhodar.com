@@ -41,7 +41,6 @@ const Header = () => {
         <NavigationLink to={"/resume"} name={"Resume"} />
         <NavigationLink to={"/blog"} name={"Blog"} />
         <NavigationLink to={"/stats"} name={"Stats"} />
-        <NavigationLink to={"/about"} name={"About"} />
       </HStack>
       <DarkModeSwitch />
     </Flex>

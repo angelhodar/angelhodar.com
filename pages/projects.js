@@ -1,6 +1,6 @@
 import PageContainer from "@/components/PageContainer";
 import ProjectCard from "@/components/ProjectCard";
-import { SimpleGrid, VStack, Heading, Text } from "@chakra-ui/react";
+import { SimpleGrid, VStack, Heading } from "@chakra-ui/react";
 import getPortfolioData from "@/lib/portfolio";
 
 export default function Projects({ projects }) {
@@ -9,7 +9,7 @@ export default function Projects({ projects }) {
       <VStack w="100%" align="center" spacing={8}>
         <Heading as="h1">Projects</Heading>
         {!projects && "No posts found."}
-        <SimpleGrid w="100%" columns={{ base: 1, md: 2 }} spacing={8}>
+        <SimpleGrid w="100%" columns={{ base: 1, md: 2, xl: 3 }} spacing={8}>
           {projects.map((project, i) => {
             return <ProjectCard key={i} {...project} />;
           })}

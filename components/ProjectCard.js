@@ -47,31 +47,29 @@ const ProjectCard = ({
         w="100%"
       >
         <Image src={"https://picsum.photos/500/250"} />
-        <VStack>
-          <VStack align="start" p="4">
-            <HStack spacing="3">
-              <Text fontWeight="bold" fontSize="2xl">
-                {displayName}
-              </Text>
-              {website && (
-                <Link href={website} isExternal>
-                  <Icon aria-label={"Website"} w={5} h={5} as={CgWebsite} />
-                </Link>
-              )}
-              {repositoryUrl && (
-                <Link href={repositoryUrl} isExternal>
-                  <Icon aria-label={"GitHub"} w={5} h={5} as={SiGithub} />
-                </Link>
-              )}
-            </HStack>
-            <Text fontSize="lg">{summary}</Text>
-            <HStack spacing="3">
-              <Image boxSize="30px" src={icons.revidace} />;
-              <Image boxSize="30px" src={icons["angelhodar.dev"]} />;
-              <Image boxSize="30px" src={icons.telesheets} />;
-              <Image boxSize="30px" src={icons.openrpg_inventory} />;
-            </HStack>
-          </VStack>
+        <VStack align="start" p="4">
+          <HStack spacing="3">
+            <Text fontWeight="bold" fontSize="2xl">
+              {displayName}
+            </Text>
+            {website && (
+              <Link href={website} isExternal>
+                <Icon aria-label={"Website"} w={5} h={5} as={CgWebsite} />
+              </Link>
+            )}
+            {repositoryUrl && (
+              <Link href={repositoryUrl} isExternal>
+                <Icon aria-label={"GitHub"} w={5} h={5} as={SiGithub} />
+              </Link>
+            )}
+          </HStack>
+          <Text fontSize="lg">{summary}</Text>
+          <HStack spacing="3">
+            <Image boxSize="30px" src={icons.revidace} />;
+            <Image boxSize="30px" src={icons["angelhodar.dev"]} />;
+            <Image boxSize="30px" src={icons.telesheets} />;
+            <Image boxSize="30px" src={icons.openrpg_inventory} />;
+          </HStack>
         </VStack>
       </Flex>
     </NextLink>

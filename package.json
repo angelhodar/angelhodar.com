@@ -28,17 +28,17 @@
   },
   "homepage": "https://github.com/angelhodar/angelhodar.dev#readme",
   "dependencies": {
-    "@chakra-ui/icons": "^1.0.3",
-    "@chakra-ui/react": "^1.1.6",
-    "@emotion/react": "^11.1.4",
-    "@emotion/styled": "^11.0.0",
+    "@chakra-ui/icons": "^1.0.5",
+    "@chakra-ui/react": "^1.3.3",
+    "@emotion/react": "^11.1.5",
+    "@emotion/styled": "^11.1.5",
     "@mdx-js/react": "^1.6.22",
-    "framer-motion": "^3.2.2-rc.1",
+    "framer-motion": "^3.6.1",
     "gray-matter": "^4.0.2",
-    "next": "^10.0.6",
+    "next": "^10.0.7",
     "next-mdx-remote": "^2.1.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-icons": "^4.1.0"
+    "react-icons": "^4.2.0"
   }
 }
