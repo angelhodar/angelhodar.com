@@ -1,15 +1,43 @@
-import { Container, HStack } from "@chakra-ui/react";
-import FooterIcon from "./FooterIcon";
+import React from "react";
+import { Container, HStack, IconButton } from "@chakra-ui/react";
+import { SiGithub, SiLinkedin, SiTwitter } from "react-icons/si";
 
-export const Footer = () => {
+const Footer = () => {
+  const icons = [
+    {
+      title: "GitHub",
+      to: "https://github.com/angelhodar",
+      icon: <SiGithub size={32} />,
+    },
+    {
+      title: "Twitter",
+      to: "https://twitter.com/angelhodar",
+      icon: <SiTwitter size={32} />,
+      color: "twitter"
+    },
+    {
+      title: "LinkedIn",
+      to: "https://www.linkedin.com/in/angel-rodriguez-hodar-541bb8199/",
+      icon: <SiLinkedin size={32} />,
+      color: "linkedin"
+    },
+  ];
+
   return (
-    <Container>
+    <Container mb={5}>
       <HStack justify="center" spacing={5}>
-        <FooterIcon to={"https://github.com/angelhodar"} title="GitHub" />
-        <FooterIcon
-          to={"https://www.linkedin.com/in/angel-rodriguez-hodar-541bb8199/"}
-          title="LinkedIn"
-        />
+        {icons.map(({ title, to, icon, color }) => (
+          <IconButton
+            key={title}
+            as="a"
+            href={to}
+            target="_blank"
+            aria-label={title}
+            icon={icon}
+            variant="ghost"
+            colorScheme={color}
+          />
+        ))}
       </HStack>
     </Container>
   );

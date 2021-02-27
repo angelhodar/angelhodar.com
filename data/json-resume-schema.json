@@ -1,0 +1,418 @@
+{
+  "basics": {
+    "name": "Angel",
+    "label": "Computer Engineer",
+    "image": "https://avatars1.githubusercontent.com/u/26228709?v=4",
+    "email": "angelhodar76@gmail.com",
+    "phone": "",
+    "url": "angelhodar.dev",
+    "summary": "I consider myself a very curious person and a good learner . I am always investigating about new technologies, tools and ways to do things better. I  am good at working in a team environment, always exchaning ideas about how to approach problems and solve them efficiently.",
+    "profiles": [
+      {
+        "network": "gitconnected",
+        "username": "angelhodar",
+        "url": "https://gitconnected.com/angelhodar"
+      },
+      {
+        "network": "GitHub",
+        "username": "angelhodar",
+        "url": "https://github.com/angelhodar"
+      },
+      {
+        "network": "LinkedIn",
+        "url": "https://www.linkedin.com/in/angel-rodriguez-hodar-541bb8199/",
+        "username": "angel-rodriguez-hodar-541bb8199"
+      },
+      {
+        "network": "Twitter",
+        "url": "https://twitter.com/@angelhodar",
+        "username": "@angelhodar"
+      }
+    ],
+    "headline": "Computer Science - University of Granada",
+    "blog": "angelhodar.dev/blog",
+    "yearsOfExperience": 1,
+    "username": "angelhodar",
+    "locationAsString": "Spain",
+    "region": "Spain",
+    "karma": 18,
+    "id": "003132b9-359d-4424-ad53-9347ef973114",
+    "followers": 47,
+    "following": 19,
+    "picture": "https://avatars1.githubusercontent.com/u/26228709?v=4",
+    "website": "angelhodar.dev"
+  },
+  "skills": [
+    {
+      "name": "React",
+      "level": "Advanced",
+      "keywords": ["react", "front"],
+      "rating": 4,
+      "yearsOfExperience": 2
+    },
+    {
+      "name": "Python",
+      "level": "Advanced",
+      "keywords": ["python", "back"],
+      "rating": 4,
+      "yearsOfExperience": 3
+    },
+    {
+      "name": "Javascript",
+      "level": "Advanced",
+      "keywords": ["javascript", "front"],
+      "rating": 4,
+      "yearsOfExperience": 2
+    },
+    {
+      "name": "Vue",
+      "level": "Intermediate",
+      "keywords": ["vue", "front"],
+      "rating": 3,
+      "yearsOfExperience": 1
+    },
+    {
+      "name": "C++",
+      "level": "Intermediate",
+      "keywords": ["cplusplus", "back"],
+      "rating": 3,
+      "yearsOfExperience": 2
+    },
+    {
+      "name": "C#",
+      "level": "Intermediate",
+      "keywords": ["csharp", "back"],
+      "rating": 3,
+      "yearsOfExperience": 1
+    },
+    {
+      "name": "Java",
+      "level": "Intermediate",
+      "keywords": ["java", "back"],
+      "rating": 3,
+      "yearsOfExperience": 2
+    },
+    {
+      "name": "NodeJS",
+      "level": "Advanced",
+      "keywords": ["nodejs", "back"],
+      "rating": 4,
+      "yearsOfExperience": 2
+    },
+    {
+      "name": "Docker",
+      "level": "Intermediate",
+      "keywords": ["docker", "devops"],
+      "rating": 3,
+      "yearsOfExperience": 2
+    },
+    {
+      "name": "MongoDB",
+      "level": "Advanced",
+      "keywords": ["mongodb", "database"],
+      "rating": 4,
+      "yearsOfExperience": 2
+    },
+    {
+      "name": "Unity",
+      "level": "Advanced",
+      "keywords": ["unity", "engine"],
+      "rating": 4,
+      "yearsOfExperience": 2
+    },
+    {
+      "name": "Unreal Engine",
+      "level": "Advanced",
+      "keywords": ["unrealengine", "engine"],
+      "rating": 4,
+      "yearsOfExperience": 4
+    },
+    {
+      "name": "HTML",
+      "level": "Advanced",
+      "keywords": ["html", "front"],
+      "rating": 4,
+      "yearsOfExperience": 2
+    },
+    {
+      "name": "PostgreSQL",
+      "level": "Beginner",
+      "keywords": ["postgresql", "database"],
+      "rating": 2,
+      "yearsOfExperience": 1
+    },
+    {
+      "name": "NextJS",
+      "level": "Intermediate",
+      "keywords": ["nextjs", "front"],
+      "rating": 3,
+      "yearsOfExperience": 1
+    },
+    {
+      "name": "Firebase",
+      "level": "Intermediate",
+      "keywords": ["firebase", "backend"],
+      "rating": 3,
+      "yearsOfExperience": 1
+    },
+    {
+      "name": "Ubuntu",
+      "level": "Intermediate",
+      "keywords": ["ubuntu", "tool"],
+      "rating": 3,
+      "yearsOfExperience": 4
+    },
+    {
+      "name": "Git",
+      "level": "Intermediate",
+      "keywords": ["git", "tool"],
+      "rating": 3,
+      "yearsOfExperience": 4
+    }
+  ],
+  "projects": [
+    {
+      "name": "revidace",
+      "description": "The goal of this project is to create a platform for health professionals to change the way people with any brain damage can train common tasks to improve their life using virtual reality to create a fully customizable environment that helps patients in their recovery. ",
+      "url": "https://revidace.com",
+      "highlights": [],
+      "keywords": [],
+      "roles": [],
+      "startDate": "",
+      "endDate": "",
+      "entity": "",
+      "type": "",
+      "displayName": "Revidace",
+      "website": "https://revidace.com",
+      "summary": "Automated virtual reality exercises for people with acquired brain damage",
+      "primaryLanguage": "Vue",
+      "languages": ["JavaScript"],
+      "libraries": ["MongoDB", "Vue", "Quasar", "NodeJS"],
+      "githubUrl": "https://github.com/angelhodar/Revidace",
+      "repositoryUrl": "https://github.com/angelhodar/Revidace",
+      "start": { "month": 1 },
+      "end": { "month": 1 },
+      "images": [],
+      "videos": []
+    },
+    {
+      "name": "angelhodar.dev",
+      "description": "In this project my goal is to create a fully featured website and portfolio to display my resume, projects, personal blog, etc. It includes several types of pages like home page to display some short feed, projects page to display any side project like GitHub repositories, resume page to display custom rendered JSON Resume Schema info using gitconnected.com, a blog page to use as a way to write articles about some new technology, pipeline or library I discover (using MDX as format) and a stats page to collect custom statistics from other sites like GitHub, Youtube, Spotify, Twitter, etc.",
+      "url": "https://angelhodar.dev",
+      "highlights": [],
+      "keywords": [],
+      "roles": [],
+      "startDate": "",
+      "endDate": "",
+      "entity": "",
+      "type": "",
+      "displayName": "angelhodar.dev",
+      "website": "https://angelhodar.dev",
+      "summary": "My personal website using NextJS, ChakraUI, MDX and Vercel",
+      "primaryLanguage": "JavaScript",
+      "languages": ["JavaScript"],
+      "libraries": ["Vercel", "MDX", "NextJS", "ChakraUI"],
+      "githubUrl": "https://github.com/angelhodar/angelhodar.dev",
+      "repositoryUrl": "https://github.com/angelhodar/angelhodar.dev",
+      "start": { "month": 1 },
+      "end": { "month": 1 },
+      "images": [],
+      "videos": []
+    },
+    {
+      "name": "telesheets",
+      "description": "This app will allow you to connect your Google Sheet with a Telegram group using a set of commands to automatically configure and keep track of the changes you make in your sheet, allowing you to notify all users in your group. For example, to keep track and notify about new califications in exams for teachers.",
+      "url": "",
+      "highlights": [],
+      "keywords": [],
+      "roles": [],
+      "startDate": "",
+      "endDate": "",
+      "entity": "",
+      "type": "",
+      "displayName": "TeleSheets",
+      "website": "",
+      "summary": "A python app to connect and format google spreadsheet data into a telegram bot",
+      "primaryLanguage": "Python",
+      "languages": ["Python"],
+      "libraries": ["Docker", "Google Sheets", "Telegram"],
+      "githubUrl": "https://github.com/angelhodar/TeleSheets",
+      "repositoryUrl": "https://github.com/angelhodar/TeleSheets",
+      "start": { "month": 1 },
+      "end": { "month": 1 },
+      "images": [],
+      "videos": []
+    },
+    {
+      "name": "openrpg_inventory",
+      "description": "A rich featured and component based inventory and equipment system to use in any Unreal Engine project to allow people create their games easily and faster",
+      "url": "",
+      "highlights": [],
+      "keywords": [],
+      "roles": [],
+      "startDate": "",
+      "endDate": "",
+      "entity": "",
+      "type": "",
+      "displayName": "OpenRPG_Inventory",
+      "website": "",
+      "summary": "Generic and fully featured multipurpose inventory container and equipment system for Unreal Engine 4",
+      "primaryLanguage": "",
+      "languages": ["Blueprints"],
+      "libraries": ["Unreal Engine"],
+      "githubUrl": "https://github.com/angelhodar/OpenRPG_Inventory",
+      "repositoryUrl": "https://github.com/angelhodar/OpenRPG_Inventory",
+      "start": { "month": 1 },
+      "end": { "month": 1 },
+      "images": [],
+      "videos": []
+    },
+    {
+      "name": "openrpg_quest",
+      "description": "",
+      "url": "",
+      "highlights": [],
+      "keywords": [],
+      "roles": [],
+      "startDate": "",
+      "endDate": "",
+      "entity": "",
+      "type": "",
+      "displayName": "OpenRPG_Quest",
+      "website": "",
+      "summary": "Efficient and rich featured quests system for Unreal Engine 4",
+      "primaryLanguage": "",
+      "languages": [],
+      "libraries": ["Unreal Engine"],
+      "githubUrl": "https://github.com/angelhodar/OpenRPG_Quest",
+      "repositoryUrl": "https://github.com/angelhodar/OpenRPG_Quest",
+      "start": { "month": 1 },
+      "end": { "month": 1 },
+      "images": [],
+      "videos": []
+    },
+    {
+      "name": "openrpg_stats",
+      "description": "",
+      "url": "",
+      "highlights": [],
+      "keywords": [],
+      "roles": [],
+      "startDate": "",
+      "endDate": "",
+      "entity": "",
+      "type": "",
+      "displayName": "OpenRPG_Stats",
+      "website": "",
+      "summary": "A powerful stats, attributes, leveling system and much more for Unreal Engine 4!",
+      "primaryLanguage": "",
+      "languages": [],
+      "libraries": ["Unreal Engine"],
+      "githubUrl": "https://github.com/angelhodar/OpenRPG_Stats",
+      "repositoryUrl": "https://github.com/angelhodar/OpenRPG_Stats",
+      "start": { "month": 1 },
+      "end": { "month": 1 },
+      "images": [],
+      "videos": []
+    },
+    {
+      "name": "openrpg_radarsystem",
+      "description": "",
+      "url": "",
+      "highlights": [],
+      "keywords": [],
+      "roles": [],
+      "startDate": "",
+      "endDate": "",
+      "entity": "",
+      "type": "",
+      "displayName": "OpenRPG_RadarSystem",
+      "website": "",
+      "summary": "Horizontal 360º rich featured radar system, typically seen in games like Skyrim, for Unreal Engine 4",
+      "primaryLanguage": "",
+      "languages": [],
+      "libraries": ["Unreal Engine"],
+      "githubUrl": "https://github.com/angelhodar/OpenRPG_RadarSystem",
+      "repositoryUrl": "https://github.com/angelhodar/OpenRPG_RadarSystem",
+      "start": { "month": 1 },
+      "end": { "month": 1 },
+      "images": [],
+      "videos": []
+    }
+  ],
+  "work": [
+    {
+      "name": "Fidesol",
+      "location": "Spain",
+      "description": "",
+      "position": "Software Engineer",
+      "url": "https://www.fidesol.org/",
+      "startDate": "2020-02-01",
+      "endDate": "",
+      "summary": "Working as VR programmer creating experiences with the Unity game engine. Also developing some React for web and NodeJS for project backend.",
+      "highlights": ["Virtual Reality", "Unity", "React", "NodeJS"],
+      "isCurrentRole": true,
+      "start": { "year": 2020, "month": 2 },
+      "end": {},
+      "company": "Fidesol",
+      "website": "https://www.fidesol.org/"
+    },
+    {
+      "name": "Fidesol",
+      "location": "Granada, Spain",
+      "description": "",
+      "position": "Software Engineer Intern",
+      "url": "https://www.fidesol.org/",
+      "startDate": "2020-02-01",
+      "endDate": "2020-05-01",
+      "summary": "While I was an intern I helped in the development of virtual reality experiences for clients, in particular, I prepared new assets to use in the current experience the client was demanding, including the interaction code, on-demand delivery and the improvements of the internal tools used to develop the experiences.",
+      "highlights": ["Virtual Reality", "Unity", "C#"],
+      "isCurrentRole": false,
+      "start": { "year": 2020, "month": 2 },
+      "end": { "year": 2020, "month": 5 },
+      "company": "Fidesol",
+      "website": "https://www.fidesol.org/"
+    }
+  ],
+  "publications": [],
+  "education": [
+    {
+      "institution": "Escuela Técnica Superior de Ingeniería Informática y Telecomunicaciones, Spain",
+      "url": "https://etsiit.ugr.es/",
+      "area": "Computer Science",
+      "studyType": "Bachelor",
+      "startDate": "2016-09-01",
+      "endDate": "2020-07-01",
+      "score": "Computer Science",
+      "courses": [],
+      "description": "This years I coursed my degree in Computer Sciene. I acquired a great fundamental knowledge about computers and programming. I took several types of subjects, going from AI to Cloud in my last year.",
+      "activities": "",
+      "start": { "year": 2016, "month": 9 },
+      "end": { "year": 2020, "month": 7 },
+      "website": "https://etsiit.ugr.es/",
+      "gpa": "Computer Science"
+    }
+  ],
+  "volunteer": [],
+  "awards": [],
+  "languages": [
+    { "language": "English", "fluency": "Fluent" },
+    { "language": "Spanish", "fluency": "Native" }
+  ],
+  "interests": [
+    { "name": "Technology", "keywords": ["computer", "innovation"] },
+    { "name": "Hiking", "keywords": [] },
+    { "name": "Memes", "keywords": [] },
+    { "name": "Automation", "keywords": [] },
+    { "name": "Animals", "keywords": [] },
+    { "name": "Nature", "keywords": [] }
+  ],
+  "references": [],
+  "certificates": [],
+  "meta": {
+    "note": "This is a combined version of the old and new JSON Resume API to provide maximum compatibility. You will notice duplicated values in different fields.",
+    "canonical": "https://raw.githubusercontent.com/jsonresume/resume-schema/master/resume.json",
+    "version": "v1.0.0",
+    "lastModified": "2020-12-29T15:53:00"
+  }
+}

@@ -1,17 +1,14 @@
 import React from "react";
-import { VStack, Heading, Text } from "@chakra-ui/react";
+import { VStack, Icon, HStack, Text } from "@chakra-ui/react";
 
-const ResumeSection = ({ title }) => {
+const ResumeSection = ({ title, icon, children }) => {
   return (
-    <VStack align="start">
-      <Heading as="h1">{title}</Heading>
-      <Text>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis
-        urna in mauris suscipit efficitur eget sit amet enim. Mauris venenatis
-        ex a magna posuere, ac accumsan orci pellentesque. Proin elementum,
-        sapien nec blandit aliquet, dolor justo placerat mi, sed auctor mi ipsum
-        ac lacus.
-      </Text>
+    <VStack align="start" spacing={5}>
+      <HStack spacing={5}>
+        <Icon as={icon} w={10} h={10} />
+        <Text fontSize="3xl">{title}</Text>
+      </HStack>
+      {children}
     </VStack>
   );
 };

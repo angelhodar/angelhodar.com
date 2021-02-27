@@ -33,15 +33,15 @@ export default function Home({ projects, articles }) {
         <VStack align="start" spacing={5}>
           <Heading as="h1">Latest Projects</Heading>
           <Divider />
-          {projects.map((project) => (
-            <LatestProject {...project} />
+          {projects.map((project, i) => (
+            <LatestProject key={i} {...project} />
           ))}
         </VStack>
         <VStack align="start" spacing={5}>
           <Heading as="h1">Latest Articles</Heading>
           <Divider />
-          {articles.map((article) => (
-            <LatestArticle {...article} />
+          {articles.map((article, i) => (
+            <LatestArticle key={i} {...article} />
           ))}
         </VStack>
       </VStack>

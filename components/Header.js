@@ -40,7 +40,6 @@ const Header = () => {
         <NavigationLink to={"/projects"} name={"Projects"} />
         <NavigationLink to={"/resume"} name={"Resume"} />
         <NavigationLink to={"/blog"} name={"Blog"} />
-        <NavigationLink to={"/stats"} name={"Stats"} />
       </HStack>
       <DarkModeSwitch />
     </Flex>

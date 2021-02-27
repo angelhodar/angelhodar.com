@@ -46,16 +46,6 @@ const MenuDrawer = () => {
                   onClick={onClose}
                 />
                 <NavigationLink to={"/blog"} name={"Blog"} onClick={onClose} />
-                <NavigationLink
-                  to={"/stats"}
-                  name={"Stats"}
-                  onClick={onClose}
-                />
-                <NavigationLink
-                  to={"/about"}
-                  name={"About"}
-                  onClick={onClose}
-                />
               </VStack>
             </DrawerBody>
           </DrawerContent>
