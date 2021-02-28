@@ -1,4 +1,4 @@
-import { VStack, Text, SimpleGrid } from "@chakra-ui/react";
+import { VStack, Text, HStack } from "@chakra-ui/react";
 import Skill from "./Skill";
 
 const SkillGroup = ({ displayName, groupName, skills }) => {
@@ -7,11 +7,11 @@ const SkillGroup = ({ displayName, groupName, skills }) => {
   return (
     <VStack align="start" spacing={5}>
       <Text fontSize="2xl">{displayName}</Text>
-      <SimpleGrid columns={{ base: 2, md: filteredSkills.length }} spacing={5}>
+      <HStack spacing={10}>
         {filteredSkills.map((skill, i) => (
           <Skill key={i} {...skill} />
         ))}
-      </SimpleGrid>
+      </HStack>
     </VStack>
   );
 };

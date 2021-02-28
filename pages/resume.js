@@ -49,14 +49,14 @@ export default function Resume({ basics, work, skills, education }) {
           <SkillGroup displayName="Tools" groupName="tool" skills={skills} />
         </ResumeSection>
         <ResumeSection title="Education" icon={FaUserGraduate}>
-          <VStack>
+          <VStack spacing={10}>
             {education.map((item, i) => (
               <Education key={i} {...item} />
             ))}
           </VStack>
         </ResumeSection>
         <ResumeSection title="Experience" icon={FaBriefcase}>
-          <VStack>
+          <VStack spacing={10}>
             {work.map((position, i) => (
               <WorkPosition key={i} {...position} />
             ))}

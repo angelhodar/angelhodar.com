@@ -1,4 +1,4 @@
-import { Box, VStack, Icon, Text, Badge, HStack } from "@chakra-ui/react";
+import { Box, VStack, Icon, Text, HStack } from "@chakra-ui/react";
 import { FaCalendarAlt, FaUniversity } from "react-icons/fa";
 
 const Education = ({
@@ -12,15 +12,15 @@ const Education = ({
   return (
     <Box rounded="lg" borderWidth="2px">
       <VStack align="start" spacing={2} m={5}>
-        <Badge fontSize="xl">
+        <Text fontSize="xl" fontWeight="bold">
           {studyType} in {area}
-        </Badge>
+        </Text>
         <HStack>
-          <Icon as={FaUniversity} />
+          <Icon as={FaUniversity} mb={1}/>
           <Text fontSize="2lg">{institution}</Text>
         </HStack>
         <HStack>
-          <Icon as={FaCalendarAlt} />
+          <Icon as={FaCalendarAlt} mb={1} />
           <Text fontSize="lg">
             {startDate} - {endDate}
           </Text>
