@@ -17,6 +17,9 @@ import {
   SiGit,
   SiUbuntu,
   SiFirebase,
+  SiVisualstudiocode,
+  SiHeroku,
+  SiDigitalocean,
 } from "react-icons/si";
 
 const icons = [
@@ -53,8 +56,8 @@ const icons = [
   {
     name: "python",
     icon: SiPython,
-    lightColor: "yellow.300",
-    darkColor: "yellow.300"
+    lightColor: "#ffd94a",
+    darkColor: "#ffd94a"
   },
   {
     name: "javascript",
@@ -113,20 +116,32 @@ const icons = [
   {
     name: "firebase",
     icon: SiFirebase,
-    lightColor: "orange.400",
-    darkColor: "orange.400"
-  },
-  {
-    name: "ubuntu",
-    icon: SiUbuntu,
-    lightColor: "orange.500",
-    darkColor: "orange.500"
+    lightColor: "#fbc125",
+    darkColor: "#fbc125"
   },
   {
     name: "git",
     icon: SiGit,
-    lightColor: "orange.700",
-    darkColor: "orange.700"
+    lightColor: "orange.500",
+    darkColor: "orange.500"
+  },
+  {
+    name: "vscode",
+    icon: SiVisualstudiocode,
+    lightColor: "blue.500",
+    darkColor: "blue.500"
+  },
+  {
+    name: "digitalocean",
+    icon: SiDigitalocean,
+    lightColor: "blue.400",
+    darkColor: "blue.400"
+  },
+  {
+    name: "heroku",
+    icon: SiHeroku,
+    lightColor: "purple.600",
+    darkColor: "purple.600"
   },
 ];
 

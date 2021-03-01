@@ -5,7 +5,7 @@ import PageContainer from "@/components/PageContainer";
 const BlogLayout = ({ frontMatter, children }) => {
   return (
     <PageContainer>
-      <VStack w="100%" spacing={5}>
+      <VStack w="100%" spacing={10}>
         <ArticleMetadata {...frontMatter} />
         <Box w="100%">{children}</Box>
       </VStack>

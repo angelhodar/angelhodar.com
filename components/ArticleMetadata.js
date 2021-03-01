@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 const ArticleAuthor = ({ title, categories, thumbnail, author, date }) => {
   return (
     <VStack spacing="5">
-      <Heading>{title}</Heading>
+      <Heading align="center">{title}</Heading>
       <HStack spacing="5">
         <HStack spacing="3">
           <Avatar src={author.avatar} h={10} w={10} />
