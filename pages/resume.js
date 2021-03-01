@@ -4,19 +4,36 @@ import SkillGroup from "@/components/SkillGroup";
 import WorkPosition from "@/components/WorkPosition";
 import Education from "@/components/Education";
 import {
+  Box,
+  Tag,
   Heading,
   VStack,
   Icon,
   Text,
   Image,
   Button,
-  useColorModeValue,
+  Wrap,
+  WrapItem,
 } from "@chakra-ui/react";
 import getPortfolioData from "@/lib/portfolio";
-import { FaUserGraduate, FaBriefcase, FaCode, FaUser } from "react-icons/fa";
-import { FaFilePdf } from "react-icons/fa";
+import {
+  FaUserGraduate,
+  FaBriefcase,
+  FaCode,
+  FaUser,
+  FaFilePdf,
+} from "react-icons/fa";
+import { IoLanguageOutline } from "react-icons/io5";
+import { GiTechnoHeart } from "react-icons/gi";
 
-export default function Resume({ basics, work, skills, education }) {
+export default function Resume({
+  basics,
+  work,
+  interests,
+  languages,
+  skills,
+  education,
+}) {
   return (
     <PageContainer>
       <VStack align="start" w="100%" spacing={8}>
@@ -26,7 +43,7 @@ export default function Resume({ basics, work, skills, education }) {
           <Button
             size="lg"
             variant="solid"
-            backgroundColor='tomato'
+            backgroundColor="tomato"
             textColor="white"
             onClick={() =>
               window.open("https://gitconnected.com/angelhodar/resume")
@@ -72,12 +89,43 @@ export default function Resume({ basics, work, skills, education }) {
             ))}
           </VStack>
         </ResumeSection>
+        <ResumeSection title="Languages" icon={IoLanguageOutline}>
+          <Wrap spacing="10px">
+            {languages.map(({ language, fluency }, i) => (
+              <WrapItem key={i}>
+                <Box rounded="lg" borderWidth="2px">
+                  <Text m="10px">
+                    {language}: {fluency}
+                  </Text>
+                </Box>
+              </WrapItem>
+            ))}
+          </Wrap>
+        </ResumeSection>
+        <ResumeSection title="Interests" icon={GiTechnoHeart}>
+          <Wrap spacing="10px">
+            {interests.map(({ name }, i) => (
+              <WrapItem key={i}>
+                <Tag colorScheme="blue" variant="outline">
+                  {name}
+                </Tag>
+              </WrapItem>
+            ))}
+          </Wrap>
+        </ResumeSection>
       </VStack>
     </PageContainer>
   );
 }
 
 export async function getStaticProps() {
-  const { basics, work, skills, education } = await getPortfolioData();
-  return { props: { basics, work, skills, education } };
+  const {
+    basics,
+    work,
+    skills,
+    education,
+    languages,
+    interests,
+  } = await getPortfolioData();
+  return { props: { basics, work, skills, languages, interests, education } };
 }
