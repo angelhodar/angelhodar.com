@@ -23,92 +23,110 @@ const icons = [
   {
     name: "react",
     icon: SiReact,
-    color: "blue.300",
+    lightColor: "blue.300",
+    darkColor: "blue.300"
   },
   {
     name: "vue",
     icon: SiVueDotJs,
-    color: "green.400",
+    lightColor: "green.400",
+    darkColor: "green.400"
   },
   {
     name: "nodejs",
     icon: SiNodeDotJs,
-    color: "green.600",
+    lightColor: "green.600",
+    darkColor: "green.600"
   },
   {
     name: "docker",
     icon: SiDocker,
-    color: "blue.500",
+    lightColor: "blue.500",
+    darkColor: "blue.500"
   },
   {
     name: "mongodb",
     icon: SiMongodb,
-    color: "green.500",
+    lightColor: "green.500",
+    darkColor: "green.500"
   },
   {
     name: "python",
     icon: SiPython,
-    color: "yellow.300",
+    lightColor: "yellow.300",
+    darkColor: "yellow.300"
   },
   {
     name: "javascript",
     icon: SiJavascript,
-    color: "black",
+    lightColor: "black",
+    darkColor: "white"
   },
   {
     name: "java",
     icon: SiJava,
-    color: "orange.500",
+    lightColor: "orange.500",
+    darkColor: "orange.500"
   },
   {
     name: "csharp",
     icon: SiCsharp,
-    color: "purple.600",
+    lightColor: "purple.600",
+    darkColor: "purple.600"
   },
   {
     name: "cplusplus",
     icon: SiCplusplus,
-    color: "blue.600",
+    lightColor: "blue.600",
+    darkColor: "blue.600",
   },
   {
     name: "unity",
     icon: SiUnity,
-    color: "black",
+    lightColor: "black",
+    darkColor: "white",
   },
   {
     name: "unrealengine",
     icon: SiUnrealengine,
-    color: "black",
+    lightColor: "black",
+    darkColor: "white",
   },
   {
     name: "html",
     icon: SiHtml5,
-    color: "orange.500",
+    lightColor: "orange.500",
+    darkColor: "orange.500"
   },
   {
     name: "nextjs",
     icon: SiNextDotJs,
-    color: "gray.700",
+    lightColor: "gray.700",
+    darkColor: "gray.200"
   },
   {
     name: "postgresql",
     icon: SiPostgresql,
-    color: "blue.800",
+    lightColor: "blue.800",
+    darkColor: "blue.500",
   },
   {
     name: "firebase",
     icon: SiFirebase,
-    color: "orange.400",
+    lightColor: "orange.400",
+    darkColor: "orange.400"
   },
   {
     name: "ubuntu",
     icon: SiUbuntu,
-    color: "orange.500",
+    lightColor: "orange.500",
+    darkColor: "orange.500"
   },
   {
     name: "git",
     icon: SiGit,
-    color: "orange.700",
+    lightColor: "orange.700",
+    darkColor: "orange.700"
   },
 ];
 

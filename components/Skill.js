@@ -1,15 +1,17 @@
-import { Icon, Text, VStack } from "@chakra-ui/react";
+import { Icon, Text, VStack, WrapItem, useColorModeValue } from "@chakra-ui/react";
 import { getSkillIcon } from "@/styles/icons";
 
 const Skill = ({ keywords, name }) => {
   const [identifier] = keywords;
-  const iconInfo = getSkillIcon(identifier);
+  const { icon, lightColor, darkColor } = getSkillIcon(identifier);
 
   return (
-    <VStack spacing={3}>
-      <Icon as={iconInfo.icon} w={50} h={50} color={iconInfo.color} />
-      <Text>{name}</Text>
-    </VStack>
+    <WrapItem>
+      <VStack spacing={3}>
+        <Icon as={icon} w={50} h={50} color={useColorModeValue(lightColor, darkColor)} />
+        <Text>{name}</Text>
+      </VStack>
+    </WrapItem>
   );
 };
 

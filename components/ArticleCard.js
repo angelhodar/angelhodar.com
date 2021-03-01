@@ -1,6 +1,17 @@
 import React from "react";
 import Link from "next/link";
-import { Flex, Box, VStack, HStack, Text, Tag, Badge } from "@chakra-ui/react";
+import {
+  Flex,
+  Box,
+  VStack,
+  HStack,
+  Text,
+  Tag,
+  Badge,
+  Wrap,
+  WrapItem,
+} from "@chakra-ui/react";
+import dayjs from "dayjs";
 
 const ArticleCard = ({ slug, date, categories, description, title }) => {
   return (
@@ -8,23 +19,19 @@ const ArticleCard = ({ slug, date, categories, description, title }) => {
       <Box as="a" cursor="pointer" w="100%">
         <VStack align="start" p={4} rounded="xl" borderWidth="1px">
           <Text fontWeight="bold" fontSize="2xl">
-            {title}
+            {title}{" "}
+            <Badge fontSize="md" colorScheme="green">
+              New!
+            </Badge>
           </Text>
-          <Flex alignItems="center">
-            <HStack spacing="3">
-              <Text fontSize="md">{date}</Text>
-              <Badge mb="1" size="md" colorScheme="green">
-                New
-              </Badge>
-            </HStack>
-          </Flex>
-          <HStack spacing={3}>
+          <Text fontSize="md">{dayjs(date).format("MMMM DD, YYYY")}</Text>
+          <Wrap spacing="5px">
             {categories.map(({ category, color }, i) => (
-              <Tag key={i} colorScheme={color}>
-                {category}
-              </Tag>
+              <WrapItem key={i}>
+                <Tag colorScheme={color}>{category}</Tag>
+              </WrapItem>
             ))}
-          </HStack>
+          </Wrap>
           <Text fontSize="lg">{description}</Text>
         </VStack>
       </Box>

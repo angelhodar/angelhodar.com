@@ -3,7 +3,15 @@ import ResumeSection from "@/components/ResumeSection";
 import SkillGroup from "@/components/SkillGroup";
 import WorkPosition from "@/components/WorkPosition";
 import Education from "@/components/Education";
-import { Heading, VStack, Icon, Text, Image, Button } from "@chakra-ui/react";
+import {
+  Heading,
+  VStack,
+  Icon,
+  Text,
+  Image,
+  Button,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import getPortfolioData from "@/lib/portfolio";
 import { FaUserGraduate, FaBriefcase, FaCode, FaUser } from "react-icons/fa";
 import { FaFilePdf } from "react-icons/fa";
@@ -12,16 +20,18 @@ export default function Resume({ basics, work, skills, education }) {
   return (
     <PageContainer>
       <VStack align="start" w="100%" spacing={8}>
-        <VStack w="100%" align="center" spacing={5}>
+        <VStack w="100%" align="center" spacing={10}>
           <Heading as="h1">Resume</Heading>
           <Image boxSize="128px" src={basics.image} borderRadius="full" />
           <Button
             size="lg"
+            variant="solid"
+            backgroundColor='tomato'
+            textColor="white"
             onClick={() =>
               window.open("https://gitconnected.com/angelhodar/resume")
             }
             leftIcon={<Icon as={FaFilePdf} w={7} h={7} />}
-            colorScheme="red"
           >
             View as PDF
           </Button>

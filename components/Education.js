@@ -1,5 +1,6 @@
 import { Box, VStack, Icon, Text, HStack } from "@chakra-ui/react";
 import { FaCalendarAlt, FaUniversity } from "react-icons/fa";
+import dayjs from "dayjs";
 
 const Education = ({
   institution,
@@ -22,7 +23,7 @@ const Education = ({
         <HStack>
           <Icon as={FaCalendarAlt} mb={1} />
           <Text fontSize="lg">
-            {startDate} - {endDate}
+            {dayjs(startDate).format("MMM YYYY")} - {dayjs(endDate).format("MMM YYYY")}
           </Text>
         </HStack>
         <Text fontSize="2sm">{description}</Text>

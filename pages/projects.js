@@ -9,7 +9,7 @@ export default function Projects({ projects }) {
       <VStack w="100%" align="center" spacing={8}>
         <Heading as="h1">Projects</Heading>
         {!projects && "No posts found."}
-        <SimpleGrid w="100%" columns={{ base: 1, md: 2, xl: 3 }} spacing={8}>
+        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
           {projects.map((project, i) => {
             return <ProjectCard key={i} {...project} />;
           })}

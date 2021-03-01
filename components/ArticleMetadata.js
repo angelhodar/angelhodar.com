@@ -1,5 +1,6 @@
 import React from "react";
 import { VStack, Tag, Image, Heading, HStack, Avatar, Text } from "@chakra-ui/react";
+import dayjs from "dayjs";
 
 const ArticleAuthor = ({ title, categories, thumbnail, author, date }) => {
   return (
@@ -11,11 +12,11 @@ const ArticleAuthor = ({ title, categories, thumbnail, author, date }) => {
           <Text fontSize="lg">{author.name}</Text>
         </HStack>
         <Text fontSize="lg">•</Text>
-        <Text fontSize="md">{date}</Text>
+        <Text fontSize="md">{dayjs(date).format('MMMM DD, YYYY')}</Text>
         <Text fontSize="lg">•</Text>
         <Text fontSize="md">8 min read</Text>
       </HStack>
-      <HStack align="center" spacing={3}>
+      <HStack spacing={3}>
         {categories.map(({ category, color }, i) => (
           <Tag key={i} colorScheme={color}>
             {category}

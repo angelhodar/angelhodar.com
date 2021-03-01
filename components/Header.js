@@ -1,8 +1,8 @@
-import Link from "next/link";
-import { Box, Flex, HStack, Image } from "@chakra-ui/react";
+import { Box, Flex, HStack } from "@chakra-ui/react";
 import NavigationLink from "./NavigationLink";
 import MenuDrawer from "./MenuDrawer";
 import DarkModeSwitch from "./DarkModeSwitch";
+import Logo from "./Logo";
 
 const Header = () => {
   return (
@@ -17,29 +17,17 @@ const Header = () => {
       p={5}
     >
       <Box py={5} display={{ base: "none", md: "flex" }}>
-        <Link href="/">
-          <Image
-            boxSize="75px"
-            src="/logo.svg"
-            alt="Logo"
-          ></Image>
-        </Link>
+        <Logo />
       </Box>
-      <MenuDrawer />
+      {<MenuDrawer />}
       <Box display={{ base: "flex", md: "none" }}>
-        <Link href="/">
-          <Image
-            boxSize="70px"
-            src="/logo.svg"
-            alt="Logo"
-          ></Image>
-        </Link>
+        <Logo />
       </Box>
       <HStack display={{ base: "none", md: "flex" }} px={10} spacing="5px">
         <NavigationLink to={"/"} name={"Home"} />
         <NavigationLink to={"/projects"} name={"Projects"} />
-        <NavigationLink to={"/resume"} name={"Resume"} />
         <NavigationLink to={"/blog"} name={"Blog"} />
+        <NavigationLink to={"/resume"} name={"Resume"} />
       </HStack>
       <DarkModeSwitch />
     </Flex>
