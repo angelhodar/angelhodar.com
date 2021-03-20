@@ -1,9 +1,19 @@
-import { VStack, Heading, Text, Divider, useColorMode } from "@chakra-ui/react";
+import {
+  VStack,
+  HStack,
+  Heading,
+  Text,
+  Icon,
+  Divider,
+  useColorMode,
+} from "@chakra-ui/react";
 import PageContainer from "../components/PageContainer";
 import LatestProject from "../components/LatestProject";
 import LatestArticle from "../components/LatestArticle";
 import getPortfolioData from "@/lib/portfolio";
 import { getArticlesFrontMatter } from "@/lib/mdx";
+import { RiArticleLine } from "react-icons/ri";
+import { GoProject } from "react-icons/go";
 
 export default function Home({ projects, articles }) {
   const { colorMode } = useColorMode();
@@ -31,14 +41,20 @@ export default function Home({ projects, articles }) {
           on the internet
         </Text>
         <VStack align="start" spacing={5}>
-          <Heading as="h1">Latest Projects</Heading>
+          <HStack spacing={5}>
+            <Icon as={GoProject} w={10} h={10} />
+            <Heading as="h1">Main Projects</Heading>
+          </HStack>
           <Divider />
           {projects.map((project, i) => (
             <LatestProject key={i} {...project} />
           ))}
         </VStack>
         <VStack align="start" spacing={5}>
-          <Heading as="h1">Latest Articles</Heading>
+          <HStack spacing={5}>
+            <Icon as={RiArticleLine} w={10} h={10} />
+            <Heading as="h1">Latest Articles</Heading>
+          </HStack>
           <Divider />
           {articles.map((article, i) => (
             <LatestArticle key={i} {...article} />

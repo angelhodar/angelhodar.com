@@ -17,13 +17,14 @@ const Education = ({
           {studyType} in {area}
         </Text>
         <HStack>
-          <Icon as={FaUniversity} mb={1}/>
+          <Icon as={FaUniversity} mb={1} />
           <Text fontSize="2lg">{institution}</Text>
         </HStack>
         <HStack>
           <Icon as={FaCalendarAlt} mb={1} />
           <Text fontSize="lg">
-            {dayjs(startDate).format("MMM YYYY")} - {dayjs(endDate).format("MMM YYYY")}
+            {dayjs(startDate).format("MMM YYYY")} -{" "}
+            {dayjs(endDate).format("MMM YYYY")}
           </Text>
         </HStack>
         <Text fontSize="2sm">{description}</Text>

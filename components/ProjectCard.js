@@ -19,6 +19,7 @@ const ProjectCard = ({
         cursor="pointer"
         alignItems="center"
         rounded="xl"
+        boxShadow="xl"
         borderWidth="1px"
         w="100%"
       >

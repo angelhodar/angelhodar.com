@@ -22,7 +22,11 @@ const CodeBlock = ({ className, children }) => {
             as="pre"
             m="10px"
             className={className}
-            style={{ ...style, whiteSpace: "pre-wrap", backgroundColor: bgColor }}
+            style={{
+              ...style,
+              whiteSpace: "pre-wrap",
+              backgroundColor: bgColor,
+            }}
           >
             {tokens.map((line, i) => {
               return (
