@@ -11,7 +11,7 @@ import PageContainer from "../components/PageContainer";
 import LatestProject from "../components/LatestProject";
 import LatestArticle from "../components/LatestArticle";
 import getPortfolioData from "@/lib/portfolio";
-import { getArticlesFrontMatter } from "@/lib/mdx";
+import { getAllNodes } from "next-mdx";
 import { RiArticleLine } from "react-icons/ri";
 import { GoProject } from "react-icons/go";
 
@@ -67,8 +67,6 @@ export default function Home({ projects, articles }) {
 
 export async function getStaticProps() {
   const { projects } = await getPortfolioData();
-  const articles = await getArticlesFrontMatter();
-  return {
-    props: { projects: projects.slice(0, 4), articles: articles.slice(0, 4) },
-  };
+  const articles = await getAllNodes("article");
+  return { props: { projects: projects.slice(0, 4), articles } };
 }

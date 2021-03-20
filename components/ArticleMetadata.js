@@ -36,7 +36,7 @@ const ArticleAuthor = ({ title, tags, thumbnail, author, date }) => {
           8 min read
         </Text>
       </Stack>
-      <Tags tags={categories} spacing="3px" />
+      <Tags tags={tags} spacing="3px" />
       <Image src={thumbnail} />
     </VStack>
   );

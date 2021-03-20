@@ -1,0 +1,9 @@
+{
+  "article": {
+    "contentPath": "data/blog",
+    "basePath": "/blog"
+  },
+  "project": {
+    "contentPath": "data/projects"
+  }
+}
