@@ -17,7 +17,6 @@ export default function Blog({ articles }) {
         {!articles.length && "No posts found."}
         <VStack w="100%" align="center" spacing={4}>
           {articles.map((article, i) => {
-            console.log(article);
             return <ArticleCard key={i} {...article} />;
           })}
         </VStack>
