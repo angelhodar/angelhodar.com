@@ -1,6 +1,7 @@
 import {
   VStack,
   HStack,
+  SimpleGrid,
   Heading,
   Text,
   Icon,
@@ -8,8 +9,8 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import PageContainer from "../components/PageContainer";
-import LatestProject from "../components/LatestProject";
-import LatestArticle from "../components/LatestArticle";
+import ProjectCard from "../components/ProjectCard";
+import ArticleCard from "../components/ArticleCard";
 import getPortfolioData from "@/lib/portfolio";
 import { getAllNodes } from "next-mdx";
 import { RiArticleLine } from "react-icons/ri";
@@ -25,9 +26,10 @@ export default function Home({ projects, articles }) {
 
   return (
     <PageContainer>
-      <VStack spacing={8}>
+      <VStack spacing={10}>
         <Text
           bgGradient={gradients[colorMode]}
+          align="center"
           bgClip="text"
           fontSize="6xl"
           fontWeight="extrabold"
@@ -46,9 +48,11 @@ export default function Home({ projects, articles }) {
             <Heading as="h1">Main Projects</Heading>
           </HStack>
           <Divider />
-          {projects.map((project, i) => (
-            <LatestProject key={i} {...project} />
-          ))}
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
+            {projects.map((project, i) => {
+              return <ProjectCard key={i} {...project} />;
+            })}
+          </SimpleGrid>
         </VStack>
         <VStack align="start" spacing={5}>
           <HStack spacing={5}>
@@ -57,7 +61,7 @@ export default function Home({ projects, articles }) {
           </HStack>
           <Divider />
           {articles.map((article, i) => (
-            <LatestArticle key={i} {...article} />
+            <ArticleCard key={i} {...article} />
           ))}
         </VStack>
       </VStack>

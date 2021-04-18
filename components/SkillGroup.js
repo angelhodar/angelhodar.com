@@ -1,18 +1,28 @@
-import { VStack, Text, Wrap } from "@chakra-ui/react";
+import { Box, Flex, Heading, Wrap } from "@chakra-ui/react";
 import Skill from "./Skill";
 
 const SkillGroup = ({ displayName, groupName, skills }) => {
   const filteredSkills = skills.filter((s) => s.keywords.includes(groupName));
 
   return (
-    <VStack align="start" spacing={5}>
-      <Text fontSize="2xl">{displayName}</Text>
-      <Wrap spacing="30px">
+    <Box rounded={{ md: "lg" }} shadow="base" overflow="hidden">
+      <Flex
+        align="center"
+        justify="space-between"
+        px="6"
+        py="4"
+        borderBottomWidth="1px"
+      >
+        <Heading as="h2" fontSize="lg">
+          {displayName}
+        </Heading>
+      </Flex>
+      <Wrap m="30px" spacing="40px">
         {filteredSkills.map((skill, i) => (
           <Skill key={i} {...skill} />
         ))}
       </Wrap>
-    </VStack>
+    </Box>
   );
 };
 

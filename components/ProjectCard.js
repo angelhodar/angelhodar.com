@@ -12,37 +12,37 @@ const ProjectCard = ({
   repositoryUrl,
 }) => {
   return (
-    <NextLink href={`/projects/${name}`}>
-      <Flex
-        as="a"
-        direction="column"
-        cursor="pointer"
-        alignItems="center"
-        rounded="xl"
-        boxShadow="xl"
-        borderWidth="1px"
-        w="100%"
-      >
-        <VStack align="start" p="4">
-          <HStack spacing="3">
+    <Flex
+      as="a"
+      direction="column"
+      cursor="pointer"
+      alignItems="center"
+      rounded="xl"
+      boxShadow="xl"
+      borderWidth="1px"
+      w="100%"
+    >
+      <VStack align="start" p="4">
+        <HStack spacing="4">
+          <NextLink href={`/projects/${name}`}>
             <Text fontWeight="bold" fontSize="2xl">
               {displayName}
             </Text>
-            {website && (
-              <Link href={website} isExternal>
-                <Icon aria-label={"Website"} w={5} h={5} as={CgWebsite} />
-              </Link>
-            )}
-            {repositoryUrl && (
-              <Link href={repositoryUrl} isExternal>
-                <Icon aria-label={"GitHub"} w={5} h={5} as={SiGithub} />
-              </Link>
-            )}
-          </HStack>
-          <Text fontSize="lg">{summary}</Text>
-        </VStack>
-      </Flex>
-    </NextLink>
+          </NextLink>
+          {website && (
+            <Link href={website} isExternal>
+              <Icon aria-label={"Website"} w={7} h={7} as={CgWebsite} />
+            </Link>
+          )}
+          {repositoryUrl && (
+            <Link href={repositoryUrl} isExternal>
+              <Icon aria-label={"GitHub"} w={7} h={7} as={SiGithub} />
+            </Link>
+          )}
+        </HStack>
+        <Text fontSize="lg">{summary}</Text>
+      </VStack>
+    </Flex>
   );
 };
 
