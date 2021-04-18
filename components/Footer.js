@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex, HStack, Text, Stack, IconButton } from "@chakra-ui/react";
-import { SiGithub, SiLinkedin, SiTwitter } from "react-icons/si";
+import { SiGithub, SiLinkedin, SiTwitter, SiGmail } from "react-icons/si";
 
 const Footer = () => {
   const icons = [
@@ -14,6 +14,11 @@ const Footer = () => {
       to: "https://twitter.com/angelhodar",
       icon: <SiTwitter size={32} />,
       color: "twitter",
+    },
+    {
+      title: "Mail",
+      to: "mailto:angelhodar76@gmail.com",
+      icon: <SiGmail size={32} />,
     },
     {
       title: "LinkedIn",
