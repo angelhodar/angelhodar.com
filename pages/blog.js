@@ -38,7 +38,13 @@ export default function Blog({ articles }) {
             placeholder="Search articles..."
             onChange={(e) => setSearchValue(e.target.value)}
           />
-          <Tags tags={tags} onClick={handleTagSelected} spacing="5px" />
+          <Tags
+            tags={tags}
+            onClick={handleTagSelected}
+            animate={true}
+            spacing="5px"
+            justify="center"
+          />
         </VStack>
         {!filteredArticles.length && (
           <Text fontSize="2xl" textAlign="center">

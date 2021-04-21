@@ -34,6 +34,29 @@ export default function Resume({
   skills,
   education,
 }) {
+  const skillGroups = [
+    {
+      displayName: "Frontend",
+      groupName: "front",
+    },
+    {
+      displayName: "Backend",
+      groupName: "back",
+    },
+    {
+      displayName: "Databases",
+      groupName: "database",
+    },
+    {
+      displayName: "Graphics Engines",
+      groupName: "engine",
+    },
+    {
+      displayName: "Tools",
+      groupName: "tool",
+    },
+  ];
+
   return (
     <PageContainer>
       <VStack align="start" w="100%" spacing={8}>
@@ -57,23 +80,9 @@ export default function Resume({
           <Text>{basics.summary}</Text>
         </ResumeSection>
         <ResumeSection title="Skills" icon={FaCode}>
-          <SkillGroup
-            displayName="Frontend"
-            groupName="front"
-            skills={skills}
-          />
-          <SkillGroup displayName="Backend" groupName="back" skills={skills} />
-          <SkillGroup
-            displayName="Databases"
-            groupName="database"
-            skills={skills}
-          />
-          <SkillGroup
-            displayName="Graphics Engines"
-            groupName="engine"
-            skills={skills}
-          />
-          <SkillGroup displayName="Tools" groupName="tool" skills={skills} />
+          {skillGroups.map((sg, i) => (
+            <SkillGroup key={i} {...sg} skills={skills} />
+          ))}
         </ResumeSection>
         <ResumeSection title="Education" icon={FaUserGraduate}>
           <VStack spacing={10}>
@@ -119,13 +128,6 @@ export default function Resume({
 }
 
 export async function getStaticProps() {
-  const {
-    basics,
-    work,
-    skills,
-    education,
-    languages,
-    interests,
-  } = await getPortfolioData();
-  return { props: { basics, work, skills, languages, interests, education } };
+  const data = await getPortfolioData();
+  return { props: data };
 }
