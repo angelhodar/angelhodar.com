@@ -8,9 +8,10 @@ export default class Document extends NextDocument {
       <Html lang="en">
         <Head>
           <script
+            async
             defer
-            src="https://static.cloudflareinsights.com/beacon.min.js"
-            data-cf-beacon='{"token": "10106d35202b416289e35b2acc681a48"}'
+            data-website-id="e1dbba0d-a4a0-4da4-b6c8-2845f92a4c44"
+            src="https://angelhodar-analytics.herokuapp.com/umami.js"
           ></script>
         </Head>
         <body>
