@@ -5,7 +5,7 @@ const SkillGroup = ({ displayName, groupName, skills }) => {
   const filteredSkills = skills.filter((s) => s.keywords.includes(groupName));
 
   return (
-    <Box rounded={{ md: "lg" }} shadow="base" overflow="hidden">
+    <Box shadow="lg" rounded="lg" overflow="hidden" borderWidth="1px">
       <Flex
         align="center"
         justify="space-between"
