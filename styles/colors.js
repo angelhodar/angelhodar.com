@@ -1,7 +1,7 @@
 const tagsColors = {
   "Unreal Engine": "gray",
   Blueprints: "blue",
-  RPG: "brown",
+  RPG: "orange",
   NextJS: "blue",
   ChakraUI: "teal",
   MDX: "orange",
@@ -9,6 +9,10 @@ const tagsColors = {
   Authorization: "yellow",
   Express: "red",
   NodeJS: "green",
+  Web: "yellow",
+  JavaScript: "orange",
+  Security: "red",
+  React: "blue",
 };
 
 export { tagsColors };

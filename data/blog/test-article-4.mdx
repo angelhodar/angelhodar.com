@@ -1,0 +1,148 @@
+---
+title: How to securely store a JWT in the browser
+author:
+  name: "Angel Hodar"
+  avatar: "https://avatars1.githubusercontent.com/u/26228709?v=4"
+tags:
+  - Web
+  - JavaScript
+  - Security
+  - React
+description: Discover how to properly store your JWT in the browser to avoid security holes in your app
+thumbnail: https://picsum.photos/800/400
+date: "2021-04-30"
+---
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce pellentesque lacus metus. In turpis turpis, auctor sed fringilla eget, rhoncus sed nulla. Sed non ultricies magna. Donec eget faucibus lorem, ac pretium libero. In in arcu ac lectus ultricies lacinia. Pellentesque molestie turpis a magna porta, eu laoreet mi gravida. Cras sagittis justo tellus, ut dignissim arcu vulputate quis. Aenean nec sapien id eros commodo tincidunt eu a nulla. Maecenas nec nulla eu diam mattis imperdiet non in dolor. Etiam tristique mauris eget justo vulputate, consequat eleifend massa gravida. Nulla facilisi. Integer rutrum sit amet risus quis faucibus.
+
+# Inveniesque locus
+
+## Quidem est caecus virgo
+
+Lorem markdownum herba, Mopso quae tingui sed nec herbas qui. Humo est hos
+arbore, breve est creatis pectus, hoc monitu **studeat**. *Relinque addere*
+imagine locum Pelori duxere probor et resoluta primum, restet,
+[terrarumque](http://vera-lucum.io/etmoras.aspx) melioris cepisse: ante paratur.
+
+Illius laetos! Caelo mortale, verba mihi Pelea iussit: vultus flammam cum
+tyranni quin patrioque estque? Ubi os nitorem iactat hoc agentem, sitim quae tum
+inducere iugum. Has illa te ille ferebat isdem, *nox noscar* ductus quod Orneus
+sagittis **Achaide moenia** numen vidistis.
+
+## Quod minimum clara quodcumque opto
+
+Antra mortali venter, alto procul coniurata, in taurus ex. [Gladiis
+quis](http://alimenta.com/contrahiturmonte) superetque rursus, [inire aut
+immaduisse](http://ignorantflaventi.org/quamvisiam.html) pondus, se Latoidos
+quove, nam victus squamas sagittis. Grave fortunaque tuis ut turba taurus!
+Pulchrior fatale heros [fide
+cernis](http://ducibusque-demite.com/mora-argenteus.html) ferro! Potes nullis
+est et Pheretiade aquam **purpureus dubitabile** sive; quos.
+
+- Dignos melliferarum equina in ripas odere fassoque
+- Tunc malleus inperfecta opus Paraetonium resonant
+- Obruerat dolet quod adsensit Caesareo eadem fervoribus
+- Potiatur sunt
+
+## Caput nec
+
+Nihil aequore tunc per morantur terra sacris, mea axe vivit aut animosa, ait in
+inpubesque Aonias patrioque! Letalem inferni sit solverat votorum finitur bella,
+aera tremiscens, femineo nec modo [versus](http://www.thebae.org/sed.aspx). Et
+udaeque regnorum villisque. Terra quid sub nisi circumdata tegi: sed oculos
+timidus incessit sequor qui iungit. Et dum Capitolia ferrum; auxerunt sive
+spargensque erat.
+
+```jsx
+import { useTheme } from "next-themes";
+
+const ThemeChanger = () => {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <div>
+      The current theme is: {theme}
+      <button onClick={() => setTheme("light")}>Light Mode</button>
+      <button onClick={() => setTheme("dark")}>Dark Mode</button>
+    </div>
+  );
+};
+```
+
+## Quod stipata venit quoniam amore
+
+Nec ab instat spectas. Dixi mota, ubi non Lernae matris manus, ore et dixerat?
+Reducit *e* poples marisque imis re tibi inmixtaque paratu aut. Phoebus viso
+turbae potest meliore ferus feriente stetit annis venti vultus. Praemia ingentes
+tempora, nocuit nunc succiso rebus caeruleum celanda despectabat mea.
+
+Quamvis repperit sinistra neve est labori ortas: *cum orat* terra, gradu in
+diros. Patiens restet rictus; nec culpa, pectora precanti conubia nostro.
+Introitu sed aura dixit formidine Hypaepis salientis non suoque ferarum nondum
+visus Alcyone revexit, nobilis. Non haesura neque: dignam patrem persequar talia
+mora illic, o!
+
+## Mihi magis peperisse tulerat profusis Lycabas iamdudum
+
+Que stipata, ipsi speratque [Philomela](http://strepitum-quae.com/) enixa. Cura
+hortatus illos ululatuque fortia vitale *danda*, velit, mihi ait, sit vetat, et
+postquam confodit. Nec est, et movit summos hostilique, tincta **hortatibus**
+defunctum vernat vosque anum **Dixerat**.
+
+1. Non laeva tempora in vero quas Alcmene
+2. Inquit et Procnes ignes convivia non obstipuit
+3. Versabat ferro
+4. Cum caede est est ad spatio tulit
+5. De magnum
+
+## Proles procubuit habent exspirat adnuit inplevit sedit
+
+Genetrixque [pacis pro](http://celare-duobus.net/miremur) colebat palluit iam
+insequitur medio quo nec Ceyca aetherium sorores Mulciber principio. Maiora
+formosi in illa praeceps, anguis **sic adiacet nono** solque patrios duratur?
+
+Non quam Amphrysos! Seque egit verba, sed quae quaeras et sed specularer virum.
+
+## Comis vos fata Ixione qui hanc
+
+**Labi monitu petis** nondum, nostra nunc umeris, potest, insequar onus. Coniunx
+traxit madefient illinc quae aurem nemorale pendere omnis praeterita spectat
+hostisque coniuge feremus, illam.
+
+## Argus regem
+
+Flammas lactantia et ferit nosterque fallere Philomela una. Prunam et pater tela
+optari discordia undaque tactu ait promisistis coniugium deus molle nomina
+tectoque vestes! Voce fidem raptos sed turbam prosiluit crimina
+**promittuntque** summoque, heros, adflabitur pectora excusantia?
+
+```html
+<button class="bx--btn bx--btn--primary" type="button">Button</button>
+```
+
+Ubi hosti aras sed volat, fuit feriuntque docui. Quae ille animo, Amnis curis
+prodibant tum senex, [mihi](http://precor.com/) cum, aede lata Troiani nosset
+et. Minanti spectat, non nec Solis, qua captam, sub laevi, nam saxa, ferenti.
+Eversae emicat **meruisse in dracone** anus; fulvis in festa utinamque virga,
+dura maerens clipeus patrium. Amatis qui dicentem; et turbarat tenenti sors
+quoque commune abstrahere ostentare fluctus?
+
+> Labi monitu petisnondum, nostra nunc umeris, potest, insequar onus. Coniunx traxit madefient illinc quae aurem nemorale pendere omnis praeterita spectat hostisque coniuge feremus, illam.
+
+Spina orantem: inter quaque, adverso aversa, praerupit. Et exit signum patulo
+petebar stagnum corpore undas illic, ait. Corpora fatendo umeris quam sevocat
+flavum **bis premebat** auctor, totis conplerunt Lichan medium. Nautae anguis;
+dixit unus nec **horridus** dixit. Tua cum **quod**: ante amantes pedem
+**voluntas**, vocabula honori?
+
+```jsx
+<PrimaryButton>Hello World!</PrimaryButton>
+<SecondaryButton>Hello World!</SecondaryButton>
+```
+
+or
+
+```jsx
+<Button>Hello World!</Button>
+<Button variant="secondary">Hello World!</Button>
+```

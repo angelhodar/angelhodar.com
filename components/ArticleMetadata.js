@@ -8,7 +8,7 @@ import {
   Avatar,
   Text,
 } from "@chakra-ui/react";
-import Tags from "./Tags";
+import ArticleTags from "./ArticleTags";
 import dayjs from "dayjs";
 
 const ArticleAuthor = ({ title, tags, thumbnail, author, date }) => {
@@ -36,7 +36,7 @@ const ArticleAuthor = ({ title, tags, thumbnail, author, date }) => {
           8 min read
         </Text>
       </Stack>
-      <Tags tags={tags} spacing="3px" />
+      <ArticleTags tags={tags} spacing="3px" />
       <Image src={thumbnail} />
     </VStack>
   );

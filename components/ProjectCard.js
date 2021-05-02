@@ -5,15 +5,11 @@ import Animation from "./Animation";
 import { SiGithub } from "react-icons/si";
 import { CgWebsite } from "react-icons/cg";
 
-const ProjectCard = ({
-  name,
-  displayName,
-  summary,
-  website,
-  repositoryUrl,
-}) => {
+const ProjectCard = (props) => {
+  const { name, displayName, summary, website, repositoryUrl } = props;
+  
   return (
-    <Animation duration={Math.random() + 2}>
+    <Animation duration={1}>
       <Flex
         direction="column"
         cursor="pointer"
