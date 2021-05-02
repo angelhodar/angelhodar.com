@@ -30,7 +30,11 @@ const WorkPosition = ({
       <Box rounded="lg" borderWidth="2px">
         <VStack align="start" spacing={2} m={5}>
           <Text fontSize="2xl">{position}</Text>
-          <Stack direction={{ base: "column", md: "row" }} spacing={2}>
+          <Stack
+            direction={{ base: "column", md: "row" }}
+            align="center"
+            spacing={2}
+          >
             <HStack spacing={2}>
               <Icon as={FaRegBuilding} mb={1} />
               <Text fontSize="lg">

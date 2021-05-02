@@ -1,25 +1,18 @@
 import React, { useState } from "react";
 import PageContainer from "@/components/PageContainer";
 import ArticleCard from "@/components/ArticleCard";
-import Tags from "@/components/Tags";
+import FilterTags from "@/components/FilterTags";
 import { VStack, Text, Input, Heading } from "@chakra-ui/react";
 import { getAllNodes } from "next-mdx";
 
-export default function Blog({ articles }) {
+export default function Blog({ articles, totalTags: tags }) {
   const [searchValue, setSearchValue] = useState("");
   const [selectedTag, setSelectedTag] = useState("");
 
-  const handleTagSelected = (tag) => {
-    if (tag === selectedTag) setSelectedTag("");
-    else setSelectedTag(tag);
-  };
-
-  const tags = articles.map(({ frontMatter }) => frontMatter.tags).flat();
-
   const filteredArticles = articles.filter(({ frontMatter }) => {
-    if (selectedTag)
-      return frontMatter.tags.map(({ tag }) => tag).includes(selectedTag);
-    return frontMatter.title.toLowerCase().includes(searchValue.toLowerCase());
+    const { title, tags } = frontMatter;
+    if (selectedTag) return tags.includes(selectedTag);
+    return title.toLowerCase().includes(searchValue.toLowerCase());
   });
 
   return (
@@ -38,11 +31,9 @@ export default function Blog({ articles }) {
             placeholder="Search articles..."
             onChange={(e) => setSearchValue(e.target.value)}
           />
-          <Tags
+          <FilterTags
             tags={tags}
-            onClick={handleTagSelected}
-            animate={true}
-            spacing="5px"
+            onTagClicked={(tag) => setSelectedTag(tag)}
             justify="center"
           />
         </VStack>
@@ -51,7 +42,7 @@ export default function Blog({ articles }) {
             No posts found
           </Text>
         )}
-        <VStack w="100%" align="center" spacing={4}>
+        <VStack align="start" w="100%" spacing={4}>
           {filteredArticles.map((article, i) => {
             return <ArticleCard key={i} {...article} />;
           })}
@@ -63,5 +54,6 @@ export default function Blog({ articles }) {
 
 export async function getStaticProps() {
   const articles = await getAllNodes("article");
-  return { props: { articles } };
+  const totalTags = articles.map(({ frontMatter }) => frontMatter.tags).flat();
+  return { props: { articles, totalTags } };
 }

@@ -2,7 +2,7 @@ import { Container } from "@chakra-ui/react";
 
 const PageContainer = ({ children }) => {
   return (
-    <Container maxW="container.lg" p={3} centerContent>
+    <Container maxW="container.lg" p={3}>
       {children}
     </Container>
   );
