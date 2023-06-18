@@ -1,8 +1,10 @@
 ---
+import Card from "./Card.astro"
+
 const { name } = Astro.props;
 ---
 
-<div class="flex flex-col shadow-xl rounded-lg overflow-hidden border border-gray-300 p-6 space-y-6">
+<Card class="space-y-6 p-5">
     <h2 class="text-xl">{name}</h2>
-    <div class="flex flex-wrap gap-8"><slot /></div>
-</div>
+    <div class="flex flex-wrap justify-center md:justify-start items-center gap-8"><slot /></div>
+</Card>

@@ -3,21 +3,41 @@ import Icon from "astro-icon";
 ---
 
 <div class="flex flex-col md:flex-row justify-center my-10 items-center gap-10">
-  <p class="text-lg dark:text-white">&copy; {new Date().getFullYear()} Angel Hodar</p>
+  <p class="text-lg dark:text-white">
+    &copy; {new Date().getFullYear()} Angel Hodar
+  </p>
   <div class="flex flex-row gap-8">
-    <a href="mailto:angelhodar76@gmail.com" target="_blank" rel="noopener noreferer"
-      ><Icon name="mail" class="w-10 h-10" /></a
+    <a
+      href="mailto:angelhodar76@gmail.com"
+      aria-label="contact-email"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <Icon name="mail" class="w-10 h-10" /></a
     >
     <a
       href="https://github.com/angelhodar"
       target="_blank"
-      rel="noopener noreferer"><Icon name="github" class="w-10 h-10" /></a
+      aria-label="my-github"
+      rel="noopener noreferrer"
     >
-    <a href="https://www.linkedin.com/in/angel-rodriguez-hodar-541bb8199/" target="_blank" rel="noopener noreferer">
+      <Icon name="github" class="w-10 h-10" />
+    </a>
+    <a
+      href="https://www.linkedin.com/in/angel-rodriguez-hodar-541bb8199/"
+      aria-label="my-linkedin"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       <Icon name="linkedin" class="w-10 h-10" /></a
     >
-    <a href="https://twitter.com/angelhodar" target="_blank" rel="noopener noreferer"
-      ><Icon name="twitter" class="w-10 h-10" /></a
+    <a
+      href="https://twitter.com/angelhodar"
+      target="_blank"
+      aria-label="my-twitter"
+      rel="noopener noreferrer"
+    >
+      <Icon name="twitter" class="w-10 h-10" /></a
     >
   </div>
 </div>

@@ -10,7 +10,7 @@ import Skill from "../components/Skill.astro";
 ---
 
 <Layout>
-	<main class="flex flex-col space-y-10 antialiased">
+	<main class="flex flex-col space-y-10 antialiased pt-6">
 		<h1
 			class="text-6xl py-3 font-extrabold bg-clip-text text-transparent bg-gradient-to-l from-yellow-400 to-red-500 dark:from-green-400 dark:to-blue-600 text-center"
 		>
@@ -75,7 +75,7 @@ import Skill from "../components/Skill.astro";
 					<Skill icon="typescript" name="TypeScript" />
 				</SkillGroup>
 
-				<div class="flex flex-col md:flex-row gap-5">
+				<div class="flex flex-col lg:flex-row gap-5">
 					<div class="grow">
 						<SkillGroup name="Devops">
 							<Skill icon="docker" name="Docker" />
@@ -104,6 +104,7 @@ import Skill from "../components/Skill.astro";
 			<div class="flex flex-col gap-10">
 				<WorkPositionCard
 					title="Full Stack Leader"
+					href="https://fuelyourbrands.com/"
 					startDate="June 2022"
 					location="Fuel Your Brands, Madrid"
 					description="Developing a platform to connect brands with microinfluencers in social networks"
@@ -121,6 +122,7 @@ import Skill from "../components/Skill.astro";
 
 				<WorkPositionCard
 					title="Software Engineer"
+					href="https://www.fidesol.org/"
 					startDate="May 2020"
 					endDate="June 2022"
 					location="Fidesol, Granada"
@@ -135,6 +137,7 @@ import Skill from "../components/Skill.astro";
 				</WorkPositionCard>
 				<WorkPositionCard
 					title="Software Engineer Intern"
+					href="https://www.fidesol.org/"
 					startDate="Feb 2020"
 					endDate="May 2020"
 					location="Fidesol, Granada"
@@ -149,6 +152,7 @@ import Skill from "../components/Skill.astro";
 		<Section title="Education" icon="education">
 			<EducationCard
 				title="Computer Science Bachelor"
+				href="https://etsiit.ugr.es/"
 				startDate="Sep 2016"
 				endDate="Jun 2020"
 				location="Escuela Técnica Superior de Ingeniería Informática y Telecomunicaciones, Granada"
