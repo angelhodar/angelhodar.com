@@ -1,0 +1,158 @@
+---
+import { Icon } from "astro-icon";
+import Layout from "../layouts/Layout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import Section from "../components/Section.astro";
+import EducationCard from "../components/EducationCard.astro";
+import WorkPositionCard from "../components/WorkPositionCard.astro";
+import SkillGroup from "../components/SkillGroup.astro";
+import Skill from "../components/Skill.astro";
+---
+
+<Layout>
+	<main class="flex flex-col space-y-10 antialiased">
+		<h1
+			class="text-6xl py-3 font-extrabold bg-clip-text text-transparent bg-gradient-to-l from-yellow-400 to-red-500 dark:from-green-400 dark:to-blue-600 text-center"
+		>
+			Hi, I'm Angel Hodar
+		</h1>
+
+		<Section title="Projects" icon="projects">
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+				<ProjectCard
+					title="OpenRPG_Inventory"
+					href="https://github.com/angelhodar/OpenRPG_Inventory"
+					description="Generic and fully featured inventory container and equipment system for Unreal Engine 4"
+				/>
+				<ProjectCard
+					title="MeshOptimizer"
+					href="https://github.com/angelhodar/mesh-optimizer"
+					description="Blender based 3D model optimizer for automatic texture compression and polygon reduction. Docker and serverless ready"
+				/>
+				<ProjectCard
+					title="OpenRPG_Stats"
+					href="https://github.com/angelhodar/OpenRPG_Stats"
+					description="Attributes and stats system for Unreal Engine 4"
+				/>
+
+				<ProjectCard
+					title="BillShare"
+					href="https://github.com/angelhodar/billshare"
+					description="Make restaurants shared payments easier by using AI driven OCR models"
+				/>
+				<ProjectCard
+					title="OpenRPG_Quests"
+					href="https://github.com/angelhodar/OpenRPG_Quests"
+					description="Multipurpose quest system for Unreal Engine 4"
+				/>
+				<ProjectCard
+					title="angelhodar.com"
+					href="https://github.com/angelhodar/angelhodar.com"
+					description="My personal portfolio using the Astro framework"
+				/>
+			</div>
+		</Section>
+
+		<Section title="Skills" icon="skills">
+			<div class="flex flex-col space-y-8">
+				<SkillGroup name="Frontend">
+					<Skill icon="javascript" name="JavaScript" />
+					<Skill icon="typescript" name="TypeScript" />
+					<Skill icon="react" name="React" />
+					<Skill icon="vue" name="Vue" />
+					<Skill icon="tailwindcss" name="Tailwind" />
+					<Skill icon="nextjs" name="NextJS" />
+					<Skill icon="nuxt" name="Nuxt" />
+					<Skill icon="astro" name="Astro" />
+				</SkillGroup>
+
+				<SkillGroup name="Backend">
+					<Skill icon="nodejs" name="Node" />
+					<Skill icon="python" name="Python" />
+					<Skill icon="cplusplus" name="C++" />
+					<Skill icon="csharp" name="C#" />
+					<Skill icon="graphql" name="GraphQL" />
+					<Skill icon="typescript" name="TypeScript" />
+				</SkillGroup>
+
+				<div class="flex flex-col md:flex-row gap-5">
+					<div class="grow">
+						<SkillGroup name="Devops">
+							<Skill icon="docker" name="Docker" />
+							<Skill icon="aws" name="AWS" />
+							<Skill icon="vercel" name="Vercel" />
+							<Skill icon="firebase" name="Firebase" />
+						</SkillGroup>
+					</div>
+					<div class="grow">
+						<SkillGroup name="Databases">
+							<Skill icon="postgresql" name="Postgres" />
+							<Skill icon="mongodb" name="MongoDB" />
+						</SkillGroup>
+					</div>
+					<div class="grow">
+						<SkillGroup name="Graphics">
+							<Skill icon="unity" name="Unity" />
+							<Skill icon="unrealengine" name="Unreal Engine" />
+						</SkillGroup>
+					</div>
+				</div>
+			</div>
+		</Section>
+
+		<Section title="Experience" icon="work">
+			<div class="flex flex-col gap-10">
+				<WorkPositionCard
+					title="Full Stack Leader"
+					startDate="June 2022"
+					location="Fuel Your Brands, Madrid"
+					description="Developing a platform to connect brands with microinfluencers in social networks"
+				>
+					<Icon name="nextjs" class="w-8 h-8" />
+					<Icon name="graphql" class="w-8 h-8" />
+					<Icon name="nodejs" class="w-8 h-8" />
+					<Icon name="typescript" class="w-8 h-8" />
+					<Icon name="aws" class="w-8 h-8" />
+					<Icon name="mongodb" class="w-8 h-8" />
+					<Icon name="docker" class="w-8 h-8" />
+					<Icon name="vercel" class="w-8 h-8" />
+					<Icon name="tailwindcss" class="w-8 h-8" />
+				</WorkPositionCard>
+
+				<WorkPositionCard
+					title="Software Engineer"
+					startDate="May 2020"
+					endDate="June 2022"
+					location="Fidesol, Granada"
+					description="Working as VR programmer creating experiences with the Unity game engine. Also developing some React for web and NodeJS for project backend."
+				>
+					<Icon name="react" class="w-8 h-8" />
+					<Icon name="javascript" class="w-8 h-8" />
+					<Icon name="nodejs" class="w-8 h-8" />
+					<Icon name="csharp" class="w-8 h-8" />
+					<Icon name="unity" class="w-8 h-8" />
+					<Icon name="docker" class="w-8 h-8" />
+				</WorkPositionCard>
+				<WorkPositionCard
+					title="Software Engineer Intern"
+					startDate="Feb 2020"
+					endDate="May 2020"
+					location="Fidesol, Granada"
+					description="While I was an intern I helped in the development of virtual reality experiences for clients, in particular, I prepared new assets to use in the current experience the client was demanding, including the interaction code, on-demand delivery and the improvements of the internal tools used to develop the experiences."
+				>
+					<Icon name="csharp" class="w-8 h-8" />
+					<Icon name="unity" class="w-8 h-8" />
+				</WorkPositionCard>
+			</div>
+		</Section>
+
+		<Section title="Education" icon="education">
+			<EducationCard
+				title="Computer Science Bachelor"
+				startDate="Sep 2016"
+				endDate="Jun 2020"
+				location="Escuela Técnica Superior de Ingeniería Informática y Telecomunicaciones, Granada"
+			/>
+		</Section>
+	</main>
+</Layout>

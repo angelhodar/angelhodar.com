@@ -1,0 +1,17 @@
+---
+import { Icon } from "astro-icon"
+
+const { title, location, startDate, endDate } = Astro.props;
+---
+
+<div class="flex flex-col rounded-lg shadow-xl p-4 space-y-2 border-gray-300 border">
+    <h2 class="text-xl font-semibold">{title}</h2>
+    <div class="flex flex-row space-x-3 items-center">
+        <Icon name="location" class="w-4 h-4" />
+        <p class="text-lg">{location}</p>
+    </div>
+    <div class="flex flex-row space-x-3 items-center">
+        <Icon name="calendar" class="w-4 h-4" />
+        <p class="text-lg">{startDate} - {endDate}</p>
+    </div>
+</div>

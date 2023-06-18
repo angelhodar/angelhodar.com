@@ -1,0 +1,16 @@
+---
+import { Icon } from "astro-icon";
+---
+
+<nav class="flex justify-between items-center p-5">
+  <Icon name="logo" class="w-20 h-20" />
+  <button
+    id="theme-toggle-button"
+    type="button"
+    class="text-muted border border-gray-300 rounded-xl text-sm p-2 inline-flex items-center"
+    aria-label="Toggle between Dark and Light mode"
+    data-toggle-color-scheme
+  >
+    <Icon name="sun" class="w-6 h-6" />
+  </button>
+</nav>

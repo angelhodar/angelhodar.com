@@ -1,0 +1,32 @@
+<script is:inline>
+function applyTheme(theme) {
+  if (theme === "dark") {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
+}
+
+function attachEvent(selector, event, fn) {
+  const matches =
+    typeof selector === "string"
+      ? document.querySelectorAll(selector)
+      : selector;
+  if (matches && matches.length) {
+    matches.forEach((elem) => {
+      elem.addEventListener(event, (e) => fn(e, elem), false);
+    });
+  }
+}
+
+applyTheme(localStorage.theme || "light");
+
+window.onload = function () {
+  attachEvent("[data-toggle-color-scheme]", "click", function () {
+    document.documentElement.classList.toggle("dark");
+    localStorage.theme = document.documentElement.classList.contains("dark")
+      ? "dark"
+      : "light";
+  });
+};
+</script>
