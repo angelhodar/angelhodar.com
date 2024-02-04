@@ -1,5 +1,5 @@
 ---
-import { Icon } from "astro-icon";
+import { Icon } from "astro-icon/components";
 import Layout from "../layouts/Layout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import Section from "../components/Section.astro";
@@ -41,8 +41,8 @@ import Skill from "../components/Skill.astro";
 					description="Make restaurants shared payments easier by using AI driven OCR models"
 				/>
 				<ProjectCard
-					title="OpenRPG_Quests"
-					href="https://github.com/angelhodar/OpenRPG_Quests"
+					title="OpenRPG_Quest"
+					href="https://github.com/angelhodar/OpenRPG_Quest"
 					description="Multipurpose quest system for Unreal Engine 4"
 				/>
 				<ProjectCard
@@ -56,56 +56,58 @@ import Skill from "../components/Skill.astro";
 		<Section title="Skills" icon="skills">
 			<div class="flex flex-col space-y-8">
 				<SkillGroup name="Frontend">
-					<Skill icon="javascript" name="JavaScript" />
-					<Skill icon="typescript" name="TypeScript" />
-					<Skill icon="react" name="React" />
-					<Skill icon="vue" name="Vue" />
-					<Skill icon="tailwindcss" name="Tailwind" />
-					<Skill icon="nextjs" name="NextJS" />
-					<Skill icon="nuxt" name="Nuxt" />
+					<Skill icon="devicon:javascript" name="JavaScript" />
+					<Skill icon="devicon:typescript" name="TypeScript" />
+					<Skill icon="devicon:react" name="React" />
+					<Skill icon="devicon:vuejs" name="Vue" />
+					<Skill icon="devicon:tailwindcss" name="Tailwind" />
+					<Skill icon="devicon:nextjs" name="NextJS" />
+					<Skill icon="devicon:nuxtjs" name="Nuxt" />
 					<Skill
-						icon="astro"
+						icon="devicon:astro"
 						name="Astro"
 						class="fill-black dark:fill-white"
 					/>
 				</SkillGroup>
 
 				<SkillGroup name="Backend">
-					<Skill icon="nodejs" name="Node" />
-					<Skill icon="python" name="Python" />
-					<Skill icon="cplusplus" name="C++" />
-					<Skill icon="csharp" name="C#" />
+					<Skill icon="devicon:nodejs" name="Node" />
+					<Skill icon="devicon:python" name="Python" />
+					<Skill icon="devicon:cplusplus" name="C++" />
+					<Skill icon="devicon:csharp" name="C#" />
 					<Skill icon="graphql" name="GraphQL" />
+					<Skill icon="devicon:docker" name="Docker" />
 				</SkillGroup>
 
 				<div class="flex flex-col lg:flex-row gap-5">
 					<div class="grow">
-						<SkillGroup name="Devops">
-							<Skill icon="docker" name="Docker" />
+						<SkillGroup name="Cloud">
 							<Skill icon="aws" name="AWS" />
+							<Skill icon="devicon:digitalocean" name="DigitalOcean" />
 							<Skill
-								icon="vercel"
+								icon="devicon:vercel"
 								name="Vercel"
 								class="fill-black dark:fill-white"
 							/>
-							<Skill icon="firebase" name="Firebase" />
+							<Skill icon="devicon:firebase" name="Firebase" />
+							<Skill icon="devicon:supabase" name="Supabase" />
 						</SkillGroup>
 					</div>
 					<div class="grow">
 						<SkillGroup name="Databases">
-							<Skill icon="postgresql" name="Postgres" />
-							<Skill icon="mongodb" name="MongoDB" />
+							<Skill icon="devicon:postgresql" name="Postgres" />
+							<Skill icon="devicon:mongodb" name="MongoDB" />
 						</SkillGroup>
 					</div>
 					<div class="grow">
 						<SkillGroup name="Graphics">
 							<Skill
-								icon="unity"
+								icon="devicon:unity"
 								name="Unity"
 								class="fill-black dark:fill-white"
 							/>
 							<Skill
-								icon="unrealengine"
+								icon="devicon:unrealengine"
 								name="Unreal Engine"
 								class="fill-black dark:fill-white"
 							/>
@@ -124,15 +126,15 @@ import Skill from "../components/Skill.astro";
 					location="Fuel Your Brands, Madrid"
 					description="At Fuel I took the development leadership of their product, a platform to connect brands with microinfluencers in social networks. I developed new features across the entire tech stack, internal tools to boost productivity and cost optimization in all the services "
 				>
-					<Icon name="nextjs" class="w-8 h-8" />
+					<Icon name="devicon:nextjs" class="w-8 h-8" />
 					<Icon name="graphql" class="w-8 h-8" />
-					<Icon name="nodejs" class="w-8 h-8" />
-					<Icon name="typescript" class="w-8 h-8" />
+					<Icon name="devicon:nodejs" class="w-8 h-8" />
+					<Icon name="devicon:typescript" class="w-8 h-8" />
 					<Icon name="aws" class="w-8 h-8" />
-					<Icon name="mongodb" class="w-8 h-8" />
-					<Icon name="docker" class="w-8 h-8" />
+					<Icon name="devicon:mongodb" class="w-8 h-8" />
+					<Icon name="devicon:docker" class="w-8 h-8" />
 					<Icon
-						name="vercel"
+						name="devicon:vercel"
 						class="w-8 h-8 fill-black dark:fill-white"
 					/>
 					<Icon name="tailwindcss" class="w-8 h-8" />
@@ -146,16 +148,16 @@ import Skill from "../components/Skill.astro";
 					location="Fidesol, Granada"
 					description="Worked as VR programmer creating experiences with the Unity game engine. I also developed the platform where the VR devices connected to, using React and NodeJS"
 				>
-					<Icon name="react" class="w-8 h-8" />
-					<Icon name="javascript" class="w-8 h-8" />
-					<Icon name="nodejs" class="w-8 h-8" />
-					<Icon name="csharp" class="w-8 h-8" />
+					<Icon name="devicon:react" class="w-8 h-8" />
+					<Icon name="devicon:javascript" class="w-8 h-8" />
+					<Icon name="devicon:nodejs" class="w-8 h-8" />
+					<Icon name="devicon:csharp" class="w-8 h-8" />
 					<Icon
-						name="unity"
+						name="devicon:unity"
 						class="w-8 h-8 fill-black dark:fill-white"
 					/>
-					<Icon name="docker" class="w-8 h-8" />
-					<Icon name="mongodb" class="w-8 h-8" />
+					<Icon name="devicon:docker" class="w-8 h-8" />
+					<Icon name="devicon:mongodb" class="w-8 h-8" />
 				</WorkPositionCard>
 				<WorkPositionCard
 					title="Software Engineer Intern"
@@ -165,9 +167,9 @@ import Skill from "../components/Skill.astro";
 					location="Fidesol, Granada"
 					description="In my internship I helped in the development of virtual reality experiences for clients, preparing new assets to use, including the interaction code, on-demand delivery and the improvements of the internal tools used to develop the experiences."
 				>
-					<Icon name="csharp" class="w-8 h-8" />
+					<Icon name="devicon:csharp" class="w-8 h-8" />
 					<Icon
-						name="unity"
+						name="devicon:unity"
 						class="w-8 h-8 fill-black dark:fill-white"
 					/>
 				</WorkPositionCard>
