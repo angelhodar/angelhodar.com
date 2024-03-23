@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from "../../layouts/Layout.astro"
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog');
+  const paths = blogEntries.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+  return paths
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Layout>
+  <a href="/articles" class="inline-block bg-gray-100 p-2 mb-6 hover:bg-indigo-500 hover:text-white">Back To Articles</a>
+  <article>
+    <h1 class="text-4xl font-bold mb-2"> {entry.data.title}</h1>
+    <h3 class="text-lg mb-2">Written by Angel on {entry.data.publishedAt}</h3>
+    <img src={'/images/' + entry.data.cover} alt="Article Image" class="w-full h-auto rounded-xl my-6" />
+    <Content />
+  </article>
+</Layout>

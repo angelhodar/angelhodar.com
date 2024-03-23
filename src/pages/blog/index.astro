@@ -1,0 +1,21 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ArticleCard from "../../components/PostCard.astro";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+const posts: CollectionEntry<"blog">[] = (await getCollection("blog")).sort(
+  (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
+    b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
+);
+---
+
+<Layout>
+  <h1 class="text-2xl pb-3">All Articles</h1>
+
+  <br />
+
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {posts.map((article) => <ArticleCard article={article} />)}
+  </div>
+</Layout>
