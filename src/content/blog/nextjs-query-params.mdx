@@ -1,17 +1,74 @@
 ---
-title: 'Creating an optimized static blog using Notion as CMS'
-slug: post
+title: 'A reusable useQueryParams hook in Next.js with built-in validation using Zod'
+slug: post-8
 cover: 'team1.png'
 publishedAt: 2024-01-20
 draft: true
 tags: ['tech', 'hardware']
 ---
 
-```js
-var foo = 'bar';
+```tsx
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { z } from 'zod'
 
-function doSomething() {
-  return foo;
+interface UseQueryParamsConfig<T> {
+  schema: z.ZodType<T>
+  defaultValues: T
+  transformer?: (parsedQuery: T) => T
+}
+
+export function useQueryParams<T>(config: UseQueryParamsConfig<T>): {
+  queryParams: T
+  setQueryParams: (newParams: Partial<T>) => void
+} {
+  const router = useRouter()
+
+  const parsedQuery = config.schema.safeParse({
+    ...config.defaultValues,
+    ...router.query,
+  })
+
+  const initialValues = parsedQuery.success
+    ? parsedQuery.data
+    : config.defaultValues
+
+  const [queryParams, setQueryParamsState] = useState<T>(initialValues)
+
+  useEffect(() => {
+    if (router.isReady) {
+      const query = { ...queryParams, ...router.query }
+      const parsedQuery = config.schema.safeParse(query)
+      const data = parsedQuery.success ? parsedQuery.data : config.defaultValues
+      const transformedData = config.transformer
+        ? config.transformer(data)
+        : data
+
+      setQueryParamsState(transformedData)
+    }
+  }, [router.isReady, router.query])
+
+  const setQueryParams = (newParams: Partial<T>) => {
+    const mergedQueryParams = {
+      ...queryParams,
+      ...router.query,
+      ...newParams,
+    }
+
+    router.replace(
+      {
+        pathname: router.pathname,
+        query: mergedQueryParams,
+      },
+      undefined,
+      { shallow: true }
+    )
+  }
+
+  return {
+    queryParams,
+    setQueryParams,
+  }
 }
 ```
 

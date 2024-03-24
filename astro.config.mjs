@@ -8,8 +8,14 @@ import icon from "astro-icon";
 export default defineConfig({
   integrations: [icon(), tailwind(), mdx()],
   output: "static",
+  markdown: {
+    shikiConfig: {
+      theme: "vitesse-dark"
+    }
+  },
   adapter: vercel({
     webAnalytics: true,
-    speedInsights: true
+    speedInsights: true,
+    imageService: true
   })
 });

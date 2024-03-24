@@ -3,7 +3,10 @@ import { Icon } from "astro-icon/components";
 ---
 
 <nav class="flex justify-between items-center">
-  <Icon name="logo" class="w-16 h-16 fill-black dark:fill-white" />
+  <a href="/" aria-label="Logo" >
+    <Icon name="logo" class="w-16 h-16 fill-black dark:fill-white" />
+  </a>
+  <a href="/blog">Blog</a>
   <button
     id="theme-toggle-button"
     type="button"

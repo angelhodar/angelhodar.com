@@ -1,8 +1,9 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import ArticleCard from "../../components/PostCard.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import PostCard from "@/components/Blog/PostCard.astro";
+import PostsContainer from "@/components/Blog/PostsContainer.astro";
 
 const posts: CollectionEntry<"blog">[] = (await getCollection("blog")).sort(
   (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
@@ -11,7 +12,10 @@ const posts: CollectionEntry<"blog">[] = (await getCollection("blog")).sort(
 ---
 
 <Layout>
-  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-    {posts.map((article) => <ArticleCard article={article} />)}
+  <div class="flex flex-col justify-center mt-8">
+    <h1 class="font-bold text-center text-4xl">Lastest posts</h1>
+    <PostsContainer class="mt-8">
+      {posts.map((post) => <PostCard post={post} />)}
+    </PostsContainer>
   </div>
 </Layout>

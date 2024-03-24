@@ -1,0 +1,29 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import { formatDate } from "@/utils";
+
+const { post } = Astro.props;
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+---
+
+<div class="rounded-lg shadow-lg border border-gray-300">
+  <a href={"/blog/" + post.slug}>
+    <Image
+      src={`/images/${post.data.cover}`}
+      alt="Article Image"
+      width={400}
+      height={300}
+      class="rounded-lg"
+    />
+  </a>
+  <div class="p-3">
+    <h2 class="text-xl font-semibold mb-2">{post.data.title}</h2>
+    <p class="text-sm">
+      {formatDate(post.data.publishedAt)}
+    </p>
+  </div>
+</div>
