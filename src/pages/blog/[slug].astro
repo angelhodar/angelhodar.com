@@ -20,16 +20,23 @@ const { Content } = await entry.render();
 
 <Layout>
   <article>
-    <div class="flex flex-col justify-center text-center mx-auto space-y-4 my-10 max-w-2xl">
+    <div
+      class="flex flex-col justify-center text-center mx-auto space-y-4 my-10 max-w-2xl"
+    >
       <h1 class="text-4xl font-semibold">{entry.data.title}</h1>
       <p class="text-md">{formatDate(entry.data.publishedAt)}</p>
-      <Image
-        src={entry.data.cover?.src as string}
-        alt="Article thumbnail"
-        width={600}
-        height={400}
-        class="rounded-xl shadow-xl mx-auto"
-      />
+
+      {
+        entry.data.cover?.src && (
+          <Image
+            src={entry.data.cover.src}
+            alt="Article thumbnail"
+            width={600}
+            height={400}
+            class="rounded-xl shadow-xl mx-auto"
+          />
+        )
+      }
     </div>
     <Prose>
       <Content />

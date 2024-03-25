@@ -12,13 +12,17 @@ interface Props {
 
 <div class="rounded-lg shadow-lg border border-gray-300">
   <a href={"/blog/" + post.slug}>
-    <Image
-      src={post.data.cover?.src as string}
-      alt="Article Image"
-      width={400}
-      height={300}
-      class="rounded-lg rounded-b-none"
-    />
+    {
+      post.data.cover?.src && (
+        <Image
+          src={post.data.cover.src}
+          alt="Article Image"
+          width={400}
+          height={300}
+          class="rounded-lg rounded-b-none"
+        />
+      )
+    }
     <div class="p-3">
       <h2 class="text-xl font-semibold mb-2">{post.data.title}</h2>
       <p class="text-sm">
