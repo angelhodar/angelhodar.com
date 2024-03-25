@@ -13,17 +13,17 @@ interface Props {
 <div class="rounded-lg shadow-lg border border-gray-300">
   <a href={"/blog/" + post.slug}>
     <Image
-      src={`/images/${post.data.cover}`}
+      src={post.data.cover?.src as string}
       alt="Article Image"
       width={400}
       height={300}
-      class="rounded-lg"
+      class="rounded-lg rounded-b-none"
     />
+    <div class="p-3">
+      <h2 class="text-xl font-semibold mb-2">{post.data.title}</h2>
+      <p class="text-sm">
+        {formatDate(post.data.publishedAt)}
+      </p>
+    </div>
   </a>
-  <div class="p-3">
-    <h2 class="text-xl font-semibold mb-2">{post.data.title}</h2>
-    <p class="text-sm">
-      {formatDate(post.data.publishedAt)}
-    </p>
-  </div>
 </div>

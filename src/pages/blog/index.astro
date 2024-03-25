@@ -5,10 +5,12 @@ import Layout from "@/layouts/Layout.astro";
 import PostCard from "@/components/Blog/PostCard.astro";
 import PostsContainer from "@/components/Blog/PostsContainer.astro";
 
-const posts: CollectionEntry<"blog">[] = (await getCollection("blog")).sort(
-  (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
-    b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
-);
+const posts: CollectionEntry<"blog">[] = (await getCollection("blog"))
+  .filter((post) => !post.data.draft)
+  .sort(
+    (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
+      b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
+  );
 ---
 
 <Layout>

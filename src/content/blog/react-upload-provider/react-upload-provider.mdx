@@ -1,0 +1,182 @@
+---
+title: 'A simple way to improve your file uploads in React with progress, cancelation and better accesibility'
+slug: improve-react-uploads-with-progress-cancelation-accessibility
+cover: './react-file-uploads.jpg'
+publishedAt: 2024-01-20
+draft: false
+---
+
+# Introduction
+
+In modern web development, providing a user-friendly and efficient file upload experience is crucial. The React ecosystem offers various ways to handle uploads, but integrating features like progress tracking, cancellation, and accessibility can be challenging. This guide explores a powerful solution using a custom React hook and provider, complete with practical examples to illustrate its implementation and benefits.
+
+# Creating the UploadProvider
+
+First, we need to create a context provider to wrap any component that will handle file uploads. The context will maintain the upload state, including whether an upload is in progress and its progress percentage. It leverages the `AbortController` API for upload cancellation. It will show a dialog to the user with the upload progress and a button to cancel the current upload.
+Lets define the context type with proper type safety:
+
+```tsx
+import React, {
+  createContext,
+  useContext,
+  PropsWithChildren,
+  useState,
+  useRef,
+  ReactNode,
+  useCallback,
+} from 'react'
+import { Dialog, DialogContent } from 'components/Primitives/Dialog'
+import UploadProgress from 'components/Common/UploadProgress'
+
+interface UploadFunctionParams {
+  onUploadProgressChange: (percentage: number) => void
+  abortController: AbortController
+}
+
+export type UploadFunction<T> = (params: UploadFunctionParams) => Promise<T>
+export type UploadResult<T> =
+  | { result: T; error: null }
+  | { result: null; error: Error }
+
+interface UploadContextType {
+  uploading: boolean
+  startUpload: <T>(
+    uploadFunction: UploadFunction<T>
+  ) => Promise<UploadResult<T>>
+}
+
+const UploadContext = createContext<UploadContextType | undefined>(undefined)
+```
+
+By defining the **UploadFunction** and **UploadResult** generic types, you can wrap the function you already use to upload files to return type safe values with an extra error variable to check for user cancelation or network problems.
+Looking at the context data, we are defining a boolean to tell the childrens if an upload is already in progress and also an **startUpload** function which is the core of the functionality.
+
+Lets define the UploadProvider by using the created types:
+
+```jsx
+export const UploadProvider = ({ children }: PropsWithChildren) => {
+  const [isUploading, setIsUploading] = useState<boolean>(false);
+  const [uploadPercentage, setUploadPercentage] = useState<number>(0);
+  const abortControllerRef = useRef<AbortController | null>(null);
+
+  const startUpload = useCallback(async <T,>(uploadFunction: UploadFunction<T>): Promise<UploadResult<T>> => {
+    setIsUploading(true);
+    setUploadPercentage(0);
+    abortControllerRef.current = new AbortController();
+
+    try {
+      const result: T = await uploadFunction({
+        onUploadProgressChange: setUploadPercentage,
+        abortController: abortControllerRef.current,
+      });
+      return { result, error: null };
+    } catch (error) {
+      console.error('Upload failed:', error);
+      return { result: null, error: error instanceof Error ? error : new Error('An unknown error occurred') };
+    } finally {
+      setIsUploading(false);
+      abortControllerRef.current = null;
+    }
+  }, []);
+
+  return (
+    <UploadContext.Provider value={{ startUpload, uploading: isUploading }}>
+      {children}
+      {/* Upload progress dialog */}
+      <Dialog open={isUploading}>
+        <DialogContent>
+          <UploadProgress progress={uploadPercentage} onCancel={cancelUpload}>
+            Uploading data...
+          </UploadProgress>
+        </DialogContent>
+      </Dialog>
+    </UploadContext.Provider>
+  );
+};
+```
+
+# Accessing the context with the useUpload hook
+
+Now we need to provide the uploader components with the context. The `useUpload` does that and ensures that these components are within an `UploadProvider`, enforcing a safe and centralized management of the upload context.
+
+```tsx
+export const useUpload = (): UploadContextType => {
+  const context = useContext(UploadContext);
+
+  if (!context) {
+    throw new Error('useUpload must be used within an UploadProvider');
+  }
+
+  return context;
+};
+```
+
+# Example: Chat attachment
+
+To use the `UploadProvider`, simply wrap it around components that require upload functionality.
+You could wrap your entire app with it, but I recommend to keep state as deep as possible to avoid unnecessary component re-renders.
+In this example, it encapsulates a chat input component which is the one that handles the uploads in my **Chat** component:
+
+```jsx
+<UploadProvider>
+  <ChatInput />
+</UploadProvider>
+```
+
+Within the `ChatInput` component, you might handle file uploads as follows, utilizing the `useUpload` hook to access the upload context:
+
+```tsx
+const ChatInput = () => {
+  const { startUpload, uploading } = useUpload();
+
+  const onFileClick = async (files: FileList) => {
+    const [attachment] = Array.from(files);
+
+    if (!attachment) return;
+
+    const handleAttachmentUpload: UploadFunction<string> = async ({
+      onUploadProgressChange,
+      abortController,
+    }) => {
+      const url = await uploadFile(attachment, {
+        abortController,
+        onUploadProgress(progress) {
+          onUploadProgressChange(progress);
+        },
+      });
+
+      return url;
+    };
+
+    try {
+      const { result: url, error } = await startUpload(handleAttachmentUpload);
+
+      if (error) {
+        toast.error("An error occurred while sending your file");
+        return;
+      }
+
+      await onAddMessage({
+        text: "",
+        file: url,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  return (
+    <div >
+      <label>
+        <PaperClipIcon />
+        <input
+          hidden
+          type="file"
+          disabled={uploading}
+          onChange={(e) => onFileClick(e.target.files as FileList)}
+        />
+      </label>
+    </div>
+  );
+};
+```

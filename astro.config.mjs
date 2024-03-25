@@ -4,13 +4,19 @@ import vercel from "@astrojs/vercel/static";
 import mdx from "@astrojs/mdx";
 import icon from "astro-icon";
 
+import {
+  transformerNotationDiff,
+  transformerNotationHighlight
+} from '@shikijs/transformers'
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [icon(), tailwind(), mdx()],
   output: "static",
   markdown: {
     shikiConfig: {
-      theme: "vitesse-dark"
+      theme: "vitesse-dark",
+      transformers: [transformerNotationDiff(), transformerNotationHighlight()]
     }
   },
   adapter: vercel({

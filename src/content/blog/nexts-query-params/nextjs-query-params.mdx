@@ -1,0 +1,163 @@
+---
+title: 'A reusable useQueryParams hook in Next.js with built-in validation using Zod'
+slug: post-8
+cover: './nextjs-zod.jpg'
+publishedAt: 2024-01-20
+draft: false
+---
+
+# Introduction
+
+At my current work, I found myself repeating some code to preserve URL query state and changes, along with the validation of those parameters. Thats why you are probably reading this,
+so in this post I will show you a custom hook called **useQueryParams**, which is a thin wrapper over Next.js **router.query** enhanced with built-in validation and
+coercion capabilities to solve this problem.
+
+> This hook was used with the **Pages Router**. If you want to know how to use it with the **App Router**, go to the last section of the post.
+
+## Key Features:
+
+- **Built-in Validation:** Leverages [zod](https://github.com/colinhacks/zod) for validating query parameters against a predefined schema, ensuring that your application only works with valid data.
+- **Type Safety:** Fully supports TypeScript, allowing you to define the shape of your query parameters upfront, thus avoiding common runtime errors.
+- **Custom Transformations:** Offers an optional transformer function that can be used to modify the query parameters after validation, providing an extra layer of flexibility.
+
+# How it works
+
+I will show you the full code directly and below you will find how it works and its configuration options:
+
+```tsx
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { z } from 'zod'
+
+interface UseQueryParamsConfig<T> {
+  schema: z.ZodType<T>
+  defaultValues: T
+  transformer?: (parsedQuery: T) => T
+}
+
+export function useQueryParams<T>(config: UseQueryParamsConfig<T>): {
+  queryParams: T
+  setQueryParams: (newParams: Partial<T>) => void
+} {
+  const router = useRouter() 
+
+  const parsedQuery = config.schema.safeParse({
+    ...config.defaultValues,
+    ...router.query,
+  })
+
+  const initialValues = parsedQuery.success
+    ? parsedQuery.data
+    : config.defaultValues
+
+  const [queryParams, setQueryParamsState] = useState<T>(initialValues)
+
+  useEffect(() => {
+    if (router.isReady) {
+      const query = { ...queryParams, ...router.query }
+      const parsedQuery = config.schema.safeParse(query)
+      const data = parsedQuery.success ? parsedQuery.data : config.defaultValues
+      const transformedData = config.transformer
+        ? config.transformer(data)
+        : data
+
+      setQueryParamsState(transformedData)
+    }
+  }, [router.isReady, router.query])
+
+  const setQueryParams = (newParams: Partial<T>) => {
+    const mergedQueryParams = {
+      ...queryParams,
+      ...router.query,
+      ...newParams,
+    }
+
+    router.replace(
+      {
+        pathname: router.pathname,
+        query: mergedQueryParams,
+      },
+      undefined,
+      { shallow: true }
+    )
+  }
+
+  return {
+    queryParams,
+    setQueryParams,
+  }
+}
+```
+
+## Configuration Options:
+
+The hook is initialized with a configuration object that contains the following properties:
+
+- `schema`: A Zod schema that describes the expected shape and constraints of your query parameters.
+- `defaultValues`: Default values for your query parameters, ensuring that your application has sensible defaults.
+- `transformer`: An optional function that can be used to transform the query parameters after they have been validated.
+
+## Execution order
+
+1. **Initialization:** When the hook is called, it immediately attempts to parse the current query parameters from the URL using the provided Zod schema and merges them with any default values specified.
+
+2. **Validation and Transformation:** The parsed query parameters are validated against the schema. If the validation is successful, and a transformer function is provided, it is applied to the validated data.
+
+3. **State Management:** The hook manages the state of the query parameters internally, providing you with `queryParams` for accessing the current state and a `setQueryParams` function for updating the query parameters in the URL.
+
+4. **URL Synchronization:** When you use the `setQueryParams` function to update the query parameters, the hook automatically synchronizes these changes with the URL, ensuring that the browser's address bar reflects the current state of the application.
+
+
+# Example using the hook
+
+Here's a basic example to get you started, notice how we dont need to parse values from strings by using zod coercion:
+
+```tsx
+import { useQueryParams } from './useQueryParams';
+import { z } from 'zod';
+
+const queryParamSchema = z.object({
+  page: z.coerce.number().default(0),
+  pageSize: z.coerce.number().default(10),
+  search: z.string().optional(),
+});
+
+const MyComponent = () => {
+  const { queryParams, setQueryParams } = useQueryParams({
+    schema: queryParamSchema,
+    defaultValues: { search: '', page: 1, pageSize: 10 },
+  });
+
+  return (
+    <div>
+      <h1>My current search params: {JSON.stringify(queryParams)}</h1>
+      <button onClick={() => setQueryParams({ search: "Your search query", page: 1 })}>Change search param</button>
+    </div>
+  );
+};
+```
+
+# App Router
+
+In the new App Router, first you need to change the way to get the search params because router.query is not available. You now need to use the **useSearchParams** to get the query parameters as a standard **URLSearchParams** instance. After that
+you need to convert it to an object to be able to pass it to zod:
+
+```tsx
+const urlParams = useSearchParams();
+const params = Object.fromEntries(urlParams);
+```
+
+Now there is another problem because the **shallow** option to make client updates in the page is not available in the new router from next/navigation. Luckily, from [Next.js 14.1](https://nextjs.org/blog/next-14-1#windowhistorypushstate-and-windowhistoryreplacestate), there is a new experimental API that allows to make client side updates just as the **shallow** property of the pages router.
+
+```tsx
+const setQueryParams = (newParams: Partial<T>) => {
+    const mergedQueryParams = {
+      ...queryParams,
+      ...newParams,
+    }
+
+    const newUrlParams = new URLSearchParams(mergedQueryParams)
+
+    window.history.pushState(null, '', `?${newUrlParams.toString()}`)
+  }
+```
