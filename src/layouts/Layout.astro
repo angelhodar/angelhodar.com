@@ -17,7 +17,6 @@ const { seo, viewTransitions } = Astro.props;
 
 <html lang="en">
 	<head>
-		{viewTransitions && <ViewTransitions />}
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -27,9 +26,10 @@ const { seo, viewTransitions } = Astro.props;
 			description="My personal portfolio and blog website"
 			{...seo}
 		/>
+		<DarkModeScript />
+		{viewTransitions && <ViewTransitions />}
 	</head>
 	<body class="dark:bg-gray-800 dark:text-white">
-		<DarkModeScript />
 		<PageContainer>
 			<Header />
 			<main>
