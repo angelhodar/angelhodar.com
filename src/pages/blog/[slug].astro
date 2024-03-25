@@ -28,7 +28,7 @@ const { Content } = await entry.render();
       basic: {
         title: entry.data.title,
         type: "article",
-        image: entry.data.cover?.src as string,
+        image: entry.data.cover?.src || "",
       },
     },
   }}
