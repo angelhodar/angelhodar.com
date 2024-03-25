@@ -13,7 +13,20 @@ const posts: CollectionEntry<"blog">[] = (await getCollection("blog"))
   );
 ---
 
-<Layout>
+<Layout
+  viewTransitions
+  seo={{
+    title: "Blog",
+    description: "My personal blog",
+    openGraph: {
+      basic: {
+        title: "Personal blog of angelhodar",
+        type: "website",
+        image: "",
+      },
+    },
+  }}
+>
   <div class="flex flex-col justify-center mt-8">
     <h1 class="font-bold text-center text-4xl">Lastest posts</h1>
     <PostsContainer class="mt-8">

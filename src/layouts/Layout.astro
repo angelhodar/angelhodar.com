@@ -1,25 +1,40 @@
 ---
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import PageContainer from "../components/PageContainer.astro";
-import DarkModeScript from "../components/DarkModeScript.astro";
+import type { Props as SeoProps } from "astro-seo";
+import { SEO } from "astro-seo";
+import { ViewTransitions } from "astro:transitions";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import PageContainer from "@/components/PageContainer.astro";
+import DarkModeScript from "@/components/DarkModeScript.astro";
+
+export interface Props {
+	seo: SeoProps;
+	viewTransitions?: boolean;
+}
+
+const { seo, viewTransitions } = Astro.props;
 ---
 
-<!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>angelhodar</title>
+		{viewTransitions && <ViewTransitions />}
 		<meta charset="UTF-8" />
-		<meta name="description" content="My personal website" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
+		<SEO
+			titleTemplate="%s — angelhodar"
+			titleDefault="Portfolio"
+			description="My personal portfolio and blog website"
+			{...seo}
+		/>
 	</head>
 	<body class="dark:bg-gray-800 dark:text-white">
 		<DarkModeScript />
 		<PageContainer>
 			<Header />
-			<slot />
+			<main>
+				<slot />
+			</main>
 			<Footer />
 		</PageContainer>
 	</body>
