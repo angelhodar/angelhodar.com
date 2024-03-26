@@ -15,7 +15,7 @@ export default defineConfig({
   output: "static",
   markdown: {
     shikiConfig: {
-      theme: "vitesse-dark",
+      theme: "catppuccin-frappe",
       transformers: [transformerNotationDiff(), transformerNotationHighlight()]
     }
   },
