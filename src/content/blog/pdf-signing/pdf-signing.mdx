@@ -1,0 +1,327 @@
+---
+title: 'How to implement PDF signing in Next.js'
+slug: how-to-implement-pdf-isgning-nextjs
+publishedAt: 2024-05-02
+cover: ./nodejs-pdf.jpg
+draft: false
+---
+
+# Server
+
+```ts
+import { PDFDocument, rgb } from 'pdf-lib'
+import { PDFItem, ImageOptions, TextOptions } from './types'
+
+export const signPdf = async (pdfUrl: string, items: PDFItem[]) => {
+  // Fetch the PDF from the public directory
+  const pdfResponse = await fetch(pdfUrl)
+  const pdfBuffer = await pdfResponse.arrayBuffer()
+  const pdfBytes = new Uint8Array(pdfBuffer)
+
+  // Load the PDFDocument
+  const pdfDoc = await PDFDocument.load(pdfBytes)
+
+  // Process each item (text or image)
+  for (const item of items) {
+    const page = pdfDoc.getPage(item.page)
+
+    if (item.type === 'image') {
+      const image = await pdfDoc.embedPng(item.data)
+      const options = item.options as ImageOptions
+      page.drawImage(image, {
+        x: item.coords.x,
+        y: item.coords.y,
+        width: options.width,
+        height: options.height,
+      })
+    } else if (item.type === 'text') {
+      const options = item.options as TextOptions
+      page.drawText(item.data, {
+        x: item.coords.x,
+        y: item.coords.y,
+        size: options.size,
+        color: rgb(0, 0, 0),
+      })
+    }
+  }
+
+  // Serialize the PDFDocument to bytes
+  const signedPdfBytes = await pdfDoc.save()
+
+  return signedPdfBytes
+}
+```
+
+# Client
+
+```ts
+import { PDFItem } from './types'
+
+export const modifyPdf = async (pdfPath: string, items: PDFItem[]): Promise<Blob | null> => {
+  const res = await fetch('/api/sign-pdf', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ pdfPath, items }),
+  })
+
+  if (!res.ok) return null
+
+  const data = await res.arrayBuffer()
+  return new Blob([data], { type: 'application/pdf' })
+}
+```
+
+# PDFViewer
+
+```ts
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
+import 'react-pdf/dist/esm/Page/TextLayer.css'
+
+import { Fragment, useCallback, useRef, useState } from 'react'
+import { Document, Page, pdfjs } from 'react-pdf'
+import { useResizeObserver } from '@wojtekmaj/react-hooks'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from './Carousel'
+
+interface PDFViewerProps {
+  file: string | File | null
+}
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.js',
+  import.meta.url
+).toString()
+
+export default function PDFViewer({ file }: PDFViewerProps) {
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  const [containerWidth, setContainerWidth] = useState<number>()
+  const [numPages, setNumPages] = useState<number>(0)
+
+  const onResize = useCallback<ResizeObserverCallback>((entries) => {
+    const [entry] = entries
+
+    if (entry) {
+      setContainerWidth(entry.contentRect.width)
+    }
+  }, [])
+
+  useResizeObserver(containerRef.current, {}, onResize)
+
+  const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
+    setNumPages(numPages)
+  }
+
+  return (
+    <div className="mx-auto border border-gray-300" ref={containerRef}>
+      <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
+        <Carousel>
+          <CarouselContent>
+            {Array.from(new Array(numPages), (_, index) => (
+              <CarouselItem
+                key={`page_${index + 1}`}
+                className="flex aspect-square items-center justify-center"
+              >
+                <Page pageNumber={index + 1} width={containerWidth} />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          {numPages > 1 ? (
+            <Fragment>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Fragment>
+          ) : null}
+        </Carousel>
+      </Document>
+    </div>
+  )
+}
+```
+
+# SignaturePadInput
+
+```ts
+'use client'
+
+import { useRef } from 'react'
+import SignatureCanvas from 'react-signature-canvas'
+import { ControllerRenderProps, FieldValues } from 'react-hook-form'
+import { Button } from 'components/Primitives/Button'
+import {
+  BaseFormInputProps,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from 'components/Primitives/Form'
+
+export default function SignaturePadInput(props: BaseFormInputProps) {
+  const { name, control, label, description } = props
+
+  const sigCanvas = useRef<SignatureCanvas>(null)
+
+  const saveSignature = ({
+    onChange,
+  }: ControllerRenderProps<FieldValues, string>) => {
+    if (!sigCanvas.current) return
+    const signatureResult = sigCanvas.current
+      .getTrimmedCanvas()
+      .toDataURL('image/png')
+    onChange(signatureResult)
+  }
+
+  const resetSignature = ({
+    onChange,
+  }: ControllerRenderProps<FieldValues, string>) => {
+    if (!sigCanvas.current) return
+    sigCanvas.current.clear()
+    onChange('')
+  }
+
+  return (
+    <FormField
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <FormItem>
+          <div className="flex flex-row justify-between items-center">
+            <FormLabel>{label}</FormLabel>
+            <Button
+              type="button"
+              variant="outline"
+              size="xs"
+              onClick={() => resetSignature(field)}
+            >
+              Reset signature
+            </Button>
+          </div>
+          <FormControl>
+            <div className="border border-gray-500 justify-center">
+              <SignatureCanvas
+                ref={sigCanvas}
+                canvasProps={{ width: 300, height: 150 }}
+                onEnd={() => saveSignature(field)}
+              />
+            </div>
+          </FormControl>
+          <FormDescription>{description}</FormDescription>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  )
+}
+```
+
+# Example usage
+
+```tsx
+import { Fragment, PropsWithChildren, useState } from "react";
+import { z } from "zod";
+import dynamic from "next/dynamic";
+import toast from "react-hot-toast";
+import { Button } from "components/Primitives/Button";
+import TextInput from "components/Primitives/Inputs/TextInput";
+import SignaturePadInput from "components/Primitives/Inputs/SignaturePadInput";
+import { modifyPdf } from "lib/pdf/client";
+import { PDFItem } from "lib/pdf/types";
+import { CloudArrowDownIcon } from "@heroicons/react/24/outline";
+
+const PDFViewer = dynamic(() => import("components/Common/PDFViewer"), {
+  ssr: false,
+});
+
+// public/contract.pdf
+const contractUrl = "/contract.pdf";
+
+export default function ContractForm() {
+  const [signedPdf, setSignedPdf] = useState(null);
+  const [signing, setSigning] = useState(false);
+
+  const handleSignPDF = async () => {
+    setSigning(true);
+
+    const dateString = new Date().toLocaleDateString("es-ES", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+
+    const items: PDFItem[] = [
+      {
+        page: 0,
+        type: "image",
+        coords: { x: 90, y: 440 },
+        data: signature,
+        options: { width: 120, height: 75 },
+      },
+      {
+        page: 0,
+        type: "text",
+        coords: { x: 260, y: 680 },
+        data: dateString,
+        options: { size: 14 },
+      },
+      {
+        page: 0,
+        type: "text",
+        coords: { x: 190, y: 550 },
+        data: fullName,
+        options: { size: 12 },
+      },
+    ];
+
+    const resultPdf = await modifyPdf(contractUrl, items);
+
+    if (!resultPdf) {
+      toast.error("An error has ocurred while signing the contract");
+      setSigning(false);
+      return;
+    }
+
+    const contractBlob = URL.createObjectURL(resultPdf);
+
+    // Do whatever with the contract
+
+    setSignedPdf(contractBlob);
+    setSigning(false);
+  };
+
+  return (
+    <div className="flex w-full flex-col flex-start justify-center lg:flex-row gap-5">
+      <div className="w-[330px] lg:w-2/3">
+        <PDFViewer file={signedPdf || contractUrl} />
+      </div>
+
+      <div className="flex flex-col space-y-5">
+        <Button className="bg-fuel-purple" asChild>
+          <a href={signedPdf || contractUrl} target="_blank" rel="noreferrer">
+            <CloudArrowDownIcon className="w-6 h-6 mr-2" />
+            {signedPdf ? "Download signed contract" : "Download contract"}
+          </a>
+        </Button>
+        {!signedPdf && (
+          <Fragment>
+            <TextInput label="Full name" name="fullName" />
+
+            <SignaturePadInput name="signature" label="Draw your signature here" />
+
+            <Button disabled={signing} onClick={handleSignPDF}>
+              {signing ? "Signing..." : "Sign"}
+            </Button>
+          </Fragment>
+        )}
+      </div>
+    </div>
+  );
+}
+```

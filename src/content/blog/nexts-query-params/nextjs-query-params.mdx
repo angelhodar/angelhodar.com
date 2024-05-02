@@ -154,57 +154,60 @@ In the new App Router, there are some substantial changes we need to make:
 3. **useEffect** can be removed as the new hooks returns valid values from the first render and dont need to check if router is ready.
 
 ```tsx
-"use client"
+"use client";
 
-import { useState } from 'react'
-import { useSearchParams, usePathname } from 'next/navigation'
-import { z } from 'zod'
+import { useState } from "react";
+import { useSearchParams, usePathname } from "next/navigation";
+import { z } from "zod";
 
 interface UseQueryParamsConfig<T extends z.ZodTypeAny> {
-    schema: T
-    defaultValues: z.infer<T>
+  schema: T;
+  defaultValues: z.infer<T>;
 }
 
 export function useQueryParams<T extends z.ZodTypeAny>(
-    config: UseQueryParamsConfig<T>
+  config: UseQueryParamsConfig<T>
 ): {
-    queryParams: z.infer<T>
-    setQueryParams: (newParams: Partial<z.infer<T>>) => void
+  queryParams: z.infer<T>;
+  setQueryParams: (newParams: Partial<z.infer<T>>) => void;
 } {
-    const searchParams = useSearchParams()
-    const pathname = usePathname()
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
 
-    // Convert URLSearchParams to an object
-    const searchParamsObject = Object.fromEntries(searchParams.entries())
+  // Convert URLSearchParams to an object
+  const searchParamsObject = Object.fromEntries(searchParams.entries());
 
-    const [queryParams, setQueryParamsState] = useState<z.infer<T>>(() => {
-        const initialParse = config.schema.safeParse({
-            ...config.defaultValues,
-            ...searchParamsObject,
-        });
-        return initialParse.success ? initialParse.data : config.defaultValues;
+  const [queryParams, setQueryParamsState] = useState<z.infer<T>>(() => {
+    const initialParse = config.schema.safeParse({
+      ...config.defaultValues,
+      ...searchParamsObject,
     });
+    return initialParse.success ? initialParse.data : config.defaultValues;
+  });
 
-    const setQueryParams = (newParams: Partial<z.infer<T>>) => {
-        const mergedParams = { ...queryParams, ...newParams };
+  const setQueryParams = (newParams: Partial<z.infer<T>>) => {
+    const mergedParams = { ...queryParams, ...newParams };
 
-        const parsedQuery = config.schema.safeParse(mergedParams);
+    const parsedQuery = config.schema.safeParse(mergedParams);
 
-        if (parsedQuery.success) {
-            setQueryParamsState(parsedQuery.data);
+    if (parsedQuery.success) {
+      setQueryParamsState(parsedQuery.data);
 
-            const newUrlParams = new URLSearchParams(parsedQuery.data);
+      const newUrlParams = new URLSearchParams(parsedQuery.data);
 
-            window.history.pushState(null, '', `${pathname}?${newUrlParams.toString()}`);
-        } else {
-            console.error('Validation failed:', parsedQuery.error);
-        }
-    };
-
-    return {
-        queryParams,
-        setQueryParams,
+      window.history.pushState(
+        null,
+        "",
+        `${pathname}?${newUrlParams.toString()}`
+      );
+    } else {
+      console.error("Validation failed:", parsedQuery.error);
     }
-}
+  };
 
+  return {
+    queryParams,
+    setQueryParams,
+  };
+}
 ```

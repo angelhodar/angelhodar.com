@@ -1,7 +1,7 @@
 ---
-title: 'A simple way to improve your file uploads in React with progress, cancelation and better accesibility'
+title: 'Improve your file uploads in React'
 description: 'Learn how to improve your code when uploading files with React with a simple context provider'
-slug: improve-react-uploads-with-progress-cancelation-accessibility
+slug: improve-your-file-uploads-in-react
 cover: './react-file-uploads.jpg'
 publishedAt: 2024-01-20
 draft: false
@@ -13,7 +13,7 @@ In modern web development, providing a user-friendly and efficient file upload e
 
 # Creating the UploadProvider
 
-First, we need to create a context provider to wrap any component that will handle file uploads. The context will maintain the upload state, including whether an upload is in progress and its progress percentage. It leverages the `AbortController` API for upload cancellation. It will show a dialog to the user with the upload progress and a button to cancel the current upload.
+First, we need to create a context provider to wrap any component that will handle file uploads. The context will maintain the upload state, including whether an upload is in progress and its progress percentage. It leverages the **AbortController** API for upload cancellation. It will show a dialog to the user with the upload progress and a button to cancel the current upload.
 Lets define the context type with proper type safety:
 
 ```tsx
@@ -49,8 +49,8 @@ interface UploadContextType {
 const UploadContext = createContext<UploadContextType | undefined>(undefined)
 ```
 
-By defining the **UploadFunction** and **UploadResult** generic types, you can wrap the function you already use to upload files to return type safe values with an extra error variable to check for user cancelation or network problems.
-Looking at the context data, we are defining a boolean to tell the childrens if an upload is already in progress and also an **startUpload** function which is the core of the functionality.
+By defining the **UploadFunction** and **UploadResult** generic types, you can wrap the function you already use to upload files to return type safe values with an extra error variable to check for user cancelation or network problems, like in Rust and Go.
+Looking at the context data, we are defining a boolean to tell the children if an upload is already in progress and also an **startUpload** function which is the core of the functionality.
 
 Lets define the UploadProvider by using the created types:
 
@@ -96,9 +96,36 @@ export const UploadProvider = ({ children }: PropsWithChildren) => {
 };
 ```
 
+This is my **UploadProgress** component, which uses the **radix-ui/progress** component internally component to ensure good accessibility for screen readers:
+
+```tsx
+import { Progress } from 'components/Primitives/Progress'
+import { Button } from 'components/Primitives/Button'
+
+interface UploadProgressProps extends React.HTMLAttributes<HTMLDivElement> {
+  progress: number
+  onCancel: () => void
+}
+
+export default function UploadProgress(props: UploadProgressProps) {
+  const { progress, children, onCancel } = props
+
+  return (
+    <div className="flex flex-col space-y-4 container justify-center items-center mx-auto">
+      <span className="text-lg font-semibold text-gray-800">{children}</span>
+      <Progress value={progress} indicatorColor="bg-fuel-blue" />
+      <span className="text-xl">{progress}%</span>
+      <Button onClick={onCancel} className="bg-fuel-purple text-white">
+        Cancelar
+      </Button>
+    </div>
+  )
+}
+```
+
 # Accessing the context with the useUpload hook
 
-Now we need to provide the uploader components with the context. The `useUpload` does that and ensures that these components are within an `UploadProvider`, enforcing a safe and centralized management of the upload context.
+Now we need to provide the uploader components with the context. The **useUpload** does that and ensures that these components are within an **UploadProvider**, enforcing a safe and centralized management of the upload context.
 
 ```tsx
 export const useUpload = (): UploadContextType => {
@@ -114,7 +141,7 @@ export const useUpload = (): UploadContextType => {
 
 # Example: Chat attachment
 
-To use the `UploadProvider`, simply wrap it around components that require upload functionality.
+To use the **UploadProvider**, simply wrap it around components that require upload functionality.
 You could wrap your entire app with it, but I recommend to keep state as deep as possible to avoid unnecessary component re-renders.
 In this example, it encapsulates a chat input component which is the one that handles the uploads in my **Chat** component:
 
@@ -124,7 +151,7 @@ In this example, it encapsulates a chat input component which is the one that ha
 </UploadProvider>
 ```
 
-Within the `ChatInput` component, you might handle file uploads as follows, utilizing the `useUpload` hook to access the upload context:
+Within the **ChatInput** component, you might handle file uploads as follows, using the **useUpload** hook to access the upload context:
 
 ```tsx
 const ChatInput = () => {
@@ -149,18 +176,15 @@ const ChatInput = () => {
       return url;
     };
 
+    const { result: url, error } = await startUpload(handleAttachmentUpload);
+
+    if (error) {
+      toast.error("An error occurred while sending your file");
+      return;
+    }
+
     try {
-      const { result: url, error } = await startUpload(handleAttachmentUpload);
-
-      if (error) {
-        toast.error("An error occurred while sending your file");
-        return;
-      }
-
-      await onAddMessage({
-        text: "",
-        file: url,
-      });
+      await addChatMessage({ file: url });
     } catch (err) {
       console.log(err);
     }

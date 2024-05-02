@@ -1,0 +1,145 @@
+---
+title: 'Zipping files to AWS S3 in TypeScript using streams'
+slug: zipping-s3-files-typescript-streams
+publishedAt: 2024-05-01
+cover: './ts-lambda.png'
+draft: false
+---
+
+# Introduction
+Recently, I had to create a feature to allow my customers to create an organized zip for their video content (which can be up to 100-200 videos).
+In this blog post, we'll explore how to efficiently create a ZIP file in S3 from other files in S3 by offloading the zipping process to a Lambda function, which also leverages streams to use as less memory as possible
+
+# Lambda function
+To address this problem, we'll create a Lambda function that takes a list of files in S3 as input, retrieves these files, and creates a ZIP file that contains them.
+Its written in TypeScript and uses the **archiver** library to efficiently create the ZIP file by using streams.
+This function will be triggered by an invoke command, passing the required parameters to create the ZIP file, which is an object with the following properties:
+
+- **bucket**: The name of the S3 bucket that contains the files.
+- **zipFileName**: The name of the ZIP file to be created.
+- **filesToZip**: An array of objects, where each object contains the key (S3 key) and fileName (name of the file in the ZIP file) of a file to be included in the ZIP file.
+
+One problem I found is that the AWS SDK has a limit of 50 maximum sockets available, so when I tried to execute this code with an array bigger than 50 elements, the lambda just aborted the execution, but without any errors.
+After reading some GitHub issues and documentation, I realized that I had to increase the maximum limit of sockets that the internal agent can handle when requesting the stream for a file. In other words, 1 socket corresponds to a GetObjectCommand call.
+
+Here's the final code:
+
+```ts
+import archiver from 'archiver';
+import { NodeHttpHandler } from '@smithy/node-http-handler';
+import https from 'https';
+import { PassThrough, Readable } from 'stream';
+import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3';
+import { Upload } from '@aws-sdk/lib-storage';
+
+export interface FileToZip {
+  key: string;
+  fileName: string;
+}
+
+interface ZipperParams {
+  bucket: string;
+  zipFileName: string;
+  filesToZip: FileToZip[];
+}
+
+const agent = new https.Agent({
+  maxSockets: 500, // Maximum concurrent files to process
+});
+
+const requestHandler = new NodeHttpHandler({ httpsAgent: agent });
+const s3Client = new S3Client({ region: 'eu-west-3', requestHandler });
+
+export const handler = async (event: ZipperParams): Promise<void> => {
+  const { bucket, zipFileName, filesToZip } = event;
+
+  const stream = new PassThrough();
+  // No compression for faster execution with the store parameter as true
+  const archive = archiver('zip', { store: true });
+
+  archive.on('error', (err: Error) => {
+    throw new Error(`Archiving error: ${err.message}`);
+  });
+
+  archive.on('progress', (data) => {
+    console.log(`Archived entry -> ${data.entries.processed} / ${data.entries.total}`);
+  });
+
+  archive.pipe(stream);
+
+  for (const [i, file] of filesToZip.entries()) {
+    const { key, fileName } = file;
+
+    const getObjectCommand = new GetObjectCommand({
+      Bucket: bucket,
+      Key: key,
+    });
+
+    const response = await s3Client.send(getObjectCommand);
+    const fileStream = response.Body as Readable;
+
+    archive.append(fileStream, { name: fileName });
+    console.log(`Appended file stream for ${fileName} ${i}/${filesToZip.length}`);
+  }
+
+  const uploadPromise = new Upload({
+    client: s3Client,
+    params: {
+      Bucket: bucket,
+      Key: zipFileName,
+      Body: stream,
+      ContentType: 'application/zip',
+    },
+  });
+
+  try {
+    console.log(`Finalizing zip...`);
+    archive.finalize();
+    console.log(`Uploading data...`);
+    await uploadPromise.done();
+    console.log(`Successfully uploaded '${zipFileName}' to bucket '${bucket}'.`);
+  } catch (error) {
+    console.error('Error uploading file:', error);
+  }
+};
+```
+
+# Invoking the Lambda Function
+
+To invoke the Lambda function, simply use the @aws-sdk/client-lambda package with the following code:
+
+```ts
+import { LambdaClient, InvokeCommand } from '@aws-sdk/client-lambda';
+import config from '../../config';
+import logger from '../logger';
+
+const lambdaClient = new LambdaClient({
+  region: config.aws.region,
+  credentials: {
+    accessKeyId: config.aws.accessKeyId,
+    secretAccessKey: config.aws.accessSecretKey,
+  },
+});
+
+const baseUrl = `https://${config.aws.bucket}.s3.${config.aws.region}.amazonaws.com/`;
+
+export const createZip = async (params: Omit<ZipperParams, 'bucket'>) => {
+  const payload: ZipperParams = {
+    bucket: config.aws.bucket,
+    ...params,
+  };
+
+  const command = new InvokeCommand({
+    FunctionName: config.aws.lambdas.zipperName,
+    Payload: Buffer.from(JSON.stringify(payload)),
+  });
+
+  try {
+    await lambdaClient.send(command);
+    return new URL(params.zipFileName, baseUrl).toString();
+  } catch (err) {
+    logger.error('Error creating zip file', err);
+    return null;
+  }
+};
+```
