@@ -1,12 +1,108 @@
 ---
-title: 'How to implement PDF signing in Next.js'
-slug: how-to-implement-pdf-isgning-nextjs
+title: 'How to implement PDF signing in React and Node.js'
+slug: how-to-implement-pdf-signing-nodejs-react
 publishedAt: 2024-05-02
 cover: ./nodejs-pdf.jpg
 draft: false
 ---
 
-# Server
+# Introduction
+In today’s digital age, electronic signatures play a vital role in various applications, from signing contracts to validating transactions.
+Integrating signature functionality into web applications is crucial for streamlining processes and enhancing user experience.
+In this post, I will show you a simple way to add a signature image or any other data to a PDF, with the client side in React and the backend logic in Node.js.
+To be more precise, I will be using Next.js, that allows both client and server side code.
+
+> This signing process does not use any electronic certificate. If you need that functionality, you can use [signpdf](https://github.com/vbuch/node-signpdf) (formerly node-signpdf)
+
+# Structure of the signing process and components
+First, lets define the how the process is going to be done:
+
+1. We show a form to the user, which will contain a canvas to draw the signature and some other text inputs for user information details like name and so on. It will also display the PDF so the user can see it.
+2. When form is submitted, the client transforms the form data into a proper input to be sent to the server.
+3. The server receives the data, applies the transformations and returns the data to the client as an application/pdf buffer.
+4. The client transforms the buffer to a blob file to be able to show the PDF result with all the transformations applied
+
+Given this flow, a few components are needed:
+
+1. A data structure for pdf transformations to be sent to the server.
+2. The signature pad input. In my case I have used the [react-signature-canvas](https://www.npmjs.com/package/react-signature-canvas) package. 
+3. A PDF viewer to show to the user. I have used [react-pdf](https://www.npmjs.com/package/react-pdf)
+4. A server API route with pdf handling capabilities. I have used [pdf-lib](https://pdf-lib.js.org/)
+
+With that in mind, lets go step by step constructing this components
+
+# Data structure
+The structure of the transformations will be very similar to the input that the pdf-lib package expects:
+
+```ts
+export interface ImageOptions {
+  width: number
+  height: number
+}
+
+export interface TextOptions {
+  size: number
+}
+
+export type PDFItem<T extends 'image' | 'text'> = {
+  page: number
+  type: T
+  coords: { x: number; y: number }
+  data: string
+  options: T extends 'image' ? ImageOptions : T extends 'text' ? TextOptions : never
+}
+```
+
+As you can see, I have added some type asssertion to automatically infer the proper options type depending on the type of item.
+
+# Using the data structure on the server
+Now we need to construct the API route that will be called from our client. I am using Next.js but if you are using your own backend with Express or something like that
+then the code will be very similar.
+
+```ts
+import { NextApiRequest, NextApiResponse } from 'next'
+import { signPdf } from 'lib/pdf/server'
+import { PDFItem } from 'lib/pdf/types'
+
+interface Body {
+  pdfPath: string
+  items: PDFItem[]
+}
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Method Not Allowed' })
+  }
+
+  try {
+    const { pdfPath, items }: Body = req.body
+
+    const host = req.headers['host'] as string
+    const protocol = req.headers['x-forwarded-proto'] as string
+
+    const pdfUrl = new URL(
+      pdfPath,
+      `${protocol || 'http'}://${host}`
+    ).toString()
+
+    const signedPdfBytes = await signPdf(pdfUrl, items)
+
+    res.setHeader('Content-Type', 'application/pdf')
+    res.setHeader('Content-Length', signedPdfBytes.length)
+
+    // Send the PDF as a Buffer
+    res.status(200).send(Buffer.from(signedPdfBytes))
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: 'Internal Server Error' })
+  }
+}
+```
+The code is pretty straightforward as most of the functionality is encapsulated in the signPdf function. The only thing that seems a bit different is that I store the pdf in my Next.js public folder, so we need to construct the absolute URL from pdf path. For example if the pdf receives the
+path as /contracts/contract.pdf, we need to convert it to an absolute url like http://localhost:3000/contracts/contract.pdf to download it. If you pass an absolute url to the pdf from the client, you can omit this step and directly pass the pdfUrl to the signPdf function, which has the following code:
 
 ```ts
 import { PDFDocument, rgb } from 'pdf-lib'
@@ -52,28 +148,13 @@ export const signPdf = async (pdfUrl: string, items: PDFItem[]) => {
 }
 ```
 
-# Client
+The function just downloads the pdf as a buffer to pass it as parameter to the pdf-lib package. It iterates all the items to apply the transformations and returns the pdf bytes. Simple, right?
+Now that we have defined all the server side functionality, lets go to the client.
 
-```ts
-import { PDFItem } from './types'
+# Creating the PDFViewer component
 
-export const modifyPdf = async (pdfPath: string, items: PDFItem[]): Promise<Blob | null> => {
-  const res = await fetch('/api/sign-pdf', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ pdfPath, items }),
-  })
-
-  if (!res.ok) return null
-
-  const data = await res.arrayBuffer()
-  return new Blob([data], { type: 'application/pdf' })
-}
-```
-
-# PDFViewer
+As I mentioned, we want to show the pdf to the user, so I have used the react-pdf library for that. The component uses a carousel to show all the pdf pages if there are more than 1, and a hook to resize it properly
+depending on the screen size. Here is the code:
 
 ```ts
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
@@ -145,7 +226,11 @@ export default function PDFViewer({ file }: PDFViewerProps) {
 }
 ```
 
-# SignaturePadInput
+# The signature pad input
+
+In order to create our form, we need a special input to allow the user to draw the signature. I have implemented it in my usual workflow when creating custom input by using react-hook-form, but you can just adapt the code
+to your own solution. The signature is stored as a base64 string, which is the data sent to the server. You can see the [react-signature-canvas](https://www.npmjs.com/package/react-signature-canvas) for more information.
+I have also added a button to reset the signature
 
 ```ts
 'use client'
@@ -222,7 +307,33 @@ export default function SignaturePadInput(props: BaseFormInputProps) {
 }
 ```
 
+# Making the request to the server
+Ir oder to encapsulate the server side request I have created this client function:
+
+```ts
+import { PDFItem } from './types'
+
+export const modifyPdf = async (pdfPath: string, items: PDFItem[]): Promise<Blob | null> => {
+  const res = await fetch('/api/sign-pdf', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ pdfPath, items }),
+  })
+
+  if (!res.ok) return null
+
+  const data = await res.arrayBuffer()
+  return new Blob([data], { type: 'application/pdf' })
+}
+```
+
+It is responsible of transforming the server response to a proper standard Blob, so we dont need to repeat the code in case you use the signing process in different places of your code.
+
+
 # Example usage
+Now that all the pieces are constructed, lets join them in a form that will be presented to the user:
 
 ```tsx
 import { Fragment, PropsWithChildren, useState } from "react";
@@ -240,17 +351,17 @@ const PDFViewer = dynamic(() => import("components/Common/PDFViewer"), {
   ssr: false,
 });
 
-// public/contract.pdf
+// Path will be public/contract.pdf
 const contractUrl = "/contract.pdf";
 
 export default function ContractForm() {
   const [signedPdf, setSignedPdf] = useState(null);
   const [signing, setSigning] = useState(false);
 
-  const handleSignPDF = async () => {
+  const handleSignPDF = async ({ fullName, signature }) => {
     setSigning(true);
 
-    const dateString = new Date().toLocaleDateString("es-ES", {
+    const currentDate = new Date().toLocaleDateString("es-ES", {
       day: "2-digit",
       month: "2-digit",
       year: "numeric",
@@ -268,7 +379,7 @@ export default function ContractForm() {
         page: 0,
         type: "text",
         coords: { x: 260, y: 680 },
-        data: dateString,
+        data: currentDate,
         options: { size: 14 },
       },
       {
@@ -303,22 +414,20 @@ export default function ContractForm() {
       </div>
 
       <div className="flex flex-col space-y-5">
-        <Button className="bg-fuel-purple" asChild>
+        <Button asChild>
           <a href={signedPdf || contractUrl} target="_blank" rel="noreferrer">
             <CloudArrowDownIcon className="w-6 h-6 mr-2" />
             {signedPdf ? "Download signed contract" : "Download contract"}
           </a>
         </Button>
         {!signedPdf && (
-          <Fragment>
+          <Form>
             <TextInput label="Full name" name="fullName" />
-
             <SignaturePadInput name="signature" label="Draw your signature here" />
-
-            <Button disabled={signing} onClick={handleSignPDF}>
+            <Button disabled={signing} onClick={onSubmit}>
               {signing ? "Signing..." : "Sign"}
             </Button>
-          </Fragment>
+          </Form>
         )}
       </div>
     </div>
