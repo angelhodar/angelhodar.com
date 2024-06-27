@@ -12,7 +12,6 @@
   "dependencies": {
     "@astrojs/mdx": "^3.0.0",
     "@astrojs/tailwind": "^5.1.0",
-    "@astrojs/vercel": "^7.4.0",
     "@iconify-json/devicon": "^1.1.36",
     "@iconify-json/logos": "^1.1.42",
     "astro": "^4.5.9",
