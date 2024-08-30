@@ -20,8 +20,7 @@ export default defineConfig({
     }
   },
   adapter: vercel({
-    webAnalytics: true,
-    speedInsights: true,
+    webAnalytics: { enabled: true },
     imageService: true
   })
 });
