@@ -6,6 +6,7 @@ import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import PageContainer from "@/components/PageContainer.astro";
 import DarkModeScript from "@/components/DarkModeScript.astro";
+import Analytics from "@/components/Analytics.astro";
 
 export interface Props {
 	seo: SeoProps;
@@ -28,6 +29,7 @@ const { seo, viewTransitions } = Astro.props;
 		/>
 		<DarkModeScript />
 		{viewTransitions && <ViewTransitions />}
+		<Analytics />
 	</head>
 	<body class="dark:bg-gray-800 dark:text-white">
 		<PageContainer>
