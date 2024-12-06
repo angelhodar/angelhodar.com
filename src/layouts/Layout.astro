@@ -1,7 +1,7 @@
 ---
 import type { Props as SeoProps } from "astro-seo";
 import { SEO } from "astro-seo";
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import PageContainer from "@/components/PageContainer.astro";
@@ -9,10 +9,9 @@ import DarkModeScript from "@/components/DarkModeScript.astro";
 
 export interface Props {
 	seo: SeoProps;
-	viewTransitions?: boolean;
 }
 
-const { seo, viewTransitions } = Astro.props;
+const { seo } = Astro.props;
 ---
 
 <html lang="en">
@@ -27,7 +26,7 @@ const { seo, viewTransitions } = Astro.props;
 			{...seo}
 		/>
 		<DarkModeScript />
-		{viewTransitions && <ViewTransitions />}
+		<ClientRouter />
 	</head>
 	<body class="dark:bg-gray-800 dark:text-white">
 		<PageContainer>

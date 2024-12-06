@@ -11,11 +11,11 @@ interface Props {
 ---
 
 <div class="rounded-lg shadow-lg border border-gray-300">
-  <a href={"/blog/" + post.slug}>
+  <a href={"/blog/" + post.id}>
     {
-      post.data.cover?.src && (
+      post.data.cover && (
         <Image
-          src={post.data.cover.src}
+          src={post.data.cover}
           alt="Article thumbnail"
           width={400}
           height={300}
