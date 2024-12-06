@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
+import vercel from "@astrojs/vercel";
 import icon from "astro-icon";
 import {
   transformerNotationDiff,
@@ -16,5 +17,9 @@ export default defineConfig({
       theme: "catppuccin-frappe",
       transformers: [transformerNotationDiff(), transformerNotationHighlight()]
     }
-  }
+  },
+  adapter: vercel({
+    imageService: true,
+    webAnalytics: { enabled: true }
+  })
 });
