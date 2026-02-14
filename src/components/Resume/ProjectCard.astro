@@ -27,7 +27,7 @@ const { title, href, description, tags } = Astro.props;
     </div>
     <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">{description}</p>
     {tags && tags.length > 0 && (
-        <div class="flex flex-wrap gap-2 pt-1">
+        <div class="flex flex-wrap gap-2 pt-1 mt-auto">
             {tags.map((tag) => (
                 <span class="text-xs px-2 py-1 rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400">
                     {tag}
