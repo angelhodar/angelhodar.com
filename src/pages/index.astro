@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import Section from "@/components/Section.astro";
-import PostCard from "@/components/Blog/PostCard.astro";
+import { formatDate } from "@/utils";
 
 const posts: CollectionEntry<"blog">[] = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
@@ -78,9 +78,24 @@ const posts: CollectionEntry<"blog">[] = (await getCollection("blog"))
 		</Section>
 
 		<!-- Blog Highlights -->
-		<Section title="Latest from the blog">
-			<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-				{posts.map((post) => <PostCard post={post} compact />)}
+		<Section title="Latest Articles">
+			<div class="flex flex-col gap-10">
+				{posts.map((post) => (
+					<article class="flex flex-col gap-2">
+						<span class="text-sm text-neutral-500">{formatDate(post.data.publishedAt)}</span>
+						<h3 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">
+							{post.data.title}
+						</h3>
+						{post.data.description && (
+							<p class="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+								{post.data.description}
+							</p>
+						)}
+						<a href={"/blog/" + post.id} class="text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline mt-1">
+							Read Article
+						</a>
+					</article>
+				))}
 			</div>
 			<a href="/blog" class="text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline">View all posts &rarr;</a>
 		</Section>
