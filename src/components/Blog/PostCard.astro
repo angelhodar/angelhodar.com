@@ -3,31 +3,67 @@ import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import { formatDate } from "@/utils";
 
-const { post } = Astro.props;
+const { post, compact = false } = Astro.props;
 
 interface Props {
   post: CollectionEntry<"blog">;
+  compact?: boolean;
 }
 ---
 
-<div class="rounded-lg shadow-lg border border-gray-300">
-  <a href={"/blog/" + post.id}>
-    {
-      post.data.cover && (
-        <Image
-          src={post.data.cover}
-          alt="Article thumbnail"
-          width={400}
-          height={300}
-          class="rounded-lg rounded-b-none"
-        />
-      )
-    }
-    <div class="p-3">
-      <h2 class="text-xl font-semibold mb-2">{post.data.title}</h2>
-      <p class="text-sm">
-        {formatDate(post.data.publishedAt)}
-      </p>
-    </div>
+{compact ? (
+  <!-- Compact: vertical card for homepage grid -->
+  <a href={"/blog/" + post.id} class="group block">
+    <article class="flex flex-col gap-3">
+      {
+        post.data.cover && (
+          <Image
+            src={post.data.cover}
+            alt={post.data.title}
+            width={400}
+            height={250}
+            class="w-full object-cover rounded-xl aspect-video"
+          />
+        )
+      }
+      <div class="flex flex-col gap-1.5">
+        <span class="text-xs text-neutral-500">
+          {formatDate(post.data.publishedAt)}
+        </span>
+        <h3 class="text-base font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+          {post.data.title}
+        </h3>
+      </div>
+    </article>
   </a>
-</div>
+) : (
+  <!-- Full: horizontal card for blog listing (matches reference template) -->
+  <a href={"/blog/" + post.id} class="group block">
+    <article class="flex flex-col sm:flex-row gap-6 items-start">
+      {
+        post.data.cover && (
+          <Image
+            src={post.data.cover}
+            alt={post.data.title}
+            width={300}
+            height={200}
+            class="w-full sm:w-64 md:w-72 shrink-0 object-cover rounded-xl aspect-[4/3]"
+          />
+        )
+      }
+      <div class="flex flex-col gap-2 py-1">
+        <span class="text-sm text-neutral-500">
+          {formatDate(post.data.publishedAt)}
+        </span>
+        <h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+          {post.data.title}
+        </h3>
+        {post.data.description && (
+          <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+            {post.data.description}
+          </p>
+        )}
+      </div>
+    </article>
+  </a>
+)}

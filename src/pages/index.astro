@@ -1,12 +1,17 @@
 ---
-import { Icon } from "astro-icon/components";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
-import ProjectCard from "@/components/Resume/ProjectCard.astro";
 import Section from "@/components/Section.astro";
-import EducationCard from "@/components/Resume/EducationCard.astro";
-import WorkPositionCard from "@/components/Resume/WorkPositionCard.astro";
-import SkillGroup from "@/components/Resume/SkillGroup.astro";
-import Skill from "@/components/Resume/Skill.astro";
+import PostCard from "@/components/Blog/PostCard.astro";
+
+const posts: CollectionEntry<"blog">[] = (await getCollection("blog"))
+  .filter((post) => !post.data.draft)
+  .sort(
+    (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
+      b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
+  )
+  .slice(0, 3);
 ---
 
 <Layout
@@ -16,201 +21,75 @@ import Skill from "@/components/Resume/Skill.astro";
 			"My portfolio with projects, education and work over the years",
 	}}
 >
-	<main class="flex flex-col space-y-10 antialiased pt-6">
-		<h1
-			class="text-6xl py-3 font-extrabold bg-clip-text text-transparent bg-linear-to-l from-yellow-400 to-red-500 dark:from-green-400 dark:to-blue-600 text-center"
-		>
-			Hi, I'm Angel Hodar
-		</h1>
-
-		<Section title="Projects" icon="projects">
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-				<ProjectCard
-					title="OpenRPG_Inventory"
-					href="https://github.com/angelhodar/OpenRPG_Inventory"
-					description="Generic and fully featured inventory container and equipment system for Unreal Engine 4"
-				/>
-				<ProjectCard
-					title="MeshOptimizer"
-					href="https://github.com/angelhodar/mesh-optimizer"
-					description="Blender based 3D model optimizer for automatic texture compression and polygon reduction. Docker and serverless ready"
-				/>
-				<ProjectCard
-					title="OpenRPG_Stats"
-					href="https://github.com/angelhodar/OpenRPG_Stats"
-					description="Attributes and stats system for Unreal Engine 4"
-				/>
-
-				<ProjectCard
-					title="ReceiptsGPT"
-					href="https://github.com/angelhodar/receipts-gpt"
-					description="Make restaurants shared payments easier by using AI driven OCR models"
-				/>
-				<ProjectCard
-					title="OpenRPG_Quest"
-					href="https://github.com/angelhodar/OpenRPG_Quest"
-					description="Multipurpose quest system for Unreal Engine 4"
-				/>
-				<ProjectCard
-					title="angelhodar.com"
-					href="https://github.com/angelhodar/angelhodar.com"
-					description="My personal portfolio using the Astro framework"
-				/>
+	<div class="flex flex-col gap-20 py-12 antialiased">
+		<!-- Hero Section -->
+		<section class="flex flex-col gap-6 max-w-2xl">
+			<h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-100">
+				Hey, I'm Angel Hodar
+			</h1>
+			<p class="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed">
+				Full Stack Developer building modern web applications. I specialize in TypeScript, React, Vue, and cloud infrastructure — turning ideas into polished, production-ready products.
+			</p>
+			<div class="flex flex-wrap gap-3">
+				<a
+					href="/projects"
+					class="inline-flex items-center px-5 py-2.5 rounded-lg bg-primary-600 text-white text-sm font-medium hover:bg-primary-700 transition-colors"
+				>
+					View Projects
+				</a>
+				<a
+					href="mailto:angelhodar76@gmail.com"
+					class="inline-flex items-center px-5 py-2.5 rounded-lg border border-neutral-300 dark:border-neutral-700 text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+				>
+					Contact me
+				</a>
 			</div>
-		</Section>
+		</section>
 
-		<Section title="Skills" icon="skills">
-			<div class="flex flex-col space-y-8">
-				<SkillGroup name="Frontend">
-					<Skill icon="devicon:javascript" name="JavaScript" />
-					<Skill icon="devicon:typescript" name="TypeScript" />
-					<Skill icon="devicon:react" name="React" />
-					<Skill icon="devicon:vuejs" name="Vue" />
-					<Skill icon="devicon:tailwindcss" name="Tailwind" />
-					<Skill icon="devicon:nextjs" name="NextJS" />
-					<Skill icon="devicon:nuxtjs" name="Nuxt" />
-					<Skill
-						icon="devicon:astro"
-						name="Astro"
-						class="fill-black dark:fill-white"
-					/>
-				</SkillGroup>
-
-				<SkillGroup name="Backend">
-					<Skill icon="devicon:nodejs" name="Node" />
-					<Skill icon="devicon:python" name="Python" />
-					<Skill icon="devicon:cplusplus" name="C++" />
-					<Skill icon="devicon:csharp" name="C#" />
-					<Skill icon="graphql" name="GraphQL" />
-					<Skill icon="devicon:docker" name="Docker" />
-				</SkillGroup>
-
-				<div class="flex flex-col lg:flex-row gap-5">
-					<div class="grow">
-						<SkillGroup name="Cloud">
-							<Skill icon="aws" name="AWS" />
-							<Skill
-								icon="devicon:digitalocean"
-								name="DigitalOcean"
-							/>
-							<Skill
-								icon="devicon:vercel"
-								name="Vercel"
-								class="fill-black dark:fill-white"
-							/>
-							<Skill icon="devicon:firebase" name="Firebase" />
-							<Skill icon="devicon:supabase" name="Supabase" />
-						</SkillGroup>
+		<!-- Work Experience Highlights -->
+		<Section title="Experience">
+			<div class="flex flex-col gap-6">
+				<div class="flex flex-col gap-1 border-l-2 border-primary-500 pl-4">
+					<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+						<h3 class="font-semibold text-neutral-900 dark:text-neutral-100">Full Stack Developer</h3>
+						<span class="text-sm text-neutral-500">July 2025 — Present</span>
 					</div>
-					<div class="grow">
-						<SkillGroup name="Databases">
-							<Skill icon="devicon:postgresql" name="Postgres" />
-							<Skill icon="devicon:mongodb" name="MongoDB" />
-						</SkillGroup>
+					<a href="https://dehn.de/" target="_blank" rel="noopener noreferrer" class="text-sm text-primary-600 dark:text-primary-400 hover:underline">DEHN Digital Solutions</a>
+					<p class="text-sm text-neutral-600 dark:text-neutral-400">Developing an IoT platform for monitoring electrical installations with real-time data visualization</p>
+				</div>
+				<div class="flex flex-col gap-1 border-l-2 border-primary-500 pl-4">
+					<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+						<h3 class="font-semibold text-neutral-900 dark:text-neutral-100">Full Stack Leader</h3>
+						<span class="text-sm text-neutral-500">June 2022 — June 2025</span>
 					</div>
-					<div class="grow">
-						<SkillGroup name="Graphics">
-							<Skill
-								icon="devicon:unity"
-								name="Unity"
-								class="fill-black dark:fill-white"
-							/>
-							<Skill
-								icon="devicon:unrealengine"
-								name="Unreal Engine"
-								class="fill-black dark:fill-white"
-							/>
-						</SkillGroup>
+					<a href="https://fuelyourbrands.com/" target="_blank" rel="noopener noreferrer" class="text-sm text-primary-600 dark:text-primary-400 hover:underline">Fuel Your Brands, Madrid</a>
+					<p class="text-sm text-neutral-600 dark:text-neutral-400">Led development of a platform connecting brands with microinfluencers across the full tech stack</p>
+				</div>
+				<div class="flex flex-col gap-1 border-l-2 border-primary-500 pl-4">
+					<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+						<h3 class="font-semibold text-neutral-900 dark:text-neutral-100">Software Engineer</h3>
+						<span class="text-sm text-neutral-500">May 2020 — June 2022</span>
 					</div>
+					<a href="https://www.fidesol.org/" target="_blank" rel="noopener noreferrer" class="text-sm text-primary-600 dark:text-primary-400 hover:underline">Fidesol, Granada</a>
+					<p class="text-sm text-neutral-600 dark:text-neutral-400">Built VR experiences with Unity and web platforms with React and Node.js</p>
 				</div>
 			</div>
+			<a href="/about" class="text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline">View all experience &rarr;</a>
 		</Section>
 
-		<Section title="Experience" icon="work">
-			<div class="flex flex-col gap-10">
-				<WorkPositionCard
-					title="Full Stack Developer"
-					href="https://dehn.de/"
-					startDate="July 2025"
-					location="DEHN Digital Solutions"
-					description="I joined DDS to develop a new IoT platform solution for customers to be able to monitor data produced by devices to alert and protect electrical installations, from the database optimization to store huge amounts of time series data to design frontend interfaces for data visualization"
-				>
-					<Icon name="devicon:vuejs" class="w-8 h-8" />
-					<Icon name="devicon:nestjs" class="w-8 h-8" />
-					<Icon name="devicon:nodejs" class="w-8 h-8" />
-					<Icon name="devicon:typescript" class="w-8 h-8" />
-					<Icon name="aws" class="w-8 h-8" />
-					<Icon name="devicon:postgresql" class="w-8 h-8" />
-					<Icon name="devicon:docker" class="w-8 h-8" />
-					<Icon name="devicon:tailwindcss" class="w-8 h-8" />
-				</WorkPositionCard>
-
-				<WorkPositionCard
-					title="Full Stack Leader"
-					href="https://fuelyourbrands.com/"
-					startDate="June 2022"
-					endDate="June 2025"
-					location="Fuel Your Brands, Madrid"
-					description="At Fuel I took the development leadership of their product, a platform to connect brands with microinfluencers in social networks. I developed new features across the entire tech stack, internal tools to boost productivity and cost optimization in all the services "
-				>
-					<Icon name="devicon:nextjs" class="w-8 h-8" />
-					<Icon name="graphql" class="w-8 h-8" />
-					<Icon name="devicon:nodejs" class="w-8 h-8" />
-					<Icon name="devicon:typescript" class="w-8 h-8" />
-					<Icon name="aws" class="w-8 h-8" />
-					<Icon name="devicon:mongodb" class="w-8 h-8" />
-					<Icon name="devicon:docker" class="w-8 h-8" />
-					<Icon
-						name="devicon:vercel"
-						class="w-8 h-8 fill-black dark:fill-white"
-					/>
-					<Icon name="devicon:tailwindcss" class="w-8 h-8" />
-				</WorkPositionCard>
-
-				<WorkPositionCard
-					title="Software Engineer"
-					href="https://www.fidesol.org/"
-					startDate="May 2020"
-					endDate="June 2022"
-					location="Fidesol, Granada"
-					description="Worked as VR programmer creating experiences with the Unity game engine. I also developed the platform where the VR devices connected to, using React and NodeJS"
-				>
-					<Icon name="devicon:react" class="w-8 h-8" />
-					<Icon name="devicon:javascript" class="w-8 h-8" />
-					<Icon name="devicon:nodejs" class="w-8 h-8" />
-					<Icon name="devicon:csharp" class="w-8 h-8" />
-					<Icon
-						name="devicon:unity"
-						class="w-8 h-8 fill-black dark:fill-white"
-					/>
-					<Icon name="devicon:docker" class="w-8 h-8" />
-					<Icon name="devicon:mongodb" class="w-8 h-8" />
-				</WorkPositionCard>
-				<WorkPositionCard
-					title="Software Engineer Intern"
-					href="https://www.fidesol.org/"
-					startDate="Feb 2020"
-					endDate="May 2020"
-					location="Fidesol, Granada"
-					description="In my internship I helped in the development of virtual reality experiences for clients, preparing new assets to use, including the interaction code, on-demand delivery and the improvements of the internal tools used to develop the experiences."
-				>
-					<Icon name="devicon:csharp" class="w-8 h-8" />
-					<Icon
-						name="devicon:unity"
-						class="w-8 h-8 fill-black dark:fill-white"
-					/>
-				</WorkPositionCard>
+		<!-- Blog Highlights -->
+		<Section title="Latest from the blog">
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+				{posts.map((post) => <PostCard post={post} compact />)}
 			</div>
+			<a href="/blog" class="text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline">View all posts &rarr;</a>
 		</Section>
 
-		<Section title="Education" icon="education">
-			<EducationCard
-				title="Computer Science Bachelor"
-				href="https://etsiit.ugr.es/"
-				startDate="Sep 2016"
-				endDate="Jun 2020"
-				location="Escuela Técnica Superior de Ingeniería Informática y Telecomunicaciones, Granada"
-			/>
-		</Section>
-	</main>
+		<!-- Education -->
+		<section class="pb-4">
+			<p class="text-sm text-neutral-500">
+				<span class="font-medium text-neutral-700 dark:text-neutral-300">Computer Science Bachelor</span> — ETSIIT, University of Granada (2016–2020)
+			</p>
+		</section>
+	</div>
 </Layout>

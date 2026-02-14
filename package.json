@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^4.0.1",
+    "@fontsource/inter": "^5.2.8",
     "@iconify-json/devicon": "^1.1.36",
     "@iconify-json/logos": "^1.1.42",
     "@tailwindcss/vite": "^4.1.11",

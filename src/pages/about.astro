@@ -1,0 +1,178 @@
+---
+import { Icon } from "astro-icon/components";
+import Layout from "@/layouts/Layout.astro";
+import Section from "@/components/Section.astro";
+import WorkPositionCard from "@/components/Resume/WorkPositionCard.astro";
+import EducationCard from "@/components/Resume/EducationCard.astro";
+import SkillGroup from "@/components/Resume/SkillGroup.astro";
+import Skill from "@/components/Resume/Skill.astro";
+---
+
+<Layout
+	seo={{
+		title: "About",
+		description: "About Angel Hodar — background, skills, and experience",
+	}}
+>
+	<div class="flex flex-col gap-16 py-12">
+		<!-- Introduction -->
+		<section class="flex flex-col gap-4 max-w-2xl">
+			<h1 class="text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">About me</h1>
+			<p class="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+				I'm a Full Stack Developer from Granada, Spain, with a passion for building clean, performant web applications. With a background in Computer Science and experience ranging from VR development to cloud-based SaaS platforms, I enjoy tackling challenges across the entire tech stack.
+			</p>
+			<p class="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+				I'm driven by a love for well-crafted software — whether it's optimizing database queries, designing intuitive UIs, or architecting scalable systems. When I'm not coding, you'll find me exploring new technologies and contributing to open source.
+			</p>
+		</section>
+
+		<!-- Skills -->
+		<Section title="Skills">
+			<div class="flex flex-col gap-6">
+				<SkillGroup name="Frontend">
+					<Skill icon="devicon:javascript" name="JavaScript" />
+					<Skill icon="devicon:typescript" name="TypeScript" />
+					<Skill icon="devicon:react" name="React" />
+					<Skill icon="devicon:vuejs" name="Vue" />
+					<Skill icon="devicon:tailwindcss" name="Tailwind" />
+					<Skill icon="devicon:nextjs" name="NextJS" />
+					<Skill icon="devicon:nuxtjs" name="Nuxt" />
+					<Skill
+						icon="devicon:astro"
+						name="Astro"
+						class="fill-black dark:fill-white"
+					/>
+				</SkillGroup>
+
+				<SkillGroup name="Backend">
+					<Skill icon="devicon:nodejs" name="Node" />
+					<Skill icon="devicon:python" name="Python" />
+					<Skill icon="devicon:cplusplus" name="C++" />
+					<Skill icon="devicon:csharp" name="C#" />
+					<Skill icon="graphql" name="GraphQL" />
+					<Skill icon="devicon:docker" name="Docker" />
+				</SkillGroup>
+
+				<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+					<SkillGroup name="Cloud">
+						<Skill icon="aws" name="AWS" />
+						<Skill icon="devicon:digitalocean" name="DigitalOcean" />
+						<Skill
+							icon="devicon:vercel"
+							name="Vercel"
+							class="fill-black dark:fill-white"
+						/>
+						<Skill icon="devicon:firebase" name="Firebase" />
+						<Skill icon="devicon:supabase" name="Supabase" />
+					</SkillGroup>
+					<SkillGroup name="Databases">
+						<Skill icon="devicon:postgresql" name="Postgres" />
+						<Skill icon="devicon:mongodb" name="MongoDB" />
+					</SkillGroup>
+					<SkillGroup name="Graphics">
+						<Skill
+							icon="devicon:unity"
+							name="Unity"
+							class="fill-black dark:fill-white"
+						/>
+						<Skill
+							icon="devicon:unrealengine"
+							name="Unreal Engine"
+							class="fill-black dark:fill-white"
+						/>
+					</SkillGroup>
+				</div>
+			</div>
+		</Section>
+
+		<!-- Experience -->
+		<Section title="Experience">
+			<div class="flex flex-col gap-8">
+				<WorkPositionCard
+					title="Full Stack Developer"
+					href="https://dehn.de/"
+					startDate="July 2025"
+					location="DEHN Digital Solutions"
+					description="I joined DDS to develop a new IoT platform solution for customers to be able to monitor data produced by devices to alert and protect electrical installations, from the database optimization to store huge amounts of time series data to design frontend interfaces for data visualization"
+				>
+					<Icon name="devicon:vuejs" class="w-7 h-7" />
+					<Icon name="devicon:nestjs" class="w-7 h-7" />
+					<Icon name="devicon:nodejs" class="w-7 h-7" />
+					<Icon name="devicon:typescript" class="w-7 h-7" />
+					<Icon name="aws" class="w-7 h-7" />
+					<Icon name="devicon:postgresql" class="w-7 h-7" />
+					<Icon name="devicon:docker" class="w-7 h-7" />
+					<Icon name="devicon:tailwindcss" class="w-7 h-7" />
+				</WorkPositionCard>
+
+				<WorkPositionCard
+					title="Full Stack Leader"
+					href="https://fuelyourbrands.com/"
+					startDate="June 2022"
+					endDate="June 2025"
+					location="Fuel Your Brands, Madrid"
+					description="At Fuel I took the development leadership of their product, a platform to connect brands with microinfluencers in social networks. I developed new features across the entire tech stack, internal tools to boost productivity and cost optimization in all the services"
+				>
+					<Icon name="devicon:nextjs" class="w-7 h-7" />
+					<Icon name="graphql" class="w-7 h-7" />
+					<Icon name="devicon:nodejs" class="w-7 h-7" />
+					<Icon name="devicon:typescript" class="w-7 h-7" />
+					<Icon name="aws" class="w-7 h-7" />
+					<Icon name="devicon:mongodb" class="w-7 h-7" />
+					<Icon name="devicon:docker" class="w-7 h-7" />
+					<Icon
+						name="devicon:vercel"
+						class="w-7 h-7 fill-black dark:fill-white"
+					/>
+					<Icon name="devicon:tailwindcss" class="w-7 h-7" />
+				</WorkPositionCard>
+
+				<WorkPositionCard
+					title="Software Engineer"
+					href="https://www.fidesol.org/"
+					startDate="May 2020"
+					endDate="June 2022"
+					location="Fidesol, Granada"
+					description="Worked as VR programmer creating experiences with the Unity game engine. I also developed the platform where the VR devices connected to, using React and NodeJS"
+				>
+					<Icon name="devicon:react" class="w-7 h-7" />
+					<Icon name="devicon:javascript" class="w-7 h-7" />
+					<Icon name="devicon:nodejs" class="w-7 h-7" />
+					<Icon name="devicon:csharp" class="w-7 h-7" />
+					<Icon
+						name="devicon:unity"
+						class="w-7 h-7 fill-black dark:fill-white"
+					/>
+					<Icon name="devicon:docker" class="w-7 h-7" />
+					<Icon name="devicon:mongodb" class="w-7 h-7" />
+				</WorkPositionCard>
+
+				<WorkPositionCard
+					title="Software Engineer Intern"
+					href="https://www.fidesol.org/"
+					startDate="Feb 2020"
+					endDate="May 2020"
+					location="Fidesol, Granada"
+					description="In my internship I helped in the development of virtual reality experiences for clients, preparing new assets to use, including the interaction code, on-demand delivery and the improvements of the internal tools used to develop the experiences."
+				>
+					<Icon name="devicon:csharp" class="w-7 h-7" />
+					<Icon
+						name="devicon:unity"
+						class="w-7 h-7 fill-black dark:fill-white"
+					/>
+				</WorkPositionCard>
+			</div>
+		</Section>
+
+		<!-- Education -->
+		<Section title="Education">
+			<EducationCard
+				title="Computer Science Bachelor"
+				href="https://etsiit.ugr.es/"
+				startDate="Sep 2016"
+				endDate="Jun 2020"
+				location="ETSIIT, University of Granada"
+			/>
+		</Section>
+	</div>
+</Layout>

@@ -33,43 +33,28 @@ const post = entry.data
     },
   }}
 >
-  <article>
-    <div
-      class="flex flex-col justify-center text-center mx-auto space-y-4 my-10 max-w-2xl"
-    >
-      <h1 class="text-4xl font-semibold">{post.title}</h1>
-      <p class="text-md">{formatDate(post.publishedAt)}</p>
-      {
-        post.cover?.src && (
-          <Image
-            src={post.cover}
-            alt="Article thumbnail"
-            width={600}
-            height={400}
-            class="rounded-xl shadow-xl mx-auto"
-          />
-        )
-      }
-    </div>
+  <article class="py-12 max-w-3xl mx-auto">
+    <a href="/blog" class="inline-flex items-center gap-1 text-sm font-medium text-neutral-900 dark:text-neutral-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors mb-10">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+      Blog
+    </a>
+    <header class="flex flex-col items-center text-center gap-4 mb-8">
+      <span class="text-sm text-neutral-500">{formatDate(post.publishedAt)}</span>
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">{post.title}</h1>
+    </header>
+    {
+      post.cover?.src && (
+        <Image
+          src={post.cover}
+          alt={post.title}
+          width={800}
+          height={450}
+          class="w-full rounded-xl mb-12"
+        />
+      )
+    }
     <Prose>
       <Content />
     </Prose>
   </article>
 </Layout>
-
-{/*<style is:global>
-  code {
-    counter-reset: step;
-    counter-increment: step 0;
-  }
-
-  code .line::before {
-    content: counter(step);
-    counter-increment: step;
-    width: 1rem;
-    margin-right: 1rem;
-    display: inline-block;
-    text-align: right;
-    color: rgba(229, 235, 238, 0.5);
-  }
-</style>*/}

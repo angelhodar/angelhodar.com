@@ -2,20 +2,37 @@
 import { Icon } from "astro-icon/components";
 import Card from "@/components/Card.astro";
 
-const { title, href, description } = Astro.props;
+interface Props {
+    title: string;
+    href: string;
+    description: string;
+    tags?: string[];
+}
+
+const { title, href, description, tags } = Astro.props;
 ---
 
 <Card>
-    <div class="flex flex-row space-x-3 items-center">
-        <h2 class="text-2xl font-semibold">{title}</h2>
+    <div class="flex items-start justify-between gap-3">
+        <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">{title}</h3>
         <a
             href={href}
             target="_blank"
-            aria-label={title + "project-link"}
+            aria-label={title + " project link"}
             rel="noopener noreferrer"
+            class="shrink-0 text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
         >
-            <Icon name="devicon:github" class="w-6 h-6 dark:bg-white dark:rounded-lg" />
+            <Icon name="devicon:github" class="w-5 h-5 dark:bg-white dark:rounded" />
         </a>
     </div>
-    <p class="text-lg">{description}</p>
+    <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">{description}</p>
+    {tags && tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 pt-1">
+            {tags.map((tag) => (
+                <span class="text-xs px-2 py-1 rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400">
+                    {tag}
+                </span>
+            ))}
+        </div>
+    )}
 </Card>

@@ -1,20 +1,11 @@
 ---
-import { Icon } from "astro-icon/components";
-import Card from "@/components/Card.astro"
-
 const { title, href, location, startDate, endDate } = Astro.props;
 ---
 
-<Card>
-    <h2 class="text-xl font-semibold">{title}</h2>
-    <div class="flex flex-row space-x-3 items-center">
-        <Icon name="location" class="w-4 h-4 shrink-0" />
-        <a href={href} aria-label={title} target="_blank" rel="noopener noreferrer">
-            <p class="text-md hover:underline">{location}</p>
-        </a>
-    </div>
-    <div class="flex flex-row space-x-3 items-center">
-        <Icon name="calendar" class="w-4 h-4" />
-        <p class="text-md">{startDate} - {endDate}</p>
-    </div>
-</Card>
+<div class="flex flex-col gap-1 border-l-2 border-neutral-300 dark:border-neutral-700 pl-5 py-1">
+    <h3 class="font-semibold text-neutral-900 dark:text-neutral-100">{title}</h3>
+    <a href={href} target="_blank" rel="noopener noreferrer" class="text-sm text-primary-600 dark:text-primary-400 hover:underline w-fit">
+        {location}
+    </a>
+    <span class="text-sm text-neutral-500">{startDate} — {endDate}</span>
+</div>

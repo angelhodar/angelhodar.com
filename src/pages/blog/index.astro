@@ -19,9 +19,12 @@ const posts: CollectionEntry<"blog">[] = (await getCollection("blog"))
     description: "My personal blog",
   }}
 >
-  <div class="flex flex-col justify-center mt-8">
-    <h1 class="font-bold text-center text-4xl">Lastest posts</h1>
-    <PostsContainer class="mt-8">
+  <div class="flex flex-col gap-10 py-12">
+    <div class="flex flex-col gap-3">
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-100">Latest Articles</h1>
+      <p class="text-neutral-600 dark:text-neutral-400">Some of my recent thoughts on web development, tools, and the tech industry.</p>
+    </div>
+    <PostsContainer>
       {posts.map((post) => <PostCard post={post} />)}
     </PostsContainer>
   </div>

@@ -1,5 +1,10 @@
 ---
 import "src/styles/global.css"
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/inter/700.css";
+import "@fontsource/inter/800.css";
 import type { Props as SeoProps } from "astro-seo";
 import { SEO } from "astro-seo";
 import { ClientRouter } from "astro:transitions";
@@ -29,7 +34,7 @@ const { seo } = Astro.props;
 		<DarkModeScript />
 		<ClientRouter />
 	</head>
-	<body class="dark:bg-gray-800 dark:text-white">
+	<body>
 		<PageContainer>
 			<Header />
 			<main>

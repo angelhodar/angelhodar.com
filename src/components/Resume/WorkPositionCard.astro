@@ -1,22 +1,15 @@
 ---
-import { Icon } from "astro-icon/components";
-import Card from "@/components/Card.astro";
-
 const { title, href, location, startDate, endDate, description } = Astro.props;
 ---
 
-<Card>
-    <h2 class="text-xl font-semibold">{title}</h2>
-    <div class="flex flex-row space-x-2 items-center">
-        <Icon name="location" class="w-4 h-4" />
-        <a href={href} target="_blank"
-            ><p class="text-md front-semibold hover:underline">{location}</p>
-        </a>
+<div class="flex flex-col gap-2 border-l-2 border-primary-500 pl-5 py-1">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+        <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">{title}</h3>
+        <span class="text-sm text-neutral-500">{startDate} — {endDate || "Present"}</span>
     </div>
-    <div class="flex flex-row space-x-3 items-center">
-        <Icon name="calendar" class="w-4 h-4" />
-        <p class="text-md">{startDate} - {endDate || "Now"}</p>
-    </div>
-    <p>{description}</p>
-    <div class="pt-3 flex flex-wrap gap-4"><slot /></div>
-</Card>
+    <a href={href} target="_blank" rel="noopener noreferrer" class="text-sm text-primary-600 dark:text-primary-400 hover:underline w-fit">
+        {location}
+    </a>
+    <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">{description}</p>
+    <div class="flex flex-wrap gap-3 pt-2"><slot /></div>
+</div>

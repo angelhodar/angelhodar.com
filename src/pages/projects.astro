@@ -1,0 +1,57 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ProjectCard from "@/components/Resume/ProjectCard.astro";
+---
+
+<Layout
+	seo={{
+		title: "Projects",
+		description: "A collection of my open source projects and side projects",
+	}}
+>
+	<div class="flex flex-col gap-8 py-12">
+		<div class="flex flex-col gap-2">
+			<h1 class="text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">Projects</h1>
+			<p class="text-neutral-600 dark:text-neutral-400">A collection of open source projects and experiments.</p>
+		</div>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+			<ProjectCard
+				title="OpenRPG_Inventory"
+				href="https://github.com/angelhodar/OpenRPG_Inventory"
+				description="Generic and fully featured inventory container and equipment system for Unreal Engine 4"
+				tags={["Unreal Engine", "C++", "Blueprints"]}
+			/>
+			<ProjectCard
+				title="MeshOptimizer"
+				href="https://github.com/angelhodar/mesh-optimizer"
+				description="Blender based 3D model optimizer for automatic texture compression and polygon reduction. Docker and serverless ready"
+				tags={["Python", "Blender", "Docker"]}
+			/>
+			<ProjectCard
+				title="ReceiptsGPT"
+				href="https://github.com/angelhodar/receipts-gpt"
+				description="Make restaurants shared payments easier by using AI driven OCR models"
+				tags={["AI", "OCR", "TypeScript"]}
+			/>
+			<ProjectCard
+				title="OpenRPG_Stats"
+				href="https://github.com/angelhodar/OpenRPG_Stats"
+				description="Attributes and stats system for Unreal Engine 4"
+				tags={["Unreal Engine", "C++", "Blueprints"]}
+			/>
+			<ProjectCard
+				title="OpenRPG_Quest"
+				href="https://github.com/angelhodar/OpenRPG_Quest"
+				description="Multipurpose quest system for Unreal Engine 4"
+				tags={["Unreal Engine", "C++", "Blueprints"]}
+			/>
+			<ProjectCard
+				title="angelhodar.com"
+				href="https://github.com/angelhodar/angelhodar.com"
+				description="My personal portfolio using the Astro framework"
+				tags={["Astro", "TypeScript", "Tailwind"]}
+			/>
+		</div>
+	</div>
+</Layout>

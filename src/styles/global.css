@@ -1,3 +1,38 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary-50: oklch(97% 0.014 259.815);
+  --color-primary-100: oklch(93.2% 0.032 259.815);
+  --color-primary-200: oklch(87% 0.065 259.815);
+  --color-primary-300: oklch(79.2% 0.104 259.815);
+  --color-primary-400: oklch(70.7% 0.15 259.815);
+  --color-primary-500: oklch(62.3% 0.214 259.815);
+  --color-primary-600: oklch(54.6% 0.215 259.815);
+  --color-primary-700: oklch(48.8% 0.185 259.815);
+  --color-primary-800: oklch(42.4% 0.148 259.815);
+  --color-primary-900: oklch(37.9% 0.114 259.815);
+  --color-primary-950: oklch(28.2% 0.091 259.815);
+
+  --color-neutral-50: oklch(98% 0 0);
+  --color-neutral-100: oklch(95.5% 0 0);
+  --color-neutral-200: oklch(90% 0 0);
+  --color-neutral-300: oklch(83% 0 0);
+  --color-neutral-400: oklch(71% 0 0);
+  --color-neutral-500: oklch(55.6% 0 0);
+  --color-neutral-600: oklch(44% 0 0);
+  --color-neutral-700: oklch(37% 0 0);
+  --color-neutral-800: oklch(27% 0 0);
+  --color-neutral-900: oklch(20.5% 0 0);
+  --color-neutral-950: oklch(14.5% 0 0);
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
