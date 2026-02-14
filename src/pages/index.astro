@@ -23,14 +23,14 @@ const posts: CollectionEntry<"blog">[] = (await getCollection("blog"))
 >
 	<div class="flex flex-col gap-20 py-12 antialiased">
 		<!-- Hero Section -->
-		<section class="flex flex-col gap-6 max-w-2xl">
+		<section class="flex flex-col items-center text-center gap-6">
 			<h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-100">
 				Hey, I'm Angel Hodar
 			</h1>
-			<p class="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed">
+			<p class="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-2xl">
 				Full Stack Developer building modern web applications. I specialize in TypeScript, React, Vue, and cloud infrastructure — turning ideas into polished, production-ready products.
 			</p>
-			<div class="flex flex-wrap gap-3">
+			<div class="flex flex-wrap justify-center gap-3">
 				<a
 					href="/projects"
 					class="inline-flex items-center px-5 py-2.5 rounded-lg bg-primary-600 text-white text-sm font-medium hover:bg-primary-700 transition-colors"
