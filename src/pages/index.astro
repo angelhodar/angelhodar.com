@@ -74,7 +74,7 @@ const posts: CollectionEntry<"blog">[] = (await getCollection("blog"))
 					<p class="text-sm text-neutral-600 dark:text-neutral-400">Built VR experiences with Unity and web platforms with React and Node.js</p>
 				</div>
 			</div>
-			<a href="/about" class="text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline">View all experience &rarr;</a>
+			<a href="/about#experience" class="text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline">View all experience &rarr;</a>
 		</Section>
 
 		<!-- Blog Highlights -->
@@ -83,17 +83,16 @@ const posts: CollectionEntry<"blog">[] = (await getCollection("blog"))
 				{posts.map((post) => (
 					<article class="flex flex-col gap-2">
 						<span class="text-sm text-neutral-500">{formatDate(post.data.publishedAt)}</span>
-						<h3 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">
-							{post.data.title}
-						</h3>
+						<a href={"/blog/" + post.id} class="hover:underline">
+							<h3 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">
+								{post.data.title}
+							</h3>
+						</a>
 						{post.data.description && (
 							<p class="text-neutral-600 dark:text-neutral-400 leading-relaxed">
 								{post.data.description}
 							</p>
 						)}
-						<a href={"/blog/" + post.id} class="text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline mt-1">
-							Read Article
-						</a>
 					</article>
 				))}
 			</div>
