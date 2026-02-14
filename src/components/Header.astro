@@ -15,64 +15,60 @@ function isActive(href: string) {
 }
 ---
 
-<nav class="flex items-center justify-between py-4 mb-4">
-  <a href="/" class="text-lg font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
-    angelhodar
-  </a>
-
-  <!-- Desktop nav -->
-  <div class="hidden md:flex items-center gap-1">
-    {navLinks.map(({ href, label }) => (
-      <a
-        href={href}
-        class:list={[
-          "px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-          isActive(href)
-            ? "text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-950"
-            : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800",
-        ]}
-      >
-        {label}
-      </a>
-    ))}
-  </div>
-
-  <div class="flex items-center gap-2">
-    <button
-      id="theme-toggle-button"
-      type="button"
-      class="p-2 rounded-lg text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
-      aria-label="Toggle between Dark and Light mode"
-      data-toggle-color-scheme
-    >
-      <Icon name="sun" class="w-5 h-5" />
-    </button>
+<div class="fixed top-4 left-1/2 -translate-x-1/2 z-50">
+  <nav class="flex items-center gap-1 px-2 py-2 rounded-full border border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md shadow-sm">
+    <!-- Desktop nav -->
+    <div class="hidden md:flex items-center gap-1">
+      {navLinks.map(({ href, label }) => (
+        <a
+          href={href}
+          class:list={[
+            "px-4 py-1.5 rounded-full text-sm font-medium transition-colors",
+            isActive(href)
+              ? "text-neutral-900 dark:text-neutral-100 font-semibold"
+              : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100",
+          ]}
+        >
+          {label}
+        </a>
+      ))}
+    </div>
 
     <!-- Mobile menu button -->
     <button
       id="mobile-menu-button"
       type="button"
-      class="md:hidden p-2 rounded-lg text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+      class="md:hidden p-2 rounded-full text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
       aria-label="Open menu"
     >
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
     </button>
-  </div>
-</nav>
 
-<!-- Mobile menu -->
-<div id="mobile-menu" class="hidden md:hidden pb-4 border-b border-neutral-200 dark:border-neutral-800 mb-4">
-  <div class="flex flex-col gap-1">
+    <button
+      id="theme-toggle-button"
+      type="button"
+      class="p-2 rounded-full text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+      aria-label="Toggle between Dark and Light mode"
+      data-toggle-color-scheme
+    >
+      <Icon name="sun" class="w-5 h-5" />
+    </button>
+  </nav>
+</div>
+
+<!-- Mobile menu dropdown -->
+<div id="mobile-menu" class="hidden fixed top-16 left-1/2 -translate-x-1/2 z-50 md:hidden">
+  <div class="flex flex-col gap-1 px-3 py-3 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md shadow-lg">
     {navLinks.map(({ href, label }) => (
       <a
         href={href}
         class:list={[
-          "px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+          "px-4 py-2 rounded-full text-sm font-medium transition-colors",
           isActive(href)
-            ? "text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-950"
-            : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800",
+            ? "text-neutral-900 dark:text-neutral-100 font-semibold"
+            : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100",
         ]}
       >
         {label}
@@ -80,6 +76,9 @@ function isActive(href: string) {
     ))}
   </div>
 </div>
+
+<!-- Spacer to prevent content from hiding behind fixed nav -->
+<div class="h-16"></div>
 
 <script is:inline>
   function setupMobileMenu() {

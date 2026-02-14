@@ -29,32 +29,33 @@ import Skill from "@/components/Resume/Skill.astro";
 		<!-- Skills -->
 		<Section title="Skills">
 			<div class="flex flex-col gap-6">
-				<SkillGroup name="Frontend">
-					<Skill icon="devicon:javascript" name="JavaScript" />
-					<Skill icon="devicon:typescript" name="TypeScript" />
-					<Skill icon="devicon:react" name="React" />
-					<Skill icon="devicon:vuejs" name="Vue" />
-					<Skill icon="devicon:tailwindcss" name="Tailwind" />
-					<Skill icon="devicon:nextjs" name="NextJS" />
-					<Skill icon="devicon:nuxtjs" name="Nuxt" />
-					<Skill
-						icon="devicon:astro"
-						name="Astro"
-						class="fill-black dark:fill-white"
-					/>
-				</SkillGroup>
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+					<SkillGroup name="Frontend">
+						<Skill icon="devicon:typescript" name="TypeScript" />
+						<Skill icon="devicon:react" name="React" />
+						<Skill icon="devicon:vuejs" name="Vue" />
+						<Skill icon="devicon:tailwindcss" name="Tailwind" />
+						<Skill icon="devicon:nextjs" name="NextJS" />
+						<Skill icon="devicon:nuxtjs" name="Nuxt" />
+						<Skill
+							icon="devicon:astro"
+							name="Astro"
+							class="fill-black dark:fill-white"
+						/>
+					</SkillGroup>
 
-				<SkillGroup name="Backend">
-					<Skill icon="devicon:nodejs" name="Node" />
-					<Skill icon="devicon:nestjs" name="NestJS" />
-					<Skill icon="devicon:python" name="Python" />
-					<Skill icon="devicon:cplusplus" name="C++" />
-					<Skill icon="devicon:csharp" name="C#" />
-					<Skill icon="graphql" name="GraphQL" />
-					<Skill icon="devicon:docker" name="Docker" />
-				</SkillGroup>
+					<SkillGroup name="Backend">
+						<Skill icon="devicon:nodejs" name="Node" />
+						<Skill icon="devicon:nestjs" name="NestJS" />
+						<Skill icon="devicon:python" name="Python" />
+						<Skill icon="devicon:cplusplus" name="C++" />
+						<Skill icon="devicon:csharp" name="C#" />
+						<Skill icon="graphql" name="GraphQL" />
+						<Skill icon="devicon:docker" name="Docker" />
+					</SkillGroup>
+				</div>
 
-				<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 					<SkillGroup name="Cloud">
 						<Skill icon="aws" name="AWS" />
 						<Skill icon="devicon:digitalocean" name="DigitalOcean" />
@@ -68,16 +69,16 @@ import Skill from "@/components/Resume/Skill.astro";
 					</SkillGroup>
 					<SkillGroup name="Databases">
 						<Skill icon="devicon:postgresql" name="Postgres" />
-						<Skill icon="timescaledb" name="TimescaleDB" />
+						<div class="flex flex-col items-center gap-2">
+							<Icon name="timescaledb-light" class="w-10 h-10 block dark:hidden" />
+							<Icon name="timescaledb" class="w-10 h-10 hidden dark:block" />
+							<span class="text-xs text-neutral-600 dark:text-neutral-400">TimescaleDB</span>
+						</div>
 						<Skill icon="devicon:mongodb" name="MongoDB" />
-					</SkillGroup>
-					<SkillGroup name="Testing">
-						<Skill icon="devicon:vitest" name="Vitest" />
-						<Skill icon="devicon:playwright" name="Playwright" />
 					</SkillGroup>
 				</div>
 
-				<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+				<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 					<SkillGroup name="Game Engines">
 						<Skill
 							icon="devicon:unity"
@@ -89,6 +90,10 @@ import Skill from "@/components/Resume/Skill.astro";
 							name="Unreal Engine"
 							class="fill-black dark:fill-white"
 						/>
+					</SkillGroup>
+					<SkillGroup name="Testing">
+						<Skill icon="devicon:vitest" name="Vitest" />
+						<Skill icon="devicon:playwright" name="Playwright" />
 					</SkillGroup>
 					<SkillGroup name="AI">
 						<Skill icon="cursor" name="Cursor" />
@@ -115,7 +120,8 @@ import Skill from "@/components/Resume/Skill.astro";
 					<Icon name="devicon:typescript" class="w-7 h-7" />
 					<Icon name="aws" class="w-7 h-7" />
 					<Icon name="devicon:postgresql" class="w-7 h-7" />
-					<Icon name="timescaledb" class="w-7 h-7" />
+					<Icon name="timescaledb-light" class="w-7 h-7 block dark:hidden" />
+				<Icon name="timescaledb" class="w-7 h-7 hidden dark:block" />
 					<Icon name="devicon:docker" class="w-7 h-7" />
 					<Icon name="devicon:tailwindcss" class="w-7 h-7" />
 				</WorkPositionCard>
