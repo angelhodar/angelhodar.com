@@ -12,7 +12,6 @@ interface Props {
 ---
 
 {compact ? (
-  <!-- Compact: vertical card for homepage grid -->
   <a href={"/blog/" + post.id} class="group block">
     <article class="flex flex-col gap-3">
       {
@@ -37,7 +36,6 @@ interface Props {
     </article>
   </a>
 ) : (
-  <!-- Full: horizontal card for blog listing (matches reference template) -->
   <a href={"/blog/" + post.id} class="group block">
     <article class="flex flex-col sm:flex-row gap-6 items-start">
       {
